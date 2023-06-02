@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">painthings</string>
+    <string name="welcome_1_heading">Hi there! Welcome to <b>Painthings</b></string>
+    <string name="welcome_2_heading">Simply express what do you feel today, and lets us <b>paint.</b></string>
+    <string name="welcome_3_heading">Build a digital diary of your emotional journey with <b>Painthings.</b></string>
+    <string name="next_button_text">Next</string>
+    <string name="skip_button_text">Skip</string>
+
 </resources>

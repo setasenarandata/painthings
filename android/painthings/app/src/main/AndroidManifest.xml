@@ -12,6 +12,18 @@
         android:theme="@style/Theme.Painthings"
         tools:targetApi="31">
         <activity
+            android:name=".auth.RegisterActivity"
+            android:exported="false" />
+        <activity
+            android:name=".auth.LoginActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.HomeActivity"
+            android:exported="false" />
+        <activity
+            android:name=".onboarding.OnboardingActivity"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
