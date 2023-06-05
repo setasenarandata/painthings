@@ -48,7 +48,6 @@ class EmotionsActivity : AppCompatActivity() {
             val currentEmotion = getItem(0)
 
             // Save the previous counter value for the current emotion
-            Log.d("CURRENTEMOTION", currentEmotion.toString())
             counterValues[currentEmotion] = viewPagerAdapter.getCounter()
 
             if (currentEmotion < 5) {
@@ -58,6 +57,8 @@ class EmotionsActivity : AppCompatActivity() {
                 mSLideViewPager.setCurrentItem(getItem(1), true)
             } else {
                 val i = Intent(this@EmotionsActivity, ArtActivity::class.java)
+
+                i.putExtra("EMOTION_ARRAY", counterValues.toIntArray())
                 Log.d("FINALEMOTION", counterValues.toString())
                 startActivity(i)
                 finish()
