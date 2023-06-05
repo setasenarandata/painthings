@@ -8,4 +8,7 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="inactive">#626262</color>
+    <color name="dimmed_black">#323232</color>
+    <color name="main_orange">#F15223</color>
+    <color name="emotion_bg">#1D1D1D</color>
 </resources>

@@ -12,6 +12,12 @@
         android:theme="@style/Theme.Painthings"
         tools:targetApi="31">
         <activity
+            android:name=".art.ArtActivity"
+            android:exported="false" />
+        <activity
+            android:name=".emotions.EmotionsActivity"
+            android:exported="false" />
+        <activity
             android:name=".auth.RegisterActivity"
             android:exported="false" />
         <activity
