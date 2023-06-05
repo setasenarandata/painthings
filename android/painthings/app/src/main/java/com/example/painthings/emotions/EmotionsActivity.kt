@@ -48,20 +48,22 @@ class EmotionsActivity : AppCompatActivity() {
             val currentEmotion = getItem(0)
 
             // Save the previous counter value for the current emotion
+            Log.d("CURRENTEMOTION", currentEmotion.toString())
             counterValues[currentEmotion] = viewPagerAdapter.getCounter()
 
-            if (currentEmotion < 6) {
+            if (currentEmotion < 5) {
                 if (counterValues[getItem(1)] == 0) viewPagerAdapter.resetCounter()
                 else viewPagerAdapter.setCounter(counterValues[getItem(1)])
 
                 mSLideViewPager.setCurrentItem(getItem(1), true)
-            }
-            else {
+            } else {
                 val i = Intent(this@EmotionsActivity, ArtActivity::class.java)
+                Log.d("FINALEMOTION", counterValues.toString())
                 startActivity(i)
                 finish()
             }
 
+            viewPagerAdapter.notifyDataSetChanged()
         }
 
         backBtn.setOnClickListener {
@@ -72,13 +74,15 @@ class EmotionsActivity : AppCompatActivity() {
 
             if (currentEmotion > 0) {
                 if (counterValues[getItem(-1)] == 0) viewPagerAdapter.resetCounter()
-                else viewPagerAdapter.setCounter(counterValues[getItem(1)])
+                else viewPagerAdapter.setCounter(counterValues[getItem(-1)])
                 mSLideViewPager.setCurrentItem(getItem(-1), true)
             } else {
                 val i = Intent(this@EmotionsActivity, HomeActivity::class.java)
                 startActivity(i)
                 finish()
             }
+
+            viewPagerAdapter.notifyDataSetChanged()
         }
 
 

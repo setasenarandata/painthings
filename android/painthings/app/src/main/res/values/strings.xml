@@ -20,7 +20,7 @@
     <string name="emotion_subtitle_3">On a scale 1–5, rate your current\nemotional connection to Anger</string>
     <string name="emotion_subtitle_4">On a scale 1–5, rate your current\nemotional connection to Happiness</string>
     <string name="emotion_subtitle_5">On a scale 1–5, rate your current\nemotional connection to Disgust</string>
-    <string name="emotion_subtitle_6">On a scale 1–5, rate your currentvemotional connection to Optimism</string>
+    <string name="emotion_subtitle_6">On a scale 1–5, rate your current\nemotional connection to Optimism</string>
 
     <string name="plus">+</string>
     <string name="minus">-</string>

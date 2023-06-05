@@ -1,10 +1,10 @@
 package com.example.painthings.emotions
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.widget.AppCompatButton
@@ -62,7 +62,7 @@ class EmotionsViewPagerAdapter(private var context: Context) : PagerAdapter() {
 
         slideTitle.setText(headings[position])
         slideSubtitle.setText(subtitle[position])
-        slideCounter.text = counter.toString()
+        slideCounter.text = getCounter().toString()
         container.addView(view)
         return view
     }
@@ -82,5 +82,9 @@ class EmotionsViewPagerAdapter(private var context: Context) : PagerAdapter() {
 
     fun resetCounter() {
         counter = 0
+    }
+
+    override fun getItemPosition(`object`: Any): Int {
+        return POSITION_NONE
     }
 }
