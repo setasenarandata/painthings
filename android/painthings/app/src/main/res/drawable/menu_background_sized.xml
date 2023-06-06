@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:drawable="@drawable/menu_background"
+        android:left="@dimen/_36sdp"
+        android:right="@dimen/_36sdp"
+        android:top="@dimen/_38sdp" />
+</layer-list>

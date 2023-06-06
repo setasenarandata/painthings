@@ -12,8 +12,8 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.viewpager.widget.ViewPager
 import com.example.painthings.R
-import com.example.painthings.auth.LoginActivity
 import com.example.painthings.ui.HomeActivity
+import com.example.painthings.ui.auth.AuthActivity
 
 class OnboardingActivity : AppCompatActivity() {
     private lateinit var mSLideViewPager: ViewPager
@@ -42,7 +42,7 @@ class OnboardingActivity : AppCompatActivity() {
         nextbtn.setOnClickListener {
             if (getitem(0) < 2) mSLideViewPager.setCurrentItem(getitem(1), true)
             else {
-                val i = Intent(this@OnboardingActivity, LoginActivity::class.java)
+                val i = Intent(this@OnboardingActivity, AuthActivity::class.java)
                 startActivity(i)
                 finish()
             }
@@ -55,7 +55,7 @@ class OnboardingActivity : AppCompatActivity() {
                 startActivity(i)
                 finish()
             } else {
-                val i = Intent(this@OnboardingActivity, LoginActivity::class.java)
+                val i = Intent(this@OnboardingActivity, AuthActivity::class.java)
                 startActivity(i)
                 finish()
             }

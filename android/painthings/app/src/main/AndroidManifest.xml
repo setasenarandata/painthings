@@ -11,6 +11,16 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Painthings"
         tools:targetApi="31">
+
+<!--        <provider-->
+<!--            android:name="androidx.core.content.FileProvider"-->
+<!--            android:authorities="com.example.painthings.fileprovider"-->
+<!--            android:exported="false"-->
+<!--            android:grantUriPermissions="true">-->
+<!--            <meta-data-->
+<!--                android:name="android.support.FILE_PROVIDER_PATHS"-->
+<!--                android:resource="@drawable/starry_night" />-->
+<!--        </provider>-->
         <activity
             android:name=".art.ArtActivity"
             android:exported="false" />
@@ -18,11 +28,18 @@
             android:name=".emotions.EmotionsActivity"
             android:exported="false" />
         <activity
-            android:name=".auth.RegisterActivity"
-            android:exported="false" />
-        <activity
-            android:name=".auth.LoginActivity"
-            android:exported="false" />
+            android:name=".ui.auth.AuthActivity"
+            android:exported="true">
+<!--            <intent-filter>-->
+<!--                <action android:name="android.intent.action.MAIN" />-->
+
+<!--                <category android:name="android.intent.category.LAUNCHER" />-->
+<!--            </intent-filter>-->
+
+<!--            <meta-data-->
+<!--                android:name="android.app.lib_name"-->
+<!--                android:value="" />-->
+        </activity>
         <activity
             android:name=".ui.HomeActivity"
             android:exported="false" />

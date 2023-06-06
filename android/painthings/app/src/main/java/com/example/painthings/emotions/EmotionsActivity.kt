@@ -13,8 +13,6 @@ import android.widget.TextView
 import androidx.viewpager.widget.ViewPager
 import com.example.painthings.R
 import com.example.painthings.art.ArtActivity
-import com.example.painthings.auth.LoginActivity
-import com.example.painthings.onboarding.ViewPagerAdapter
 import com.example.painthings.ui.HomeActivity
 
 class EmotionsActivity : AppCompatActivity() {
@@ -25,7 +23,6 @@ class EmotionsActivity : AppCompatActivity() {
     private lateinit var nextbtn: Button
     private lateinit var backBtn: Button
 
-    private var emotions = Emotions(0, 0, 0, 0, 0, 0)
     private val counterValues = mutableListOf(0, 0, 0, 0, 0, 0)
     override fun onCreate(savedInstanceState: Bundle?) {
 

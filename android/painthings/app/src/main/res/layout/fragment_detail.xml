@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background_rounded_top"
+    android:padding="@dimen/_24sdp"
+    tools:context=".ui.main.ui.detail.DetailFragment">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/layout_image"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_200sdp"
+        app:cardCornerRadius="@dimen/_20sdp"
+        app:cardElevation="0dp"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/iv_detail"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:src="@drawable/starry_night" />
+
+    </androidx.cardview.widget.CardView>
+
+    <LinearLayout
+        android:id="@+id/layout_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_12sdp"
+        android:gravity="center"
+        android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@id/layout_image">
+
+        <TextView
+            android:id="@+id/tv_detail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Starry Night"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_18ssp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tv_artist"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Vincent Van Gogh"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_18ssp" />
+
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="@dimen/_16sdp"
+        android:layout_marginBottom="@dimen/_16sdp"
+        app:layout_constraintBottom_toTopOf="@id/btn_share"
+        app:layout_constraintTop_toBottomOf="@id/layout_title">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Through his drip action technique, Pollock would create layers upon layers of paint, created in a chaotic assemblage of drips and splashes. Physicists have studied Pollock’s canvases, such as Lavender Mist, for fractals, which naturally occur out of chaos. Chaos is defined as an irregularity of motion or shape that naturally arises from deterministic forces (such as painting). Some art scientists, such as Richard Taylor, have determined that the more chaotic Pollock’s drippings became, the closer they resembled naturally occurring fractals, and that his chronologically later paintings displayed these characteristics more so than his earlier works, which were less chaotic."
+            android:textColor="@color/black" />
+
+    </ScrollView>
+
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_share"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Share"
+        android:textAllCaps="false"
+        android:textStyle="bold"
+        app:backgroundTint="@color/btnColor"
+        app:cornerRadius="@dimen/_20sdp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:rippleColor="@color/white" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

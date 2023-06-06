@@ -26,4 +26,7 @@
     <string name="minus">-</string>
     <string name="default_emotion_value">0</string>
 
+    <string name="title_home">Home</string>
+    <string name="title_draw">Draw</string>
+
 </resources>
