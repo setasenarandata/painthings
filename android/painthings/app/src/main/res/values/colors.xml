@@ -7,4 +7,23 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="inactive">#626262</color>
+    <color name="dimmed_black">#323232</color>
+    <color name="main_orange">#F15223</color>
+    <color name="emotion_bg">#1D1D1D</color>
+    <color name="subtitleTextColor">#888888</color>
+
+    <color name="primaryColor">#1D1D1D</color>
+    <color name="menuColor">#BFBFBF</color>
+    <color name="btnColor">#F15223</color>
+    <color name="btnColorOpacity">#40F15223</color>
+    <color name="bcColor">#2F2157</color>
+
+    <color name="dateBtnColor">#404040</color>
+    <color name="barColorPink">#EEB0C1</color>
+    <color name="barColorBlue">#4E72A7</color>
+    <color name="barColorRed">#C92929</color>
+    <color name="barColorYellow">#FFD41D</color>
+    <color name="barColorGreen">#4AE16B</color>
+    <color name="barColorGold">#D88018</color>
 </resources>
