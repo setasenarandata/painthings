@@ -95,6 +95,12 @@
             android:padding="@dimen/_8sdp"
             tools:visibility="gone" />
 
+        <ProgressBar
+            android:id="@+id/progressBarChart"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone" />
+
         <com.example.painthings.barchart.PopupBarChart
             android:id="@+id/bc_emotions"
             android:layout_width="match_parent"

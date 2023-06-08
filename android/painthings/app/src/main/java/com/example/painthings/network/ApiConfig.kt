@@ -14,7 +14,7 @@ class ApiConfig {
 
         fun getApiService(): ApiService {
             val retrofit = Retrofit.Builder()
-                .baseUrl("https://quote-api.dicoding.dev/")
+                .baseUrl("https://painthings-dot-proven-reality-379717.et.r.appspot.com/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(setupOkhttpInterceptor())
                 .build()

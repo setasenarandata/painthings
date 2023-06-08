@@ -31,7 +31,7 @@ interface ApiService {
     @POST("posts")
     suspend fun createPost(
         @Body emotions: Emotions
-    ): CreatePostResponse
+    ): Call<CreatePostResponse>
 
     // post by id
     @GET("posts/{id}")
@@ -41,7 +41,7 @@ interface ApiService {
 
     // format date: dd-mm-yyyy
     @GET("posts/date/{createdAt}")
-    suspend fun getPostByDate(
+    fun getPostByDate(
         @Path("createdAt") createdAt: String,
-    ): EmotionResponseItem
+    ): Call<EmotionResponseItem>
 }

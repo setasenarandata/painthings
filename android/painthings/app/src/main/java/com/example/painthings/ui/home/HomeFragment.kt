@@ -8,10 +8,12 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
 import androidx.core.graphics.drawable.toBitmap
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.painthings.R
 import com.example.painthings.databinding.FragmentHomeBinding
@@ -21,20 +23,31 @@ import com.example.painthings.adapter.HomeDateAdapter
 import com.example.painthings.emotions.Emotions
 import com.example.painthings.emotions.EmotionsActivity
 import com.example.painthings.model.HomeDate
+import com.example.painthings.network.LoginBody
+import com.example.painthings.view_model.ChartViewModel
+import com.example.painthings.view_model.LoginViewModel
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.justin.popupbarchart.GraphValue
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
+import java.text.SimpleDateFormat
 import java.util.*
 
-class HomeFragment : Fragment() {
+class HomeFragment : Fragment(), HomeDateAdapter.DateItemClickListener {
 
     private var _binding: FragmentHomeBinding? = null
+    private lateinit var viewModel: ChartViewModel
     private lateinit var addEmotionsButton: FloatingActionButton
     private lateinit var shareBtn: MaterialButton
     private val binding get() = _binding!!
+    private var selectedDate: String = SimpleDateFormat(
+        "dd-MM-yyyy",
+        Locale.getDefault()
+    ).format(
+        Date().time
+    )
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -47,10 +60,10 @@ class HomeFragment : Fragment() {
         // greet user
         val greetingString = resources.getString(R.string.greet_user)
         val greeting = String.format(greetingString, name)
-        _binding!!.tvHomeGreet.text = greeting
 
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         addEmotionsButton = _binding!!.fabAdd
+        _binding!!.tvHomeGreet.text = greeting
         addEmotionsButton.setOnClickListener {
             val i = Intent(requireContext(), EmotionsActivity::class.java)
             startActivity(i)
@@ -59,6 +72,28 @@ class HomeFragment : Fragment() {
         shareBtn.setOnClickListener {
             shareImage()
         }
+
+        viewModel = ViewModelProvider(
+            this,
+            ViewModelProvider.NewInstanceFactory()
+        )[ChartViewModel::class.java]
+
+        viewModel.getChartStatus().observe(viewLifecycleOwner) {
+            showLoading(false)
+            if (it.uuid != "" && it.createdAt == selectedDate) {
+                val emotion = Emotions(
+                    it.love,
+                    it.sad,
+                    it.anger,
+                    it.happiness,
+                    it.disgust,
+                    it.optimism
+                )
+                setBarGraph(emotion)
+            } else {
+                setBarGraph(Emotions(0, 0, 0, 0, 0, 0))
+            }
+        }
         return binding.root
     }
 
@@ -66,11 +101,9 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         initLittleCalendar()
-
+        getPostByDate()
         // Nembak ke api terus nanti setiap ganti hari
-        val emotion = Emotions(1, 2,3,5,2,3)
-
-        setBarGraph(emotion)
+//        val emotion = Emotions(1, 2,3,5,2,3)
         setListeners()
     }
 
@@ -104,7 +137,7 @@ class HomeFragment : Fragment() {
         binding.rvDate.apply {
             layoutManager =
                 LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
-            adapter = HomeDateAdapter(homeDateList)
+            adapter = HomeDateAdapter(homeDateList, this@HomeFragment)
         }
     }
 
@@ -189,5 +222,30 @@ class HomeFragment : Fragment() {
         val shareIntent = Intent(Intent.ACTION_SEND)
         shareIntent.type = "image/png"
         startActivity(Intent.createChooser(shareIntent, "Share Image"))
+    }
+
+    private fun showLoading(state: Boolean) {
+        if (state) {
+            binding.progressBarChart.visibility = View.VISIBLE
+        } else {
+            binding.progressBarChart.visibility = View.GONE
+        }
+    }
+
+    private fun getPostByDate() {
+        binding.apply {
+            showLoading(true)
+            viewModel.getChart(selectedDate)
+        }
+    }
+
+    override fun onDateItemClicked(date: Date) {
+        val isoDateFormat = SimpleDateFormat("dd-MM-yyyy", Locale.getDefault())
+        val isoDate = isoDateFormat.format(date)
+
+        Log.d("DATEHOME", isoDate.toString())
+
+        selectedDate = isoDate
+        getPostByDate()
     }
 }
