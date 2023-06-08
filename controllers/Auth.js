@@ -10,17 +10,25 @@ export const Login = async (req, res) =>{
     if(!user) return res.status(404).json({msg: "User tidak ditemukan"});
     const match = await argon2.verify(user.password, req.body.password);
     if(!match) return res.status(400).json({msg: "Wrong Password"});
+
+    //"connect.sid=s%3A"
+    const sessionId = "connect.sid=s%3A" + req.cookies['connect.sid'].substring(2,);
+    const finalsession = sessionId.replace('+', '%2B')
     req.session.userId = user.uuid;
     const uuid = user.uuid;
     const name = user.name;
     const email = user.email;
     const role = user.role;
-    res.status(200).json({uuid, name, email, role});
+    res.status(200).json({uuid, name, email, role, finalsession});
 }
 
 export const Me = async (req, res) =>{
     if(!req.session.userId){
-        return res.status(401).json({msg: "Mohon login ke akun Anda!"});
+        return res.status(401).json({
+            uuid:"expired",
+            name:"invalid",
+            email:"expired"
+        });
     }
     const user = await User.findOne({
         attributes:['uuid','name','email','role'],

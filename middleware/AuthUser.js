@@ -11,7 +11,7 @@ export const verifyUser = async (req, res, next) =>{
     });
     if(!user) return res.status(404).json({msg: "User tidak ditemukan"});
     req.userId = user.id;
-    req.role = user.role; 
+    req.role = user.role;
     next();
 }
 
