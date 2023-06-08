@@ -7,7 +7,8 @@ export const getPosts = async (req, res) =>{
         let response;
         if(req.role === "admin"){
             response = await Post.findAll({
-                attributes:['uuid','love', 'sad', 'anger', 'happiness','art_id', 'createdAt'],
+                attributes:['id', 'uuid','love', 'sad', 'anger', 'happiness', 'disgust', 'optimism',
+                'art_id', 'createdAt'],
                 include:[{
                     model: User,
                     attributes:['name','email']
@@ -15,7 +16,8 @@ export const getPosts = async (req, res) =>{
             });
         }else{
             response = await Post.findAll({
-                attributes:['uuid','love', 'sad', 'anger', 'happiness','art_id', 'createdAt'],
+                attributes:['id', 'uuid','love', 'sad', 'anger', 'happiness', 'disgust', 'optimism',
+                'art_id', 'createdAt'],
                 where:{
                     userId: req.userId
                 },
@@ -43,7 +45,8 @@ export const getPostByDate = async(req, res) =>{
         let response;
         if(req.role === "admin"){
             response = await Post.findAll({
-                attributes:['uuid','love', 'sad', 'anger', 'happiness','art_id', 'createdAt'],
+                attributes:['id', 'uuid','love', 'sad', 'anger', 'happiness', 'disgust', 'optimism',
+                'art_id', 'createdAt'],
                 where:{
                     createdAt: createdAt
                 },
@@ -54,7 +57,8 @@ export const getPostByDate = async(req, res) =>{
             });
         }else{
             response = await Post.findOne({
-                attributes:['uuid','love', 'sad', 'anger', 'happiness','art_id', 'createdAt'],
+                attributes:['id', 'uuid','love', 'sad', 'anger', 'happiness', 'disgust', 'optimism',
+                'art_id', 'createdAt'],
                 where:{
                     [Op.and]:[{createdAt: createdAt}, {userId: req.userId}]
                 },
@@ -82,7 +86,8 @@ export const getPostById = async(req, res) =>{
         let response;
         if(req.role === "admin"){
             response = await Post.findOne({
-                attributes:['uuid','love', 'sad', 'anger', 'happiness','art_id', 'createdAt'],
+                attributes:['id', 'uuid','love', 'sad', 'anger', 'happiness', 'disgust', 'optimism',
+                'art_id', 'createdAt'],
                 where:{
                     id: post.id
                 },
@@ -93,7 +98,8 @@ export const getPostById = async(req, res) =>{
             });
         }else{
             response = await Post.findOne({
-                attributes:['uuid','love', 'sad', 'anger', 'happiness','art_id', 'createdAt'],
+                attributes:['id', 'uuid','love', 'sad', 'anger', 'happiness', 'disgust', 'optimism',
+                'art_id', 'createdAt'],
                 where:{
                     [Op.and]:[{id: post.id}, {userId: req.userId}]
                 },
@@ -120,7 +126,7 @@ export const createPost = async(req, res) =>{
     if (dd < 10) dd = '0' + dd;
     if (mm < 10) mm = '0' + mm;
     const formattedToday = dd + '-' + mm + '-' + yyyy;
-    const {love, sad, anger, happiness} = req.body;
+    const {love, sad, anger, happiness, disgust, optimism} = req.body;
     try {
         await Post.create({
             createdAt: formattedToday,
@@ -128,6 +134,8 @@ export const createPost = async(req, res) =>{
             sad : sad,
             anger: anger,
             happiness: happiness,
+            disgust: disgust,
+            optimism: optimism,
             userId: req.userId
         });
         res.status(201).json({msg: "Post Created Successfuly"});

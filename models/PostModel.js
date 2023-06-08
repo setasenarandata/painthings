@@ -33,6 +33,7 @@ const Posts = db.define('post',{
             notEmpty: true
         }
     },
+
     anger:{
         type: DataTypes.INTEGER,
         allowNull: false,
@@ -40,6 +41,7 @@ const Posts = db.define('post',{
             notEmpty: true
         }
     },
+
     happiness:{
         type: DataTypes.INTEGER,
         allowNull: false,
@@ -47,6 +49,24 @@ const Posts = db.define('post',{
             notEmpty: true
         }
     },
+
+
+    disgust:{
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        validate:{
+            notEmpty: true
+        }
+    },
+
+    optimism:{
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        validate:{
+            notEmpty: true
+        }
+    },
+
     art_id:{
         type: DataTypes.STRING,
         allowNull: true

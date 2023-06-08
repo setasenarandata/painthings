@@ -18,7 +18,6 @@ const store = new sessionStore({
 });
 
 
-
 app.use(session({
     secret: process.env.SESS_SECRET,
     resave: false,
@@ -38,11 +37,11 @@ app.use(UserRoute);
 app.use(PostRoute);
 app.use(AuthRoute);
 
-// (async()=>{
-//     await db.sync();
-// })();
+(async()=>{
+    await db.sync();
+})();
 
-// store.sync();
+store.sync();
 
 app.listen(process.env.APP_PORT, ()=> {
     console.log('Server up and running...');
