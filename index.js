@@ -29,20 +29,21 @@ app.use(session({
 }));
 
 app.use(cors({
-    credentials: true,
-    origin: 'http://localhost:3000'
+    credentials: true
+    // origin: 'http://localhost:8080'
 }));
 app.use(express.json());
 app.use(UserRoute);
 app.use(PostRoute);
 app.use(AuthRoute);
 
-(async()=>{
-    await db.sync();
-})();
+// (async()=>{
+//     await db.sync();
+// })();
 
-store.sync();
+// store.sync();
 
-app.listen(process.env.APP_PORT, ()=> {
-    console.log('Server up and running...');
-});
+const PORT = process.env.PORT || 8000
+app.listen(PORT, () => {
+    console.log("Server is up and listening on " + PORT)
+})
