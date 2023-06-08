@@ -10,15 +10,19 @@ def index():
 
 @app.route('/predict',methods=['POST'])
 def predict():
-    love = request.form.get('love')
-    sadness = request.form.get('sadness')
-    anger = request.form.get('anger')
-    happiness = request.form.get('happiness')
-    disgust = request.form.get('disgust')
-    optimism = request.form.get('optimism')
+    data = request.get_json()  # Retrieve the JSON data from the request body
+
+    # Extract the values from the JSON data
+    love = data.get('love')
+    sad = data.get('sadness')
+    anger = data.get('anger')
+    happiness = data.get('happiness')
+    disgust = data.get('disgust')
+    optimism = data.get('optimism')
+
     X_2 = {
        'Art (image+title): love': [love],
-       'Art (image+title): sadness': [sadness],
+       'Art (image+title): sadness': [sad],
        'Art (image+title): anger': [anger],
        'Art (image+title): happiness': [happiness],
        'Art (image+title): disgust': [disgust],
@@ -28,8 +32,8 @@ def predict():
     ['love', 'sadness', 'anger', 'happiness','disgust', 'optimism']
 
     df2
-  
+
     result = model.predict(df2)
     return jsonify({'hasil clusteting':str(result)})
-if __name__ == "__main__":
+if __name__ == "_main_":
     app.run()
