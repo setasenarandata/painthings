@@ -1,5 +1,6 @@
 package com.example.painthings.ui.home
 
+import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
 import android.os.Bundle
@@ -40,6 +41,14 @@ class HomeFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        val sharedPreferences = requireContext().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
+        val name = sharedPreferences.getString("name", "User")!!
+
+        // greet user
+        val greetingString = resources.getString(R.string.greet_user)
+        val greeting = String.format(greetingString, name)
+        _binding!!.tvHomeGreet.text = greeting
+
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         addEmotionsButton = _binding!!.fabAdd
         addEmotionsButton.setOnClickListener {
@@ -56,10 +65,11 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        initLittleCalendar()
+
         // Nembak ke api terus nanti setiap ganti hari
         val emotion = Emotions(1, 2,3,5,2,3)
 
-        initLittleCalendar()
         setBarGraph(emotion)
         setListeners()
     }
@@ -176,36 +186,8 @@ class HomeFragment : Fragment() {
     }
 
     private fun shareImage() {
-        // Get the drawable resource ID of the image you want to share
-//        val drawableResId = R.drawable.starry_night
-//
-//        // Retrieve the drawable using its resource ID
-//        val drawable = ContextCompat.getDrawable(requireContext(), drawableResId)
-//
-//        // Convert the drawable to a bitmap
-//        val bitmap = drawable?.toBitmap()
-//
-//        // Create a temporary PNG file to share
-//        val cachePath = File(requireContext().cacheDir, "images")
-//        cachePath.mkdirs()
-//        val imagePath = File(cachePath, "image.png")
-//        val imageUri = FileProvider.getUriForFile(requireContext(), "com.your.package.name.fileprovider", imagePath)
-//
-//        try {
-//            // Save the bitmap to the temporary file
-//            val stream = FileOutputStream(imagePath)
-//            bitmap?.compress(Bitmap.CompressFormat.PNG, 100, stream)
-//            stream.close()
-//        } catch (e: IOException) {
-//            e.printStackTrace()
-//        }
-//
-//        // Create and set the sharing intent
         val shareIntent = Intent(Intent.ACTION_SEND)
         shareIntent.type = "image/png"
-//        shareIntent.putExtra(Intent.EXTRA_STREAM, imageUri)
-
-        // Start the activity for sharing
         startActivity(Intent.createChooser(shareIntent, "Share Image"))
     }
 }
