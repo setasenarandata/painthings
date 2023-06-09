@@ -4,9 +4,6 @@ import com.example.painthings.emotions.Emotions
 import retrofit2.Call
 import retrofit2.http.*
 
-class RegisterBody(val name: String, val email: String, val password: String, val birthdate: String)
-class LoginBody(val email: String, val password: String)
-
 interface ApiService {
     @POST("login")
     fun login(
@@ -45,4 +42,12 @@ interface ApiService {
     fun getMe(
         @Header("Cookie") cookie: String,
     ): Call<LoginResponse>
+
+    @GET("art/{id}")
+    fun fetchCluster(
+        @Path("id") id: Int,
+    ): Call<List<ArtResponse>>
 }
+
+class RegisterBody(val name: String, val email: String, val password: String, val birthdate: String)
+class LoginBody(val email: String, val password: String)

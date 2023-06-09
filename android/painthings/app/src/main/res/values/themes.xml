@@ -37,4 +37,8 @@
         <attr name="chart_bar_tooltip_subtitle_text_family" format="reference" />
 
     </declare-styleable>
+
+    <style name="textView_style">
+        <item name="android:textColor">@color/black</item>
+    </style>
 </resources>

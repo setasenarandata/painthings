@@ -35,6 +35,9 @@ data class EmotionResponseItem(
     @field:SerializedName("art_id")
     val art_id: String? = null,
 
+    @field:SerializedName("journal")
+    val journal: String? = null,
+
     @field:SerializedName("createdAt")
     val createdAt: String? = "",
 
@@ -44,13 +47,42 @@ data class EmotionResponseItem(
 
 )
 
+data class WikiArtDetailResponse(
+    @PrimaryKey
+    @field:SerializedName("id")
+    val id: String? = "",
+
+    @field:SerializedName("title")
+    val title: String? = "",
+
+    @field:SerializedName("completitionYear")
+    val completitionYear: Int? = 0,
+
+    @field:SerializedName("artistName")
+    val artistName: String? = "",
+
+    @field:SerializedName("image")
+    val image: String? = "",
+
+    @field:SerializedName("description")
+    val description: String? = "",
+)
+
+data class ArtResponse(
+    val id: String,
+    val Style: String,
+    val Category: String,
+    val Artist: String,
+    val Title: String
+)
+
 data class UserPainthings(
     val name: String,
     val email: String
 )
 
 data class PredictResponse(
-    @field:SerializedName("hasil clustering")
+    @field:SerializedName("hasil clusteting")
     val cluster: String,
 )
 

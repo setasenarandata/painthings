@@ -21,7 +21,7 @@ class ChartViewModel(): ViewModel() {
                     chartRes.postValue(response.body())
                 } else {
                     val errorObj = EmotionResponseItem(
-                        0, "", 0, 0, 0, 0, 0, 0, "", "", UserPainthings("", "")
+                        0, "", 0, 0, 0, 0, 0, 0, "", "", "", UserPainthings("", "")
                     )
                     chartRes.postValue(errorObj)
                 }

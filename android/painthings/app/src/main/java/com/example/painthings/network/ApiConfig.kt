@@ -2,8 +2,11 @@ package com.example.painthings.network
 
 import android.util.Log
 import android.webkit.CookieManager
+import com.google.gson.Gson
+import com.google.gson.GsonBuilder
 import okhttp3.*
 import okhttp3.logging.HttpLoggingInterceptor
+import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
@@ -35,6 +38,23 @@ class ApiConfig {
                 .client(client)
                 .build()
             return retrofit.create(MlApiService::class.java)
+        }
+
+        fun getWikiArtService(): WikiArtApiService {
+            val loggingInterceptor =
+                HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
+            val client = OkHttpClient.Builder()
+                .addInterceptor(loggingInterceptor)
+                .build()
+            val gson: Gson = GsonBuilder()
+                .registerTypeAdapter(Call::class.java, CallInstanceCreator<Any>())
+                .create()
+            val retrofit = Retrofit.Builder()
+                .baseUrl("https://www.wikiart.org/en/api/2/")
+                .addConverterFactory(GsonConverterFactory.create(gson))
+                .client(client)
+                .build()
+            return retrofit.create(WikiArtApiService::class.java)
         }
         private fun setupOkhttpInterceptor(): OkHttpClient {
 
@@ -104,14 +124,5 @@ class ApiConfig {
 
             return builder.build()
         }
-//        private fun saveCookies(cookies: List<Cookie>) {
-//            val cookieStrings = ArrayList<String>()
-//            for (cookie in cookies) {
-//                cookieStrings.add(cookie.toString())
-//            }
-//            val editor = sharedPreferences.edit()
-//            editor.putStringSet("cookies", cookieStrings.toSet())
-//            editor.apply()
-//        }
     }
 }
