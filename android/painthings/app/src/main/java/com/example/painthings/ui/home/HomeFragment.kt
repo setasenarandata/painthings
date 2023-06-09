@@ -24,6 +24,7 @@ import com.example.painthings.emotions.Emotions
 import com.example.painthings.emotions.EmotionsActivity
 import com.example.painthings.model.HomeDate
 import com.example.painthings.network.LoginBody
+import com.example.painthings.ui.auth.AuthActivity
 import com.example.painthings.view_model.ChartViewModel
 import com.example.painthings.view_model.LoginViewModel
 import com.google.android.material.button.MaterialButton
@@ -248,5 +249,16 @@ class HomeFragment : Fragment(), HomeDateAdapter.DateItemClickListener {
 
         selectedDate = isoDate
         getPostByDate()
+    }
+
+    private fun logout() {
+        val sharedPrefs = requireContext().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
+        val editor = sharedPrefs.edit()
+        editor.clear()
+        editor.apply()
+
+        Toast.makeText(requireContext(), "Please Login again", Toast.LENGTH_LONG).show()
+        val intent = Intent(requireContext(), AuthActivity::class.java)
+        startActivity(intent)
     }
 }
