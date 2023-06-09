@@ -1,4 +1,4 @@
-node_modules
-.env
 serviceaccountkey.json
 app.yaml
+node_modules
+.env
