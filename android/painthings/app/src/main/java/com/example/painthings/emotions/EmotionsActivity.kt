@@ -31,16 +31,6 @@ class EmotionsActivity : AppCompatActivity() {
         nextbtn = findViewById(R.id.nextButton)
         backBtn = findViewById(R.id.backButton)
 
-//        val sharedPrefs = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
-//        Log.d("SHARED PREFS IN ONBOARDING", sharedPrefs.getString("token", null).toString())
-//        val skipLogin: Boolean = sharedPrefs.getString("token", null) != null
-
-//        if (skipLogin) {
-//            val i = Intent(this@OnboardingActivity, HomeActivity::class.java)
-//            startActivity(i)
-//            finish()
-//        }
-
         nextbtn.setOnClickListener {
             val currentEmotion = getItem(0)
 

@@ -23,6 +23,19 @@ class ApiConfig {
             return retrofit.create(ApiService::class.java)
         }
 
+        fun getMlApiService(): MlApiService {
+            val loggingInterceptor =
+                HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
+            val client = OkHttpClient.Builder()
+                .addInterceptor(loggingInterceptor)
+                .build()
+            val retrofit = Retrofit.Builder()
+                .baseUrl("https://mlpainthings-dot-proven-reality-379717.et.r.appspot.com/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .client(client)
+                .build()
+            return retrofit.create(MlApiService::class.java)
+        }
         private fun setupOkhttpInterceptor(): OkHttpClient {
 
             var cookieManager: CookieManager

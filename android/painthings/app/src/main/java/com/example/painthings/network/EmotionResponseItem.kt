@@ -17,8 +17,8 @@ data class EmotionResponseItem(
     @field:SerializedName("love")
     val love: Int,
 
-    @field:SerializedName("sad")
-    val sad: Int,
+    @field:SerializedName("sadness")
+    val sadness: Int,
 
     @field:SerializedName("anger")
     val anger: Int,
@@ -47,6 +47,11 @@ data class EmotionResponseItem(
 data class UserPainthings(
     val name: String,
     val email: String
+)
+
+data class PredictResponse(
+    @field:SerializedName("hasil clustering")
+    val cluster: String,
 )
 
 // Kalau berhasil 'Register Berhasil'

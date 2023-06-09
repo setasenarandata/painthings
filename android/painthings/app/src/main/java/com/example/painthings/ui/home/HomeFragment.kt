@@ -2,16 +2,12 @@ package com.example.painthings.ui.home
 
 import android.content.Context
 import android.content.Intent
-import android.graphics.Bitmap
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.core.content.ContextCompat
-import androidx.core.content.FileProvider
-import androidx.core.graphics.drawable.toBitmap
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -23,17 +19,11 @@ import com.example.painthings.adapter.HomeDateAdapter
 import com.example.painthings.emotions.Emotions
 import com.example.painthings.emotions.EmotionsActivity
 import com.example.painthings.model.HomeDate
-import com.example.painthings.network.LoginBody
 import com.example.painthings.ui.auth.AuthActivity
 import com.example.painthings.view_model.ChartViewModel
-import com.example.painthings.view_model.LoginViewModel
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.justin.popupbarchart.GraphValue
-import java.io.File
-import java.io.FileOutputStream
-import java.io.IOException
-import java.net.CookieManager
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -85,7 +75,7 @@ class HomeFragment : Fragment(), HomeDateAdapter.DateItemClickListener {
             if (it.uuid != "" && it.createdAt == selectedDate) {
                 val emotion = Emotions(
                     it.love,
-                    it.sad,
+                    it.sadness,
                     it.anger,
                     it.happiness,
                     it.disgust,
@@ -157,7 +147,7 @@ class HomeFragment : Fragment(), HomeDateAdapter.DateItemClickListener {
                     GraphValue(
                         day = 2,
                         id = 2,
-                        progress = emotions.sad * 20,
+                        progress = emotions.sadness * 20,
                         isToday = false,
                         showToolTip = false
                     ),
