@@ -33,11 +33,10 @@ class LoginFragment : Fragment() {
             showLoading(false)
             if (it.email == binding.edEmail.text.toString()) {
                 val sharedPreferences = requireContext().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
-                with(sharedPreferences?.edit()) {
-                    this?.putString("name", it.name)
-                    this?.putString("email", it.email)
-                    this?.putString("uuid", it.uuid)
-                    this?.apply()
+                with(sharedPreferences.edit()) {
+                    putString("cookies", it.finalsession)
+                    putString("name", it.name)
+                    apply()
                 }
                 Toast.makeText(requireContext(), "Login successful", Toast.LENGTH_LONG).show()
                 val i = Intent(requireContext(), HomeActivity::class.java)

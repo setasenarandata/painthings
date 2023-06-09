@@ -34,6 +34,23 @@ class LoginViewModel(): ViewModel() {
         })
     }
 
+    fun getMe(cookie: String) {
+        ApiConfig.getApiService().getMe(cookie).enqueue(object : Callback<LoginResponse> {
+            override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
+                if (response.isSuccessful && response.code() != 401) {
+                    loginRes.postValue(response.body())
+                } else {
+                    loginRes.postValue(response.body())
+                }
+            }
+
+            override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
+                Log.d("error", t.message.toString())
+            }
+
+        })
+    }
+
     fun getLoginStatus(): LiveData<LoginResponse> {
         return loginRes
     }

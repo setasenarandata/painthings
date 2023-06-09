@@ -57,7 +57,8 @@ data class RegisterResponse(
 data class LoginResponse(
     val uuid: String,
     val name: String,
-    val email: String
+    val email: String,
+    val finalsession: String
 )
 
 data class CreatePostResponse(

@@ -2,11 +2,7 @@ package com.example.painthings.network
 
 import com.example.painthings.emotions.Emotions
 import retrofit2.Call
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.POST
-import retrofit2.http.Path
-import retrofit2.http.Query
+import retrofit2.http.*
 
 class RegisterBody(val name: String, val email: String, val password: String, val birthdate: String)
 class LoginBody(val email: String, val password: String)
@@ -44,4 +40,9 @@ interface ApiService {
     fun getPostByDate(
         @Path("createdAt") createdAt: String,
     ): Call<EmotionResponseItem>
+
+    @GET("me")
+    fun getMe(
+        @Header("Cookie") cookie: String,
+    ): Call<LoginResponse>
 }

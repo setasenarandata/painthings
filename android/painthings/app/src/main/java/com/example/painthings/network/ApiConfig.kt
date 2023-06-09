@@ -10,7 +10,9 @@ import java.util.concurrent.TimeUnit
 
 class ApiConfig {
     companion object{
-        var TIMEOUT_MILLIS = 20000
+//        private lateinit var sharedPreferences: SharedPreferences
+
+        private var TIMEOUT_MILLIS = 20000
 
         fun getApiService(): ApiService {
             val retrofit = Retrofit.Builder()
@@ -28,6 +30,7 @@ class ApiConfig {
             val interceptor = HttpLoggingInterceptor()
             interceptor.level = HttpLoggingInterceptor.Level.BODY
 
+
             val builder = OkHttpClient.Builder()
                 .followRedirects(false)
                 .cookieJar(object : CookieJar {
@@ -37,15 +40,13 @@ class ApiConfig {
                      * @param cookies list of cookies get in api response
                      */
                     override fun saveFromResponse(url: HttpUrl, cookies: List<Cookie>) {
-
                         cookieManager = CookieManager.getInstance()
                         for (cookie in cookies) {
                             cookieManager.setCookie(url.toString(), cookie.toString())
-                            Log.e(
-                                "ok",
-                                "saveFromResponse :  Cookie url : $url$cookie"
-                            )
+                            Log.e("ok", "saveFromResponse :  Cookie url : $url$cookie")
                         }
+
+//                        saveCookies(cookies) // Call the saveCookies function here
                     }
 
                     /**
@@ -90,5 +91,14 @@ class ApiConfig {
 
             return builder.build()
         }
+//        private fun saveCookies(cookies: List<Cookie>) {
+//            val cookieStrings = ArrayList<String>()
+//            for (cookie in cookies) {
+//                cookieStrings.add(cookie.toString())
+//            }
+//            val editor = sharedPreferences.edit()
+//            editor.putStringSet("cookies", cookieStrings.toSet())
+//            editor.apply()
+//        }
     }
 }
