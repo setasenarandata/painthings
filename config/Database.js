@@ -1,7 +1,9 @@
 import {Sequelize} from "sequelize";
 
-const db = new Sequelize('painthings', 'root', 'strix2107', {
-    host: "34.128.117.197",
+const host = process.env.host
+
+const db = new Sequelize("painthings", "root", '', {
+    host: host,
     dialect: "mysql"
 });
 

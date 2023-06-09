@@ -126,7 +126,7 @@ export const createPost = async(req, res) =>{
     if (dd < 10) dd = '0' + dd;
     if (mm < 10) mm = '0' + mm;
     const formattedToday = dd + '-' + mm + '-' + yyyy;
-    const {love, sad, anger, happiness, disgust, optimism} = req.body;
+    const {love, sad, anger, happiness, disgust, optimism, art_id} = req.body;
     try {
         await Post.create({
             createdAt: formattedToday,
@@ -135,7 +135,9 @@ export const createPost = async(req, res) =>{
             anger: anger,
             happiness: happiness,
             disgust: disgust,
+            art_id: art_id,
             optimism: optimism,
+
             userId: req.userId
         });
         res.status(201).json({msg: "Post Created Successfuly"});

@@ -26,9 +26,8 @@ export const Me = async (req, res) =>{
     if(!req.session.userId){
         return res.status(401).json({
             uuid:"expired",
-            name:"invalid",
-            email:"expired"
-        });
+            name:"expired",
+            email:"expired"});
     }
     const user = await User.findOne({
         attributes:['uuid','name','email','role'],

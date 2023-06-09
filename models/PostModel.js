@@ -69,7 +69,10 @@ const Posts = db.define('post',{
 
     art_id:{
         type: DataTypes.STRING,
-        allowNull: true
+        allowNull: false,
+        validate:{
+            notEmpty:true
+        }
     },
 
     userId:{
