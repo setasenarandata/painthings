@@ -8,7 +8,7 @@ export const getPosts = async (req, res) =>{
         if(req.role === "admin"){
             response = await Post.findAll({
                 attributes:['id', 'uuid','love', 'sad', 'anger', 'happiness', 'disgust', 'optimism',
-                'art_id', 'createdAt'],
+                'art_id', 'journal', 'createdAt'],
                 include:[{
                     model: User,
                     attributes:['name','email']
@@ -17,7 +17,7 @@ export const getPosts = async (req, res) =>{
         }else{
             response = await Post.findAll({
                 attributes:['id', 'uuid','love', 'sad', 'anger', 'happiness', 'disgust', 'optimism',
-                'art_id', 'createdAt'],
+                'art_id', 'journal', 'createdAt'],
                 where:{
                     userId: req.userId
                 },
@@ -46,7 +46,7 @@ export const getPostByDate = async(req, res) =>{
         if(req.role === "admin"){
             response = await Post.findAll({
                 attributes:['id', 'uuid','love', 'sad', 'anger', 'happiness', 'disgust', 'optimism',
-                'art_id', 'createdAt'],
+                'art_id', 'journal', 'createdAt'],
                 where:{
                     createdAt: createdAt
                 },
@@ -58,7 +58,7 @@ export const getPostByDate = async(req, res) =>{
         }else{
             response = await Post.findOne({
                 attributes:['id', 'uuid','love', 'sad', 'anger', 'happiness', 'disgust', 'optimism',
-                'art_id', 'createdAt'],
+                'art_id', 'journal', 'createdAt'],
                 where:{
                     [Op.and]:[{createdAt: createdAt}, {userId: req.userId}]
                 },
@@ -87,7 +87,7 @@ export const getPostById = async(req, res) =>{
         if(req.role === "admin"){
             response = await Post.findOne({
                 attributes:['id', 'uuid','love', 'sad', 'anger', 'happiness', 'disgust', 'optimism',
-                'art_id', 'createdAt'],
+                'art_id', 'journal', 'createdAt'],
                 where:{
                     id: post.id
                 },
@@ -99,7 +99,7 @@ export const getPostById = async(req, res) =>{
         }else{
             response = await Post.findOne({
                 attributes:['id', 'uuid','love', 'sad', 'anger', 'happiness', 'disgust', 'optimism',
-                'art_id', 'createdAt'],
+                'art_id', 'journal', 'createdAt'],
                 where:{
                     [Op.and]:[{id: post.id}, {userId: req.userId}]
                 },

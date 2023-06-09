@@ -77,10 +77,7 @@ const Posts = db.define('post',{
 
     journal:{
         type: DataTypes.STRING,
-        allowNull: false,
-        validate:{
-            notEmpty:true
-        }
+        allowNull: true
     },
 
     userId:{
