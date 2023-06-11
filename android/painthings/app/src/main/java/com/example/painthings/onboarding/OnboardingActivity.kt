@@ -7,13 +7,19 @@ import android.os.Bundle
 import android.text.Html
 import android.util.Log
 import android.view.View
+import android.webkit.CookieManager
 import android.widget.Button
 import android.widget.LinearLayout
+import android.widget.ProgressBar
 import android.widget.TextView
+import android.widget.Toast
+import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager.widget.ViewPager
 import com.example.painthings.R
+import com.example.painthings.network.LoginBody
 import com.example.painthings.ui.HomeActivity
 import com.example.painthings.ui.auth.AuthActivity
+import com.example.painthings.view_model.LoginViewModel
 
 class OnboardingActivity : AppCompatActivity() {
     private lateinit var mSLideViewPager: ViewPager
@@ -22,6 +28,7 @@ class OnboardingActivity : AppCompatActivity() {
     private lateinit var viewPagerAdapter: ViewPagerAdapter
     private lateinit var nextbtn: Button
     private lateinit var skipbtn: Button
+    private lateinit var viewModel: LoginViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
@@ -30,14 +37,29 @@ class OnboardingActivity : AppCompatActivity() {
         skipbtn = findViewById(R.id.skipButton)
 
         val sharedPrefs = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
-        Log.d("SHARED PREFS IN ONBOARDING", sharedPrefs.getString("token", null).toString())
-        val skipLogin: Boolean = sharedPrefs.getString("token", null) != null
+        val cookie = sharedPrefs.getString("cookies", null)
+        val name = sharedPrefs.getString("name", null)
 
-        if (skipLogin) {
-            val i = Intent(this@OnboardingActivity, HomeActivity::class.java)
-            startActivity(i)
-            finish()
+        Log.d("COOKIESCOY", cookie.toString())
+
+        viewModel = ViewModelProvider(
+            this,
+            ViewModelProvider.NewInstanceFactory()
+        )[LoginViewModel::class.java]
+
+        viewModel.getLoginStatus().observe(this@OnboardingActivity) {
+            Log.d("Namacoy", name.toString())
+            Log.d("Namait", it.name)
+            if (it.name == name) {
+                val i = Intent(this@OnboardingActivity, HomeActivity::class.java)
+                startActivity(i)
+                finish()
+            } else {
+                Toast.makeText(this@OnboardingActivity, "Please login again", Toast.LENGTH_LONG).show()
+            }
         }
+
+        if (cookie != null) getMe(cookie)
 
         nextbtn.setOnClickListener {
             if (getitem(0) < 2) mSLideViewPager.setCurrentItem(getitem(1), true)
@@ -48,18 +70,9 @@ class OnboardingActivity : AppCompatActivity() {
             }
         }
         skipbtn.setOnClickListener {
-            Log.d("SKIP LOGIN", skipLogin.toString())
-            if (skipLogin) {
-                Log.d("SKIP LOGIN", "SKIPPING")
-                val i = Intent(this@OnboardingActivity, HomeActivity::class.java)
-                startActivity(i)
-                finish()
-            } else {
-                val i = Intent(this@OnboardingActivity, AuthActivity::class.java)
-                startActivity(i)
-                finish()
-            }
-
+            val i = Intent(this@OnboardingActivity, AuthActivity::class.java)
+            startActivity(i)
+            finish()
         }
         mSLideViewPager = findViewById<View>(R.id.viewPager) as ViewPager
         mDotLayout = findViewById<View>(R.id.pageIndicator) as LinearLayout
@@ -98,5 +111,9 @@ class OnboardingActivity : AppCompatActivity() {
 
     private fun getitem(i: Int): Int {
         return mSLideViewPager.currentItem + i
+    }
+
+    private fun getMe(cookie: String) {
+        viewModel.getMe(cookie)
     }
 }

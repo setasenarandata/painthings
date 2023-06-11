@@ -17,9 +17,16 @@
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="@dimen/_100sdp"
-            android:layout_margin="@dimen/_64sdp"
+            android:layout_marginHorizontal="@dimen/_64sdp"
+            android:layout_marginTop="@dimen/_64sdp"
+            android:layout_marginBottom="@dimen/_32sdp"
             android:src="@drawable/painthings_logo" />
 
+        <ProgressBar
+            android:id="@+id/loginProgressBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone" />
 
         <EditText
             android:id="@+id/ed_email"
@@ -27,6 +34,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_24sdp"
             android:layout_marginEnd="@dimen/_24sdp"
+            android:layout_marginTop="@dimen/_32sdp"
             android:background="@drawable/background_input_form"
             android:hint="Email"
             android:inputType="textEmailAddress"

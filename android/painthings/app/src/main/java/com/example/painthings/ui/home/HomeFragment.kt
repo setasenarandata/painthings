@@ -1,16 +1,15 @@
 package com.example.painthings.ui.home
 
+import android.content.Context
 import android.content.Intent
-import android.graphics.Bitmap
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
-import androidx.core.content.FileProvider
-import androidx.core.graphics.drawable.toBitmap
+import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.painthings.R
 import com.example.painthings.databinding.FragmentHomeBinding
@@ -20,28 +19,43 @@ import com.example.painthings.adapter.HomeDateAdapter
 import com.example.painthings.emotions.Emotions
 import com.example.painthings.emotions.EmotionsActivity
 import com.example.painthings.model.HomeDate
+import com.example.painthings.ui.auth.AuthActivity
+import com.example.painthings.view_model.ChartViewModel
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.justin.popupbarchart.GraphValue
-import java.io.File
-import java.io.FileOutputStream
-import java.io.IOException
+import java.text.SimpleDateFormat
 import java.util.*
 
-class HomeFragment : Fragment() {
+class HomeFragment : Fragment(), HomeDateAdapter.DateItemClickListener {
 
     private var _binding: FragmentHomeBinding? = null
+    private lateinit var viewModel: ChartViewModel
     private lateinit var addEmotionsButton: FloatingActionButton
     private lateinit var shareBtn: MaterialButton
     private val binding get() = _binding!!
+    private var selectedDate: String = SimpleDateFormat(
+        "dd-MM-yyyy",
+        Locale.getDefault()
+    ).format(
+        Date().time
+    )
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        val sharedPreferences = requireContext().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
+        val name = sharedPreferences.getString("name", "User")!!
+
+        // greet user
+        val greetingString = resources.getString(R.string.greet_user)
+        val greeting = String.format(greetingString, name)
+
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         addEmotionsButton = _binding!!.fabAdd
+        _binding!!.tvHomeGreet.text = greeting
         addEmotionsButton.setOnClickListener {
             val i = Intent(requireContext(), EmotionsActivity::class.java)
             startActivity(i)
@@ -50,17 +64,38 @@ class HomeFragment : Fragment() {
         shareBtn.setOnClickListener {
             shareImage()
         }
+
+        viewModel = ViewModelProvider(
+            this,
+            ViewModelProvider.NewInstanceFactory()
+        )[ChartViewModel::class.java]
+
+        viewModel.getChartStatus().observe(viewLifecycleOwner) {
+            showLoading(false)
+            if (it.uuid != "" && it.createdAt == selectedDate) {
+                val emotion = Emotions(
+                    it.love,
+                    it.sadness,
+                    it.anger,
+                    it.happiness,
+                    it.disgust,
+                    it.optimism
+                )
+                setBarGraph(emotion)
+            } else {
+                setBarGraph(Emotions(0, 0, 0, 0, 0, 0))
+            }
+        }
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Nembak ke api terus nanti setiap ganti hari
-        val emotion = Emotions(1, 2,3,5,2,3)
-
         initLittleCalendar()
-        setBarGraph(emotion)
+        getPostByDate()
+        // Nembak ke api terus nanti setiap ganti hari
+//        val emotion = Emotions(1, 2,3,5,2,3)
         setListeners()
     }
 
@@ -94,7 +129,7 @@ class HomeFragment : Fragment() {
         binding.rvDate.apply {
             layoutManager =
                 LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
-            adapter = HomeDateAdapter(homeDateList)
+            adapter = HomeDateAdapter(homeDateList, this@HomeFragment)
         }
     }
 
@@ -112,7 +147,7 @@ class HomeFragment : Fragment() {
                     GraphValue(
                         day = 2,
                         id = 2,
-                        progress = emotions.sad * 20,
+                        progress = emotions.sadness * 20,
                         isToday = false,
                         showToolTip = false
                     ),
@@ -176,36 +211,44 @@ class HomeFragment : Fragment() {
     }
 
     private fun shareImage() {
-        // Get the drawable resource ID of the image you want to share
-//        val drawableResId = R.drawable.starry_night
-//
-//        // Retrieve the drawable using its resource ID
-//        val drawable = ContextCompat.getDrawable(requireContext(), drawableResId)
-//
-//        // Convert the drawable to a bitmap
-//        val bitmap = drawable?.toBitmap()
-//
-//        // Create a temporary PNG file to share
-//        val cachePath = File(requireContext().cacheDir, "images")
-//        cachePath.mkdirs()
-//        val imagePath = File(cachePath, "image.png")
-//        val imageUri = FileProvider.getUriForFile(requireContext(), "com.your.package.name.fileprovider", imagePath)
-//
-//        try {
-//            // Save the bitmap to the temporary file
-//            val stream = FileOutputStream(imagePath)
-//            bitmap?.compress(Bitmap.CompressFormat.PNG, 100, stream)
-//            stream.close()
-//        } catch (e: IOException) {
-//            e.printStackTrace()
-//        }
-//
-//        // Create and set the sharing intent
         val shareIntent = Intent(Intent.ACTION_SEND)
         shareIntent.type = "image/png"
-//        shareIntent.putExtra(Intent.EXTRA_STREAM, imageUri)
-
-        // Start the activity for sharing
         startActivity(Intent.createChooser(shareIntent, "Share Image"))
+    }
+
+    private fun showLoading(state: Boolean) {
+        if (state) {
+            binding.progressBarChart.visibility = View.VISIBLE
+        } else {
+            binding.progressBarChart.visibility = View.GONE
+        }
+    }
+
+    private fun getPostByDate() {
+        binding.apply {
+            showLoading(true)
+            viewModel.getChart(selectedDate)
+        }
+    }
+
+    override fun onDateItemClicked(date: Date) {
+        val isoDateFormat = SimpleDateFormat("dd-MM-yyyy", Locale.getDefault())
+        val isoDate = isoDateFormat.format(date)
+
+        Log.d("DATEHOME", isoDate.toString())
+
+        selectedDate = isoDate
+        getPostByDate()
+    }
+
+    private fun logout() {
+        val sharedPrefs = requireContext().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
+        val editor = sharedPrefs.edit()
+        editor.clear()
+        editor.apply()
+
+        Toast.makeText(requireContext(), "Please Login again", Toast.LENGTH_LONG).show()
+        val intent = Intent(requireContext(), AuthActivity::class.java)
+        startActivity(intent)
     }
 }
