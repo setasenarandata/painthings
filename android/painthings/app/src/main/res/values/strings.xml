@@ -7,7 +7,7 @@
     <string name="back_button_text">Back</string>
     <string name="skip_button_text">Skip</string>
 
-<!--    emotion section-->
+    <!--    emotion section-->
     <string name="emotion_heading_1">Love</string>
     <string name="emotion_heading_2">Sad</string>
     <string name="emotion_heading_3">Anger</string>
@@ -35,5 +35,9 @@
     <string name="starry_night_artist">Vincent Van Gogh</string>
     <string name="starry_night_style">1902</string>
     <string name="helper_art_activity">Which paintings would you use to describe your current emotional state?</string>
+
+    <string name="journal_helper">Write anything about today</string>
+    <string name="journal_placeholder">Type here</string>
+    <string name="journal_button">Post</string>
 
 </resources>

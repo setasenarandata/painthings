@@ -1,19 +1,26 @@
 package com.example.painthings.art
 
 import android.content.ContentValues.TAG
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
+import android.widget.ImageView
+import android.widget.TextView
 import android.widget.Toast
+import androidx.core.app.ActivityOptionsCompat
+import androidx.core.util.Pair
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.painthings.R
 import com.example.painthings.databinding.ActivityArtBinding
+import com.example.painthings.emotions.CreateNewPost
 import com.example.painthings.emotions.Emotions
 import com.example.painthings.network.ArtResponse
+import com.example.painthings.network.WikiArtDetailResponse
 import com.example.painthings.view_model.ChartViewModel
 import com.example.painthings.view_model.EmotionViewModel
 import kotlinx.coroutines.CoroutineScope
@@ -32,6 +39,43 @@ class ArtActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         adapter = ArtAdapter()
+
+        val emotionArray = intent.getIntArrayExtra("EMOTION_ARRAY")
+        val emotions = Emotions(emotionArray!![0], emotionArray[1], emotionArray[2], emotionArray[3], emotionArray[4], emotionArray[5])
+
+        Log.d("LOVE", emotions.love.toString())
+        Log.d("SADNESS", emotions.sadness.toString())
+        Log.d("ANGER", emotions.anger.toString())
+        Log.d("HAPPINESS", emotions.happiness.toString())
+        Log.d("DISGUST", emotions.disgust.toString())
+        Log.d("OPTIMISM", emotions.optimism.toString())
+
+
+        adapter.setOnItemClickCallback(object : ArtAdapter.OnItemClickCallback {
+            override fun onItemClick(
+                data: WikiArtDetailResponse,
+                title: TextView,
+                artist: TextView,
+                year: TextView,
+                paintings: ImageView
+            ) {
+                val paintingsPair = Pair<View?, String?>(paintings, "sharedElementTransPaintings")
+                val titlePair = Pair.create<View?, String?>(title, "sharedElementTransTitle")
+                val artistPair = Pair.create<View?, String?>(artist, "sharedElementTransArtist")
+                val yearPair = Pair.create<View?, String?>(year, "sharedElementTransYear")
+                Intent(this@ArtActivity, CreateNewPost::class.java).also {
+                    it.putExtra(CreateNewPost.EXTRA_YEAR, data.completitionYear)
+                    it.putExtra(CreateNewPost.EXTRA_ARTIST, data.artistName)
+                    it.putExtra(CreateNewPost.EXTRA_TITLE, data.title)
+                    it.putExtra(CreateNewPost.EXTRA_PAINTINGS, data.image)
+                    it.putExtra(CreateNewPost.EXTRA_ID, data.id)
+                    it.putExtra("emotions", emotionArray)
+                    startActivity(it, ActivityOptionsCompat.makeSceneTransitionAnimation(
+                        this@ArtActivity, titlePair, artistPair, yearPair, paintingsPair
+                    ).toBundle())
+                }
+            }
+        })
 
         emotionViewModel = ViewModelProvider(
             this,
@@ -62,6 +106,7 @@ class ArtActivity : AppCompatActivity() {
                 Log.d("CLUSTERCONTAINER", "INVALID")
             }
         }
+
         emotionViewModel.getWikiArtList().observe(this@ArtActivity) {
             Log.d("INSIDEWIKIART", it.size.toString())
             if (it.isNotEmpty()) {
@@ -73,22 +118,11 @@ class ArtActivity : AppCompatActivity() {
             }
         }
 
-
         binding.apply {
             rvArtResponse.layoutManager = LinearLayoutManager(this@ArtActivity)
             rvArtResponse.setHasFixedSize(true)
             rvArtResponse.adapter = adapter
         }
-
-        val emotionArray = intent.getIntArrayExtra("EMOTION_ARRAY")
-        val emotions = Emotions(emotionArray!![0], emotionArray[1], emotionArray[2], emotionArray[3], emotionArray[4], emotionArray[5])
-
-        Log.d("LOVE", emotions.love.toString())
-        Log.d("SADNESS", emotions.sadness.toString())
-        Log.d("ANGER", emotions.anger.toString())
-        Log.d("HAPPINESS", emotions.happiness.toString())
-        Log.d("DISGUST", emotions.disgust.toString())
-        Log.d("OPTIMISM", emotions.optimism.toString())
 
         predictCluster(emotions)
     }

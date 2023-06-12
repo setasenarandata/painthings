@@ -21,7 +21,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:alpha="0.4"
-            android:transitionName="sharedElementTrans"
+            android:transitionName="sharedElementTransPaintings"
             android:scaleType="centerCrop"
             android:src="@drawable/starry_night" />
 
@@ -33,7 +33,7 @@
             android:fontFamily="@font/r_flex_black"
             android:text="@string/starry_night_title"
             android:textColor="@color/white"
-            android:transitionName="sharedElementTransHeading"
+            android:transitionName="sharedElementTransTitle"
 
             android:textSize="24sp"
             android:textStyle="bold"
@@ -52,7 +52,7 @@
             android:textColor="@color/white"
             android:textSize="20sp"
             android:textStyle="normal"
-            android:transitionName="sharedElementTransSub"
+            android:transitionName="sharedElementTransArtist"
             app:layout_constraintBottom_toTopOf="@+id/tvArtYear"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvArtTitle" />
@@ -67,7 +67,7 @@
             android:textColor="@color/white"
             android:textSize="16sp"
             android:textStyle="normal"
-            android:transitionName="sharedElementTransSub"
+            android:transitionName="sharedElementTransYear"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvArtTitle" />
