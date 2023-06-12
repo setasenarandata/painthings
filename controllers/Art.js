@@ -14,21 +14,7 @@ export const getArtByCluster = async(req, res) =>{
         });
         if(!art) return res.status(404).json({msg: "Data tidak ditemukan"});
         let response;
-        // if(req.role === "admin"){
-        //     response = await Post.findAll({
-        //         attributes:['id', 'uuid','love', 'sad', 'anger', 'happiness', 'disgust', 'optimism',
-        //         'art_id', 'createdAt'],
-        //         where:{
-        //             createdAt: createdAt
-        //         },
-        //         include:[{
-        //             model: User,
-        //             attributes:['name','email']
-        //         }]
-        //     });
-        // }else{
             response = art;
-        // }
         res.status(200).json(response);
     } catch (error) {
         res.status(500).json({msg: error.message});

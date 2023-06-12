@@ -119,13 +119,14 @@ export const getPostById = async(req, res) =>{
 export const createPost = async(req, res) =>{
     let today = new Date();
 
-    let yyyy = today.getFullYear();
-    let mm = today.getMonth() + 1;
-    let dd = today.getDate();
+    const options = {
+        timeZone: 'Asia/Jakarta', // Set the timezone to GMT+7
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit',
+      };
 
-    if (dd < 10) dd = '0' + dd;
-    if (mm < 10) mm = '0' + mm;
-    const formattedToday = dd + '-' + mm + '-' + yyyy;
+    const formattedToday = today.toLocaleString('en-GB', options).replace(/\//g, '-');
     const {love, sad, anger, happiness, disgust, optimism, art_id, journal} = req.body;
     try {
         await Post.create({
@@ -145,61 +146,3 @@ export const createPost = async(req, res) =>{
         res.status(500).json({msg: error.message});
     }
 }
-
-// export const updatePost = async(req, res) =>{
-//     try {
-//         const post = await Post.findOne({
-//             where:{
-//                 uuid: req.params.id
-//             }
-//         });
-//         if(!post) return res.status(404).json({msg: "Data tidak ditemukan"});
-//         const {name, price} = req.body;
-//         if(req.role === "admin"){
-//             await Post.update({name, price},{
-//                 where:{
-//                     id: post.id
-//                 }
-//             });
-//         }else{
-//             if(req.userId !== post.userId) return res.status(403).json({msg: "Akses terlarang"});
-//             await Post.update({name, price},{
-//                 where:{
-//                     [Op.and]:[{id: post.id}, {userId: req.userId}]
-//                 }
-//             });
-//         }
-//         res.status(200).json({msg: "Post updated successfuly"});
-//     } catch (error) {
-//         res.status(500).json({msg: error.message});
-//     }
-// }
-
-// export const deletePost = async(req, res) =>{
-//     try {
-//         const post = await Post.findOne({
-//             where:{
-//                 uuid: req.params.id
-//             }
-//         });
-//         if(!post) return res.status(404).json({msg: "Data tidak ditemukan"});
-//         const {name, price} = req.body;
-//         if(req.role === "admin"){
-//             await Post.destroy({
-//                 where:{
-//                     id: post.id
-//                 }
-//             });
-//         }else{
-//             if(req.userId !== post.userId) return res.status(403).json({msg: "Akses terlarang"});
-//             await Post.destroy({
-//                 where:{
-//                     [Op.and]:[{id: post.id}, {userId: req.userId}]
-//                 }
-//             });
-//         }
-//         res.status(200).json({msg: "Post deleted successfuly"});
-//     } catch (error) {
-//         res.status(500).json({msg: error.message});
-//     }
-// }

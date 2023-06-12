@@ -41,11 +41,11 @@ app.use(PostRoute);
 app.use(AuthRoute);
 app.use(ArtRoute);
 
-(async()=>{
-    await db.sync();
-})();
+// (async()=>{
+//     await db.sync();
+// })();
 
-store.sync();
+// store.sync();
 
 const PORT = process.env.PORT || 8000
 app.listen(PORT, () => {
