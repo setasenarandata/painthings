@@ -1,15 +1,20 @@
 package com.example.painthings.emotions
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
+import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.example.painthings.R
 import com.example.painthings.databinding.ActivityCreateNewPostBinding
 import com.example.painthings.network.PostBody
+import com.example.painthings.ui.HomeActivity
+import com.example.painthings.view_model.EmotionViewModel
 import com.google.android.material.textfield.TextInputEditText
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.MultipartBody
@@ -32,6 +37,7 @@ class CreateNewPost : AppCompatActivity() {
     private lateinit var buttonPost: Button
     private lateinit var journalEditText: TextInputEditText
     private lateinit var myBinding: ActivityCreateNewPostBinding
+    private lateinit var viewModel: EmotionViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         myBinding = ActivityCreateNewPostBinding.inflate(layoutInflater)
@@ -66,6 +72,17 @@ class CreateNewPost : AppCompatActivity() {
         buttonPost.setOnClickListener {
             post(emotionArray!!, idPaintings!!)
         }
+
+        viewModel = ViewModelProvider(this)[EmotionViewModel::class.java]
+
+        viewModel.getPostStatus().observe(this) {
+            if (it.msg != "Failed") {
+                Toast.makeText(this, "Story created! Message: ${it.msg}", Toast.LENGTH_LONG)
+                    .show()
+                val i = Intent(this@CreateNewPost, HomeActivity::class.java)
+                startActivity(i)
+            }
+        }
     }
 
     private fun showLoading(state: Boolean) {
@@ -89,15 +106,8 @@ class CreateNewPost : AppCompatActivity() {
                 id,
                 journal
             )
-
-//            if (locationSwitch.isChecked) {
-//                viewModel.postWithLocation(description, imageMultipart, token, userLat, userLon)
-//                showLoading(true)
-//            } else {
-//                // Call the API without location information
-//                viewModel.post(description, imageMultipart, token)
-//                showLoading(true)
-//            }
+            viewModel.postJournal(payload)
+            showLoading(true)
         }
     }
 }

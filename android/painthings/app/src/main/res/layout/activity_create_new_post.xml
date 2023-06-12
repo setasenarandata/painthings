@@ -105,7 +105,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/tvArtTitleJournal" />
             </androidx.constraintlayout.widget.ConstraintLayout>
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/journalInput"
+                android:id="@+id/inputLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
@@ -117,7 +117,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/paintingContainer">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/ed_add_description"
+                    android:id="@+id/journalInput"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:backgroundTint="@android:color/transparent"
@@ -139,7 +139,7 @@
                 android:textColor="@color/black"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/journalInput"
+                app:layout_constraintTop_toBottomOf="@id/inputLayout"
                 android:background="@drawable/roundstyle"
                 android:layout_marginTop="36dp"/>
 

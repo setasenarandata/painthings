@@ -22,7 +22,7 @@ interface ApiService {
 
     // create new post
     @POST("posts")
-    suspend fun createPost(
+    fun createPost(
         @Body emotions: PostBody
     ): Call<CreatePostResponse>
 
@@ -53,7 +53,7 @@ class RegisterBody(val name: String, val email: String, val password: String, va
 class LoginBody(val email: String, val password: String)
 data class PostBody(
     val love: Int,
-    val sadness: Int,
+    val sad: Int,
     val anger: Int,
     val happiness: Int,
     val disgust: Int,
