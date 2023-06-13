@@ -7,10 +7,14 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.LinearLayout
+import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.bumptech.glide.Glide
 import com.example.painthings.R
 import com.example.painthings.databinding.FragmentHomeBinding
 import com.example.painthings.ui.HomeActivity
@@ -24,6 +28,9 @@ import com.example.painthings.view_model.ChartViewModel
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.justin.popupbarchart.GraphValue
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -33,7 +40,12 @@ class HomeFragment : Fragment(), HomeDateAdapter.DateItemClickListener {
     private lateinit var viewModel: ChartViewModel
     private lateinit var addEmotionsButton: FloatingActionButton
     private lateinit var shareBtn: MaterialButton
+    private lateinit var ivToday: ImageView
+    private lateinit var tvTitleToday: TextView
+    private lateinit var tvArtistToday: TextView
+    private lateinit var bottomContent: LinearLayout
     private var isValid: Boolean = true
+    private var artId: String = "empty"
     private val binding get() = _binding!!
     private var selectedDate: String = SimpleDateFormat(
         "dd-MM-yyyy",
@@ -66,6 +78,13 @@ class HomeFragment : Fragment(), HomeDateAdapter.DateItemClickListener {
             shareImage()
         }
 
+        ivToday = _binding!!.ivToday
+        tvTitleToday = _binding!!.tvTodayTitle
+        tvArtistToday = _binding!!.tvTodayArtist
+        bottomContent = _binding!!.layoutContentBottom
+
+        bottomContent.visibility = View.GONE
+
         viewModel = ViewModelProvider(
             this,
             ViewModelProvider.NewInstanceFactory()
@@ -74,7 +93,7 @@ class HomeFragment : Fragment(), HomeDateAdapter.DateItemClickListener {
         viewModel.getChartStatus().observe(viewLifecycleOwner) {
             showLoading(false)
             if (it.uuid != "" && it.createdAt == selectedDate) {
-//                isValid = false
+                isValid = false
                 val emotion = Emotions(
                     it.love,
                     it.sadness,
@@ -84,9 +103,27 @@ class HomeFragment : Fragment(), HomeDateAdapter.DateItemClickListener {
                     it.optimism
                 )
                 setBarGraph(emotion)
+                artId = it.art_id!!
+                CoroutineScope(Dispatchers.Main).launch {
+                    setAboutToday(artId)
+                }
+
             } else {
                 logout()
                 setBarGraph(Emotions(0, 0, 0, 0, 0, 0))
+            }
+        }
+
+        viewModel.getArtStatus().observe(viewLifecycleOwner) {
+            if (it.id == artId) {
+                tvArtistToday.text = it.artistName
+                tvTitleToday.text = it.title
+                Glide.with(this)
+                    .load(it.image)
+                    .into(ivToday)
+                bottomContent.visibility = View.VISIBLE
+            } else {
+                Toast.makeText(requireContext(), "Error fetching about today", Toast.LENGTH_LONG).show()
             }
         }
         return binding.root
@@ -259,6 +296,12 @@ class HomeFragment : Fragment(), HomeDateAdapter.DateItemClickListener {
             startActivity(i)
         } else {
             Toast.makeText(requireContext(), "You can only make one journal a day.", Toast.LENGTH_LONG).show()
+        }
+    }
+
+    private suspend fun setAboutToday(artId: String) {
+        binding.apply {
+            viewModel.getArtDetails(artId)
         }
     }
 }

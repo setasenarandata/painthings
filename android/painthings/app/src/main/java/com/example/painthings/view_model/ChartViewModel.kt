@@ -11,6 +11,7 @@ import retrofit2.Response
 
 class ChartViewModel(): ViewModel() {
     private val chartRes = MutableLiveData<EmotionResponseItem>()
+    private val wikiArt = MutableLiveData<WikiArtDetailResponse>()
 
     fun getChart(date: String) {
 
@@ -32,7 +33,24 @@ class ChartViewModel(): ViewModel() {
         })
     }
 
+    suspend fun getArtDetails(artId: String) {
+        try {
+            val response = ApiConfig.getWikiArtService().getPaintingDetails(artId)
+            if (response.id == artId) {
+                wikiArt.postValue(response)
+            } else {
+                Log.e("WIKIERROR", "ERROR FOUND")
+            }
+        } catch (e: Exception) {
+            Log.e("WIKIERROR", "Error occurred during API requests CATCH 1: ${e.message}")
+        }
+    }
+
     fun getChartStatus(): LiveData<EmotionResponseItem> {
         return chartRes
+    }
+
+    fun getArtStatus(): LiveData<WikiArtDetailResponse> {
+        return wikiArt
     }
 }
