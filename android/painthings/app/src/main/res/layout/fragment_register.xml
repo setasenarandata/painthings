@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/emotion_bg"
+    android:orientation="vertical"
+    tools:context=".ui.auth.RegisterFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="@dimen/_16sdp">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_100sdp"
+            android:layout_marginHorizontal="@dimen/_64sdp"
+            android:layout_marginTop="@dimen/_64sdp"
+            android:layout_marginBottom="@dimen/_12sdp"
+            android:src="@drawable/painthings_logo" />
+
+        <ProgressBar
+            android:id="@+id/registerProgressBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"/>
+
+
+        <EditText
+            android:id="@+id/ed_name"
+            android:layout_marginTop="@dimen/_12sdp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_24sdp"
+            android:layout_marginEnd="@dimen/_24sdp"
+            android:background="@drawable/background_input_form"
+            android:hint="Name"
+            android:fontFamily="@font/r_flex_mediumitalic"
+            android:inputType="text"
+            android:paddingStart="@dimen/_12sdp"
+            android:paddingTop="@dimen/_6sdp"
+            android:paddingEnd="@dimen/_12sdp"
+            android:paddingBottom="@dimen/_6sdp" />
+
+
+        <EditText
+            android:id="@+id/ed_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_24sdp"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:layout_marginEnd="@dimen/_24sdp"
+            android:background="@drawable/background_input_form"
+            android:fontFamily="@font/r_flex_mediumitalic"
+            android:hint="Email"
+            android:inputType="textEmailAddress"
+            android:paddingStart="@dimen/_12sdp"
+            android:paddingTop="@dimen/_6sdp"
+            android:paddingEnd="@dimen/_12sdp"
+            android:paddingBottom="@dimen/_6sdp" />
+
+        <EditText
+            android:id="@+id/ed_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_24sdp"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:layout_marginEnd="@dimen/_24sdp"
+            android:background="@drawable/background_input_form"
+            android:hint="Password"
+            android:fontFamily="@font/r_flex_mediumitalic"
+            android:inputType="textPassword"
+            android:paddingStart="@dimen/_12sdp"
+            android:paddingTop="@dimen/_6sdp"
+            android:paddingEnd="@dimen/_12sdp"
+            android:paddingBottom="@dimen/_6sdp" />
+
+
+        <EditText
+            android:id="@+id/ed_birth_date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_24sdp"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:layout_marginEnd="@dimen/_24sdp"
+            android:background="@drawable/background_input_form"
+            android:clickable="false"
+            android:cursorVisible="false"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+            android:hint="Date of Birth"
+            android:paddingStart="@dimen/_12sdp"
+            android:paddingTop="@dimen/_6sdp"
+            android:paddingEnd="@dimen/_12sdp"
+            android:paddingBottom="@dimen/_6sdp"
+            android:fontFamily="@font/r_flex_mediumitalic"/>
+
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_register"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:backgroundTint="@color/white"
+            android:paddingStart="@dimen/_24sdp"
+            android:paddingTop="@dimen/_8sdp"
+            android:paddingEnd="@dimen/_24sdp"
+            android:paddingBottom="@dimen/_8sdp"
+            android:text="Register"
+            android:fontFamily="@font/r_flex_bold"
+            android:textAllCaps="false"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            app:cornerRadius="@dimen/_16sdp" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/_36sdp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Have an account?"
+                android:fontFamily="@font/r_flex_mediumitalic"
+                android:textColor="@color/white" />
+
+            <TextView
+                android:id="@+id/btn_to_login"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/_4sdp"
+                android:text="Login here"
+                android:fontFamily="@font/r_flex_mediumitalic"
+                android:textColor="@color/white" />
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+</ScrollView>
