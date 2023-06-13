@@ -10,6 +10,7 @@ import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager.widget.ViewPager
 import com.example.painthings.R
@@ -44,11 +45,10 @@ class OnboardActivity : AppCompatActivity() {
 
         viewModel.getLoginStatus().observe(this@OnboardActivity) {
             if (it.name == name) {
+                StyleableToast.makeText(this, "Welcome home, ${it.name}", Toast.LENGTH_LONG, R.style.mytoast).show()
                 val i = Intent(this@OnboardActivity, HomeActivity::class.java)
                 startActivity(i)
                 finish()
-            } else {
-                StyleableToast.makeText(this, "Please login again", Toast.LENGTH_LONG, R.style.mytoast).show()
             }
         }
 

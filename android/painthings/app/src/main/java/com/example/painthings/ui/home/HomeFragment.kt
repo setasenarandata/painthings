@@ -307,7 +307,7 @@ class HomeFragment : Fragment(), HomeDateAdapter.DateItemClickListener {
         editor.clear()
         editor.apply()
 
-        StyleableToast.makeText(requireContext(), "Please Login again", Toast.LENGTH_LONG, R.style.mytoast).show()
+        StyleableToast.makeText(requireContext(), "See ya!", Toast.LENGTH_LONG, R.style.mytoast).show()
         val intent = Intent(requireContext(), AuthActivity::class.java)
         startActivity(intent)
     }

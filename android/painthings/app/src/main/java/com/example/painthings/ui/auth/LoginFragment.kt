@@ -3,6 +3,7 @@ package com.example.painthings.ui.auth
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -32,6 +33,7 @@ class LoginFragment : Fragment() {
 
         viewModel.getLoginStatus().observe(viewLifecycleOwner) {
             showLoading(false)
+            Log.d("LOGIN", it.name.toString())
             if (it.email == binding.edEmail.text.toString()) {
                 val sharedPreferences = requireContext().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
                 with(sharedPreferences.edit()) {
@@ -39,7 +41,7 @@ class LoginFragment : Fragment() {
                     putString("name", it.name)
                     apply()
                 }
-                StyleableToast.makeText(requireContext(), "Login successful", Toast.LENGTH_LONG, R.style.mytoast).show()
+                StyleableToast.makeText(requireContext(), "Welcome home, ${it.name}", Toast.LENGTH_LONG, R.style.mytoast).show()
                 val i = Intent(requireContext(), HomeActivity::class.java)
                 startActivity(i)
             } else {

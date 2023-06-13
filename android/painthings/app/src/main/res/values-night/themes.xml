@@ -29,7 +29,6 @@
         <item name="stStrokeWidth">3dp</item>
         <item name="stStrokeColor">@color/emotion_bg</item>
         <item name="stLength">LONG</item>
-        <item name="stGravity">top</item>
         <item name="stRadius">24dp</item>
     </style>
 

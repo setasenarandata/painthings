@@ -23,7 +23,13 @@ class LoginViewModel : ViewModel() {
                 if (response.isSuccessful) {
                     loginRes.postValue(response.body())
                 } else {
-                    // Do
+                    val errorObj = LoginResponse(
+                        "login",
+                        "login",
+                        "login",
+                        "login",
+                    )
+                    loginRes.postValue(errorObj)
                 }
             }
 
