@@ -11,7 +11,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class EmotionViewModel(): ViewModel() {
+class EmotionViewModel : ViewModel() {
     private val resCluster = MutableLiveData<PredictResponse>()
     private val clusterContainer = MutableLiveData<List<ArtResponse>>()
     private val finalArt = MutableLiveData<ArrayList<WikiArtDetailResponse>>()
@@ -98,7 +98,7 @@ class EmotionViewModel(): ViewModel() {
     }
 
     fun getWikiArtList(): LiveData<ArrayList<WikiArtDetailResponse>> {
-        return finalArt;
+        return finalArt
     }
 
     fun postJournal(data: PostBody) {

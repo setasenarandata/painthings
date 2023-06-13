@@ -9,7 +9,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class ChartViewModel(): ViewModel() {
+class ChartViewModel : ViewModel() {
     private val chartRes = MutableLiveData<EmotionResponseItem>()
     private val wikiArt = MutableLiveData<WikiArtDetailResponse>()
 
