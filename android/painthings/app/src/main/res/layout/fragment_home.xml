@@ -55,6 +55,7 @@
                 android:layout_weight="1">
 
                 <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/circleImageView"
                     android:layout_width="@dimen/_50sdp"
                     android:layout_height="@dimen/_50sdp"
                     android:scaleType="centerCrop"

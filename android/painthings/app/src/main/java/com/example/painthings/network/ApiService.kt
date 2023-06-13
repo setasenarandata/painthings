@@ -55,7 +55,7 @@ data class LoginBody(val email: String, val password: String)
 
 data class PostBody(
     val love: Int,
-    val sad: Int,
+    val sadness: Int,
     val anger: Int,
     val happiness: Int,
     val disgust: Int,

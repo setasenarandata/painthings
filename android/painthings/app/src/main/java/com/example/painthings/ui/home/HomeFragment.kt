@@ -1,5 +1,6 @@
 package com.example.painthings.ui.home
 
+import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -28,6 +29,7 @@ import com.example.painthings.view_model.ChartViewModel
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.justin.popupbarchart.GraphValue
+import de.hdodenhof.circleimageview.CircleImageView
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -44,6 +46,7 @@ class HomeFragment : Fragment(), HomeDateAdapter.DateItemClickListener {
     private lateinit var tvTitleToday: TextView
     private lateinit var tvArtistToday: TextView
     private lateinit var bottomContent: LinearLayout
+    private lateinit var circleImage: CircleImageView
     private var isValid: Boolean = true
     private var artId: String = "empty"
     private val binding get() = _binding!!
@@ -82,6 +85,7 @@ class HomeFragment : Fragment(), HomeDateAdapter.DateItemClickListener {
         tvTitleToday = _binding!!.tvTodayTitle
         tvArtistToday = _binding!!.tvTodayArtist
         bottomContent = _binding!!.layoutContentBottom
+        circleImage = _binding!!.circleImageView
 
         bottomContent.visibility = View.GONE
 
@@ -109,8 +113,8 @@ class HomeFragment : Fragment(), HomeDateAdapter.DateItemClickListener {
                 }
 
             } else {
-                logout()
                 setBarGraph(Emotions(0, 0, 0, 0, 0, 0))
+                bottomContent.visibility = View.GONE
             }
         }
 
@@ -125,6 +129,22 @@ class HomeFragment : Fragment(), HomeDateAdapter.DateItemClickListener {
             } else {
                 Toast.makeText(requireContext(), "Error fetching about today", Toast.LENGTH_LONG).show()
             }
+        }
+
+        circleImage.setOnClickListener {
+            val builder = AlertDialog.Builder(requireContext())
+            builder.setTitle("Logout")
+            builder.setMessage("Are you sure you want to logout?")
+            builder.setPositiveButton("Yes") { dialog, _ ->
+                // Call the logout() function or perform any other desired action
+                logout()
+                dialog.dismiss()
+            }
+            builder.setNegativeButton("No") { dialog, _ ->
+                dialog.dismiss()
+            }
+            val dialog = builder.create()
+            dialog.show()
         }
         return binding.root
     }

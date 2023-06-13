@@ -37,16 +37,18 @@
 
             android:textSize="24sp"
             android:textStyle="bold"
-            android:layout_marginLeft="16dp"
+            android:layout_marginStart="16dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            android:maxLines="1"
+            android:ellipsize="end"/>
 
         <TextView
             android:id="@+id/tvArtArtist"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
+            android:layout_marginStart="16dp"
             android:fontFamily="@font/r_flex_mediumitalic"
             android:text="@string/starry_night_artist"
             android:textColor="@color/white"
@@ -55,13 +57,15 @@
             android:transitionName="sharedElementTransArtist"
             app:layout_constraintBottom_toTopOf="@+id/tvArtYear"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvArtTitle" />
+            app:layout_constraintTop_toBottomOf="@+id/tvArtTitle"
+            android:maxLines="1"
+            android:ellipsize="end"/>
 
         <TextView
             android:id="@+id/tvArtYear"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
+            android:layout_marginStart="16dp"
             android:fontFamily="@font/r_flex_lightitalic"
             android:text="@string/starry_night_style"
             android:textColor="@color/white"
@@ -70,6 +74,8 @@
             android:transitionName="sharedElementTransYear"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvArtTitle" />
+            app:layout_constraintTop_toBottomOf="@+id/tvArtTitle"
+            android:maxLines="1"
+            android:ellipsize="end"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>
