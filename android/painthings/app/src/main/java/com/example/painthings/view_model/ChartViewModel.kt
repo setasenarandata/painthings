@@ -1,6 +1,5 @@
 package com.example.painthings.view_model
 
-import android.content.Context
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -10,8 +9,9 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class ChartViewModel(): ViewModel() {
+class ChartViewModel : ViewModel() {
     private val chartRes = MutableLiveData<EmotionResponseItem>()
+    private val wikiArt = MutableLiveData<WikiArtDetailResponse>()
 
     fun getChart(date: String) {
 
@@ -33,7 +33,24 @@ class ChartViewModel(): ViewModel() {
         })
     }
 
+    suspend fun getArtDetails(artId: String) {
+        try {
+            val response = ApiConfig.getWikiArtService().getPaintingDetails(artId)
+            if (response.id == artId) {
+                wikiArt.postValue(response)
+            } else {
+                Log.e("WIKIERROR", "ERROR FOUND")
+            }
+        } catch (e: Exception) {
+            Log.e("WIKIERROR", "Error occurred during API requests CATCH 1: ${e.message}")
+        }
+    }
+
     fun getChartStatus(): LiveData<EmotionResponseItem> {
         return chartRes
+    }
+
+    fun getArtStatus(): LiveData<WikiArtDetailResponse> {
+        return wikiArt
     }
 }

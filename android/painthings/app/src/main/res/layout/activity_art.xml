@@ -20,12 +20,12 @@
             android:layout_marginHorizontal="@dimen/_12sdp"
             android:text="@string/helper_art_activity"
             android:fontFamily="@font/r_flex_mediumitalic"
-            android:textSize="24sp"
+            android:textSize="18sp"
             style="@style/textView_style" />
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="640dp"
             android:orientation="vertical">
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvArtResponse"
@@ -35,6 +35,18 @@
                 android:paddingBottom="20dp"
                 tools:listitem="@layout/item_art" />
         </LinearLayout>
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btRefresh"
+            android:layout_width="match_parent"
+            android:layout_marginHorizontal="140dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:fontFamily="@font/r_flex_medium"
+            android:textColor="@color/white"
+            android:backgroundTint="@color/emotion_bg"
+            android:background="@drawable/roundstyle"
+            android:text="@string/refresh_button"
+            android:visibility="gone"/>
     </LinearLayout>
 
     <ProgressBar
@@ -46,6 +58,9 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/linearLayout" />
+
+
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

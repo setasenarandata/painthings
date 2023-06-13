@@ -22,8 +22,8 @@ interface ApiService {
 
     // create new post
     @POST("posts")
-    suspend fun createPost(
-        @Body emotions: Emotions
+    fun createPost(
+        @Body emotions: PostBody
     ): Call<CreatePostResponse>
 
     // post by id
@@ -49,5 +49,17 @@ interface ApiService {
     ): Call<List<ArtResponse>>
 }
 
-class RegisterBody(val name: String, val email: String, val password: String, val birthdate: String)
-class LoginBody(val email: String, val password: String)
+data class RegisterBody(val name: String, val email: String, val password: String, val birthdate: String)
+
+data class LoginBody(val email: String, val password: String)
+
+data class PostBody(
+    val love: Int,
+    val sadness: Int,
+    val anger: Int,
+    val happiness: Int,
+    val disgust: Int,
+    val optimism: Int,
+    val art_id: String,
+    val journal: String
+)

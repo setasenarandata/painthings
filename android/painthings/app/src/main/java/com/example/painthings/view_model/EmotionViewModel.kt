@@ -11,10 +11,11 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class EmotionViewModel(): ViewModel() {
+class EmotionViewModel : ViewModel() {
     private val resCluster = MutableLiveData<PredictResponse>()
     private val clusterContainer = MutableLiveData<List<ArtResponse>>()
     private val finalArt = MutableLiveData<ArrayList<WikiArtDetailResponse>>()
+    private val postRes = MutableLiveData<CreatePostResponse>()
 
 
     fun getCluster(emotions: Emotions) {
@@ -97,6 +98,27 @@ class EmotionViewModel(): ViewModel() {
     }
 
     fun getWikiArtList(): LiveData<ArrayList<WikiArtDetailResponse>> {
-        return finalArt;
+        return finalArt
+    }
+
+    fun postJournal(data: PostBody) {
+        ApiConfig.getApiService().createPost(data).enqueue(object : Callback<CreatePostResponse> {
+            override fun onResponse(call: Call<CreatePostResponse>, response: Response<CreatePostResponse>) {
+                if (response.isSuccessful && response.body() != null) {
+                    postRes.postValue(response.body())
+                } else {
+                    val errorObj = CreatePostResponse("Failed")
+                    postRes.postValue(errorObj)
+                }
+            }
+
+            override fun onFailure(call: Call<CreatePostResponse>, t: Throwable) {
+                Log.d("error", t.message.toString())
+            }
+        })
+    }
+
+    fun getPostStatus(): LiveData<CreatePostResponse> {
+        return postRes
     }
 }

@@ -2,6 +2,8 @@ package com.example.painthings.art
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
@@ -27,7 +29,7 @@ class ArtAdapter : RecyclerView.Adapter<ArtAdapter.ArtViewHolder>() {
         RecyclerView.ViewHolder(binding.root) {
         fun bind(art: WikiArtDetailResponse) {
             binding.root.setOnClickListener {
-                onItemClickCallback?.onItemClick(art)
+                onItemClickCallback?.onItemClick(art, binding.tvArtTitle, binding.tvArtArtist, binding.tvArtYear, binding.ivPainting)
             }
             binding.apply {
                 Glide.with(itemView).load(art.image)
@@ -53,6 +55,6 @@ class ArtAdapter : RecyclerView.Adapter<ArtAdapter.ArtViewHolder>() {
     }
 
     interface OnItemClickCallback {
-        fun onItemClick(data: WikiArtDetailResponse)
+        fun onItemClick(data: WikiArtDetailResponse, title: TextView, artist: TextView, year: TextView, paintings: ImageView)
     }
 }

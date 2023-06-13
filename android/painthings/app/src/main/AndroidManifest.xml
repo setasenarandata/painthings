@@ -13,7 +13,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Painthings"
         tools:targetApi="31">
-
+        <activity
+            android:name=".emotions.CreateNewPost"
+            android:exported="false" />
         <activity
             android:name=".art.ArtActivity"
             android:exported="false" />
@@ -22,13 +24,12 @@
             android:exported="false" />
         <activity
             android:name=".ui.auth.AuthActivity"
-            android:exported="true">
-        </activity>
+            android:exported="true"></activity>
         <activity
             android:name=".ui.HomeActivity"
             android:exported="false" />
         <activity
-            android:name=".onboarding.OnboardingActivity"
+            android:name=".onboarding.OnboardActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"

@@ -13,7 +13,7 @@ import retrofit2.Callback
 import retrofit2.Response
 
 
-class LoginViewModel(): ViewModel() {
+class LoginViewModel : ViewModel() {
     private val loginRes = MutableLiveData<LoginResponse>()
 
     fun login(body: LoginBody) {
@@ -40,7 +40,13 @@ class LoginViewModel(): ViewModel() {
                 if (response.isSuccessful && response.code() != 401) {
                     loginRes.postValue(response.body())
                 } else {
-                    loginRes.postValue(response.body())
+                    val errorObj = LoginResponse(
+                        "login",
+                        "login",
+                        "login",
+                        "login",
+                    )
+                    loginRes.postValue(errorObj)
                 }
             }
 

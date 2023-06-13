@@ -80,4 +80,7 @@ dependencies {
     implementation "androidx.room:room-runtime:2.5.1"
     implementation 'androidx.room:room-paging:2.4.0-rc01'
     implementation "androidx.room:room-ktx:2.5.1"
+
+    //styleable toast
+    implementation 'io.github.muddz:styleabletoast:2.4.0'
 }
