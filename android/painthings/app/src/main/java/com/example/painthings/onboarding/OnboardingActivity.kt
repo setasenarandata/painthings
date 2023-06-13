@@ -48,8 +48,6 @@ class OnboardingActivity : AppCompatActivity() {
         )[LoginViewModel::class.java]
 
         viewModel.getLoginStatus().observe(this@OnboardingActivity) {
-            Log.d("Namacoy", name.toString())
-            Log.d("Namait", it.name)
             if (it.name == name) {
                 val i = Intent(this@OnboardingActivity, HomeActivity::class.java)
                 startActivity(i)
@@ -60,6 +58,7 @@ class OnboardingActivity : AppCompatActivity() {
         }
 
         if (cookie != null) getMe(cookie)
+        else getMe("dummyCookie")
 
         nextbtn.setOnClickListener {
             if (getitem(0) < 2) mSLideViewPager.setCurrentItem(getitem(1), true)

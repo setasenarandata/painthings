@@ -8,6 +8,7 @@ import android.util.Log
 import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
@@ -31,6 +32,8 @@ class ArtActivity : AppCompatActivity() {
     private lateinit var emotionViewModel: EmotionViewModel
     private lateinit var binding: ActivityArtBinding
     private lateinit var adapter: ArtAdapter
+    private lateinit var refreshButton: Button
+    private var clusterNumber: Int = 0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_art)
@@ -39,6 +42,8 @@ class ArtActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         adapter = ArtAdapter()
+
+        refreshButton = findViewById(R.id.btRefresh)
 
         val emotionArray = intent.getIntArrayExtra("EMOTION_ARRAY")
         val emotions = Emotions(emotionArray!![0], emotionArray[1], emotionArray[2], emotionArray[3], emotionArray[4], emotionArray[5])
@@ -85,9 +90,7 @@ class ArtActivity : AppCompatActivity() {
         emotionViewModel.getResCluster().observe(this@ArtActivity) {
             showLoading(false)
             if (it.cluster != "INVALID") {
-                Toast.makeText(this, "Cluster done. Fetching cluster container...", Toast.LENGTH_LONG).show()
-                Log.d("RESCLUSTER", it.cluster)
-                val clusterNumber = it.cluster.substring(1,2).toInt()
+                clusterNumber = it.cluster.substring(1,2).toInt()
                 fetchArtCluster(clusterNumber)
             } else {
                 Log.e("RESCLUSTER", "INVALID")
@@ -97,24 +100,21 @@ class ArtActivity : AppCompatActivity() {
         emotionViewModel.getClusterContainer().observe(this@ArtActivity) {
             showLoading(false)
             if (it.isNotEmpty()) {
-                Toast.makeText(this, "Container fetched. Generating result from WikiArt...", Toast.LENGTH_LONG).show()
-                Log.d("CLUSTERCONTAINER", it.size.toString())
                 CoroutineScope(Dispatchers.Main).launch {
                     fetchWikiArt(it)
                 }
             } else {
-                Log.d("CLUSTERCONTAINER", "INVALID")
+                Toast.makeText(this, "Container INVALID!", Toast.LENGTH_LONG).show()
             }
         }
 
         emotionViewModel.getWikiArtList().observe(this@ArtActivity) {
-            Log.d("INSIDEWIKIART", it.size.toString())
             if (it.isNotEmpty()) {
-                Toast.makeText(this, "Data fetching done", Toast.LENGTH_LONG).show()
                 adapter.setList(it)
                 showLoading(false)
+                refreshButton.visibility = View.VISIBLE
             } else {
-                Log.d("WIKIARTLIST", "INVALID")
+                Toast.makeText(this, "WIKIART INVALID", Toast.LENGTH_LONG).show()
             }
         }
 
@@ -125,6 +125,10 @@ class ArtActivity : AppCompatActivity() {
         }
 
         predictCluster(emotions)
+
+        refreshButton.setOnClickListener {
+            fetchArtCluster(clusterNumber)
+        }
     }
 
     private fun showLoading(state: Boolean) {

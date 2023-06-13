@@ -39,5 +39,6 @@
     <string name="journal_helper">Write anything about today</string>
     <string name="journal_placeholder">Type here</string>
     <string name="journal_button">Post</string>
+    <string name="refresh_button">Refresh</string>
 
 </resources>

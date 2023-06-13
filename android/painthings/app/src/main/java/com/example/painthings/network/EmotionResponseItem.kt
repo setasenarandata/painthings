@@ -4,7 +4,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 
-@Entity(tableName = "quote")
+@Entity(tableName = "emotion")
 data class EmotionResponseItem(
 
     @PrimaryKey
@@ -43,8 +43,6 @@ data class EmotionResponseItem(
 
     @field:SerializedName("user")
     val user: UserPainthings,
-
-
 )
 
 data class WikiArtDetailResponse(

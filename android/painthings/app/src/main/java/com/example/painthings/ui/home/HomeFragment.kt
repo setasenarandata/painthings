@@ -33,6 +33,7 @@ class HomeFragment : Fragment(), HomeDateAdapter.DateItemClickListener {
     private lateinit var viewModel: ChartViewModel
     private lateinit var addEmotionsButton: FloatingActionButton
     private lateinit var shareBtn: MaterialButton
+    private var isValid: Boolean = true
     private val binding get() = _binding!!
     private var selectedDate: String = SimpleDateFormat(
         "dd-MM-yyyy",
@@ -57,9 +58,9 @@ class HomeFragment : Fragment(), HomeDateAdapter.DateItemClickListener {
         addEmotionsButton = _binding!!.fabAdd
         _binding!!.tvHomeGreet.text = greeting
         addEmotionsButton.setOnClickListener {
-            val i = Intent(requireContext(), EmotionsActivity::class.java)
-            startActivity(i)
+            addNewEmotions()
         }
+
         shareBtn = _binding!!.btnShare
         shareBtn.setOnClickListener {
             shareImage()
@@ -73,6 +74,7 @@ class HomeFragment : Fragment(), HomeDateAdapter.DateItemClickListener {
         viewModel.getChartStatus().observe(viewLifecycleOwner) {
             showLoading(false)
             if (it.uuid != "" && it.createdAt == selectedDate) {
+//                isValid = false
                 val emotion = Emotions(
                     it.love,
                     it.sadness,
@@ -83,6 +85,7 @@ class HomeFragment : Fragment(), HomeDateAdapter.DateItemClickListener {
                 )
                 setBarGraph(emotion)
             } else {
+                logout()
                 setBarGraph(Emotions(0, 0, 0, 0, 0, 0))
             }
         }
@@ -94,8 +97,6 @@ class HomeFragment : Fragment(), HomeDateAdapter.DateItemClickListener {
 
         initLittleCalendar()
         getPostByDate()
-        // Nembak ke api terus nanti setiap ganti hari
-//        val emotion = Emotions(1, 2,3,5,2,3)
         setListeners()
     }
 
@@ -250,5 +251,14 @@ class HomeFragment : Fragment(), HomeDateAdapter.DateItemClickListener {
         Toast.makeText(requireContext(), "Please Login again", Toast.LENGTH_LONG).show()
         val intent = Intent(requireContext(), AuthActivity::class.java)
         startActivity(intent)
+    }
+
+    private fun addNewEmotions() {
+        if (isValid) {
+            val i = Intent(requireContext(), EmotionsActivity::class.java)
+            startActivity(i)
+        } else {
+            Toast.makeText(requireContext(), "You can only make one journal a day.", Toast.LENGTH_LONG).show()
+        }
     }
 }

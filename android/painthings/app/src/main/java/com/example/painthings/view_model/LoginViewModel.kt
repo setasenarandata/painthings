@@ -40,7 +40,13 @@ class LoginViewModel(): ViewModel() {
                 if (response.isSuccessful && response.code() != 401) {
                     loginRes.postValue(response.body())
                 } else {
-                    loginRes.postValue(response.body())
+                    val errorObj = LoginResponse(
+                        "login",
+                        "login",
+                        "login",
+                        "login",
+                    )
+                    loginRes.postValue(errorObj)
                 }
             }
 
