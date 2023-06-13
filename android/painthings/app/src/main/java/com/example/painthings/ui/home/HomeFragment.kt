@@ -30,6 +30,7 @@ import com.google.android.material.button.MaterialButton
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.justin.popupbarchart.GraphValue
 import de.hdodenhof.circleimageview.CircleImageView
+import io.github.muddz.styleabletoast.StyleableToast
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -57,6 +58,9 @@ class HomeFragment : Fragment(), HomeDateAdapter.DateItemClickListener {
         Date().time
     )
 
+    private var myCalendar = Calendar.getInstance()
+    private var jakartaTimeZone = TimeZone.getTimeZone("Asia/Jakarta")
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -64,6 +68,8 @@ class HomeFragment : Fragment(), HomeDateAdapter.DateItemClickListener {
     ): View {
         val sharedPreferences = requireContext().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
         val name = sharedPreferences.getString("name", "User")!!
+
+        myCalendar.timeZone = jakartaTimeZone
 
         // greet user
         val greetingString = resources.getString(R.string.greet_user)
@@ -170,8 +176,7 @@ class HomeFragment : Fragment(), HomeDateAdapter.DateItemClickListener {
     }
 
     private fun initLittleCalendar() {
-        val date = Calendar.getInstance()
-        val numDay = date.get(Calendar.DATE).toString()
+        val numDay = myCalendar.get(Calendar.DATE).toString()
 
         val homeDateList: ArrayList<HomeDate> = ArrayList()
 
@@ -305,7 +310,7 @@ class HomeFragment : Fragment(), HomeDateAdapter.DateItemClickListener {
         editor.clear()
         editor.apply()
 
-        Toast.makeText(requireContext(), "Please Login again", Toast.LENGTH_LONG).show()
+        StyleableToast.makeText(requireContext(), "Please Login again", Toast.LENGTH_LONG, R.style.mytoast).show()
         val intent = Intent(requireContext(), AuthActivity::class.java)
         startActivity(intent)
     }
@@ -315,7 +320,7 @@ class HomeFragment : Fragment(), HomeDateAdapter.DateItemClickListener {
             val i = Intent(requireContext(), EmotionsActivity::class.java)
             startActivity(i)
         } else {
-            Toast.makeText(requireContext(), "You can only make one journal a day.", Toast.LENGTH_LONG).show()
+            StyleableToast.makeText(requireContext(), "You can only make one journal a day.", Toast.LENGTH_LONG, R.style.mytoast).show()
         }
     }
 

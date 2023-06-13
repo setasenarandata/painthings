@@ -19,6 +19,20 @@
         <item name="android:windowSharedElementExitTransition">@transition/shared_transition</item>
     </style>
 
+    <style name="mytoast">
+        <item name="stTextBold">true</item>
+        <item name="stTextColor">@color/emotion_bg</item>
+        <item name="stFont">@font/r_flex_medium</item>
+        <item name="stTextSize">14sp</item>
+        <item name="stColorBackground">#fff</item>
+        <item name="stSolidBackground">true</item>
+        <item name="stStrokeWidth">3dp</item>
+        <item name="stStrokeColor">@color/emotion_bg</item>
+        <item name="stLength">LONG</item>
+        <item name="stGravity">top</item>
+        <item name="stRadius">24dp</item>
+    </style>
+
     <declare-styleable name="PopupBarChart">
         <!--Chart bar attributes-->
         <attr name="chart_bar_start_color" format="color" />
