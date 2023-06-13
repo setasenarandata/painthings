@@ -12,9 +12,9 @@ export const Login = async (req, res) =>{
     if(!match) return res.status(400).json({msg: "Wrong Password"});
 
     //"connect.sid=s%3A"
+    req.session.userId = user.uuid;
     const sessionId = "connect.sid=s%3A" + req.cookies['connect.sid'].substring(2,);
     const finalsession = sessionId.replace('+', '%2B')
-    req.session.userId = user.uuid;
     const uuid = user.uuid;
     const name = user.name;
     const email = user.email;

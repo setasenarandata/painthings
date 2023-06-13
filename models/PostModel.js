@@ -26,7 +26,7 @@ const Posts = db.define('post',{
             notEmpty: true
         }
     },
-    sad:{
+    sadness:{
         type: DataTypes.INTEGER,
         allowNull: false,
         validate:{
