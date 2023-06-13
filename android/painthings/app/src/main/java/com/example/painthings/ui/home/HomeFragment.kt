@@ -4,7 +4,6 @@ import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -133,7 +132,7 @@ class HomeFragment : Fragment(), HomeDateAdapter.DateItemClickListener {
                     .into(ivToday)
                 bottomContent.visibility = View.VISIBLE
             } else {
-                Toast.makeText(requireContext(), "Error fetching about today", Toast.LENGTH_LONG).show()
+                StyleableToast.makeText(requireContext(), "Error fetching about today", Toast.LENGTH_LONG, R.style.mytoast).show()
             }
         }
 
@@ -297,8 +296,6 @@ class HomeFragment : Fragment(), HomeDateAdapter.DateItemClickListener {
     override fun onDateItemClicked(date: Date) {
         val isoDateFormat = SimpleDateFormat("dd-MM-yyyy", Locale.getDefault())
         val isoDate = isoDateFormat.format(date)
-
-        Log.d("DATEHOME", isoDate.toString())
 
         selectedDate = isoDate
         getPostByDate()

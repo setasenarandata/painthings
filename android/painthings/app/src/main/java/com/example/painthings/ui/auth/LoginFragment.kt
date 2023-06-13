@@ -14,6 +14,7 @@ import com.example.painthings.R
 import com.example.painthings.databinding.FragmentLoginBinding
 import com.example.painthings.network.LoginBody
 import com.example.painthings.ui.HomeActivity
+import io.github.muddz.styleabletoast.StyleableToast
 
 class LoginFragment : Fragment() {
     private lateinit var binding: FragmentLoginBinding
@@ -38,11 +39,11 @@ class LoginFragment : Fragment() {
                     putString("name", it.name)
                     apply()
                 }
-                Toast.makeText(requireContext(), "Login successful", Toast.LENGTH_LONG).show()
+                StyleableToast.makeText(requireContext(), "Login successful", Toast.LENGTH_LONG, R.style.mytoast).show()
                 val i = Intent(requireContext(), HomeActivity::class.java)
                 startActivity(i)
             } else {
-                Toast.makeText(requireContext(), "Login unsuccessful", Toast.LENGTH_LONG).show()
+                StyleableToast.makeText(requireContext(), "Login unsuccessful", Toast.LENGTH_LONG, R.style.mytoast).show()
             }
         }
         return binding.root

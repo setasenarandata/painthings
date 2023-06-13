@@ -1,11 +1,9 @@
 package com.example.painthings.art
 
-import android.content.ContentValues.TAG
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.Button
@@ -22,8 +20,8 @@ import com.example.painthings.emotions.CreateNewPost
 import com.example.painthings.emotions.Emotions
 import com.example.painthings.network.ArtResponse
 import com.example.painthings.network.WikiArtDetailResponse
-import com.example.painthings.view_model.ChartViewModel
 import com.example.painthings.view_model.EmotionViewModel
+import io.github.muddz.styleabletoast.StyleableToast
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -93,7 +91,7 @@ class ArtActivity : AppCompatActivity() {
                 clusterNumber = it.cluster.substring(1,2).toInt()
                 fetchArtCluster(clusterNumber)
             } else {
-                Log.e("RESCLUSTER", "INVALID")
+                StyleableToast.makeText(this, "Cluster INVALID", Toast.LENGTH_LONG, R.style.mytoast).show()
             }
         }
 
@@ -104,7 +102,7 @@ class ArtActivity : AppCompatActivity() {
                     fetchWikiArt(it)
                 }
             } else {
-                Toast.makeText(this, "Container INVALID!", Toast.LENGTH_LONG).show()
+                StyleableToast.makeText(this, "Container INVALID", Toast.LENGTH_LONG, R.style.mytoast).show()
             }
         }
 
@@ -114,7 +112,7 @@ class ArtActivity : AppCompatActivity() {
                 showLoading(false)
                 refreshButton.visibility = View.VISIBLE
             } else {
-                Toast.makeText(this, "WIKIART INVALID", Toast.LENGTH_LONG).show()
+                StyleableToast.makeText(this, "WikiArt INVALID", Toast.LENGTH_LONG, R.style.mytoast).show()
             }
         }
 

@@ -13,6 +13,7 @@ import com.example.painthings.R
 import com.example.painthings.databinding.FragmentRegisterBinding
 import com.example.painthings.network.RegisterBody
 import com.example.painthings.view_model.RegisterViewModel
+import io.github.muddz.styleabletoast.StyleableToast
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -34,7 +35,7 @@ class RegisterFragment : Fragment() {
         viewModel.getStatus().observe(viewLifecycleOwner) {
             showLoading(false)
             if (it.msg == "Register Berhasil") {
-                Toast.makeText(requireContext(), "Register successful", Toast.LENGTH_LONG).show()
+                StyleableToast.makeText(requireContext(), "Register successful", Toast.LENGTH_LONG, R.style.mytoast).show()
                 parentFragmentManager.beginTransaction().apply {
                     replace(
                         R.id.auth_container,
@@ -44,7 +45,7 @@ class RegisterFragment : Fragment() {
                         .commit()
                 }
             } else {
-                Toast.makeText(requireContext(), "Register unsuccessful", Toast.LENGTH_LONG).show()
+                StyleableToast.makeText(requireContext(), "Register unsuccessful", Toast.LENGTH_LONG, R.style.mytoast).show()
             }
         }
         return binding.root

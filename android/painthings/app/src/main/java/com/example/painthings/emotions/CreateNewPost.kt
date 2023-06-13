@@ -16,10 +16,7 @@ import com.example.painthings.network.PostBody
 import com.example.painthings.ui.HomeActivity
 import com.example.painthings.view_model.EmotionViewModel
 import com.google.android.material.textfield.TextInputEditText
-import okhttp3.MediaType.Companion.toMediaType
-import okhttp3.MultipartBody
-import okhttp3.RequestBody.Companion.asRequestBody
-import okhttp3.RequestBody.Companion.toRequestBody
+import io.github.muddz.styleabletoast.StyleableToast
 
 class CreateNewPost : AppCompatActivity() {
     companion object {
@@ -77,10 +74,12 @@ class CreateNewPost : AppCompatActivity() {
 
         viewModel.getPostStatus().observe(this) {
             if (it.msg != "Failed") {
-                Toast.makeText(this, "Story created! Message: ${it.msg}", Toast.LENGTH_LONG)
-                    .show()
+                showLoading(false)
+                StyleableToast.makeText(this, "Story created!", Toast.LENGTH_LONG, R.style.mytoast).show()
                 val i = Intent(this@CreateNewPost, HomeActivity::class.java)
                 startActivity(i)
+            } else {
+                StyleableToast.makeText(this, "Failed. Please try again", Toast.LENGTH_LONG, R.style.mytoast).show()
             }
         }
     }
