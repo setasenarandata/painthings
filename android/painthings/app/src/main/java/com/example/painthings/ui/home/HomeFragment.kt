@@ -86,13 +86,14 @@ class HomeFragment : Fragment(), HomeDateAdapter.DateItemClickListener {
             shareImage()
         }
 
+        val layoutContentPosted = _binding!!.layoutContentPosted
+        val layoutContentNotPosted = _binding!!.layoutContentNotPosted
+
         ivToday = _binding!!.ivToday
         tvTitleToday = _binding!!.tvTodayTitle
         tvArtistToday = _binding!!.tvTodayArtist
         bottomContent = _binding!!.layoutContentBottom
         circleImage = _binding!!.circleImageView
-
-        bottomContent.visibility = View.GONE
 
         viewModel = ViewModelProvider(
             this,
@@ -119,7 +120,8 @@ class HomeFragment : Fragment(), HomeDateAdapter.DateItemClickListener {
 
             } else {
                 setBarGraph(Emotions(0, 0, 0, 0, 0, 0))
-                bottomContent.visibility = View.GONE
+                layoutContentPosted.visibility = View.GONE
+                layoutContentNotPosted.visibility = View.VISIBLE
             }
         }
 
@@ -130,7 +132,8 @@ class HomeFragment : Fragment(), HomeDateAdapter.DateItemClickListener {
                 Glide.with(this)
                     .load(it.image)
                     .into(ivToday)
-                bottomContent.visibility = View.VISIBLE
+                layoutContentPosted.visibility = View.VISIBLE
+                layoutContentNotPosted.visibility = View.GONE
             } else {
                 StyleableToast.makeText(requireContext(), "Error fetching about today", Toast.LENGTH_LONG, R.style.mytoast).show()
             }
@@ -154,6 +157,7 @@ class HomeFragment : Fragment(), HomeDateAdapter.DateItemClickListener {
         return binding.root
     }
 
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -164,7 +168,7 @@ class HomeFragment : Fragment(), HomeDateAdapter.DateItemClickListener {
 
     private fun setListeners() {
         binding.apply {
-            ivToday.setOnClickListener {
+            layoutContentPosted.setOnClickListener {
                 (requireActivity() as HomeActivity).addFragment(
                     DetailFragment(),
                     true,
@@ -273,9 +277,32 @@ class HomeFragment : Fragment(), HomeDateAdapter.DateItemClickListener {
     }
 
     private fun shareImage() {
+   /*     val drawableResId = R.drawable.starry_night
+        val drawable = ContextCompat.getDrawable(requireContext(), drawableResId)
+        val bitmap = drawable?.toBitmap()
+
+        val cachePath = File(requireContext().cacheDir, "images")
+        cachePath.mkdirs()
+        val imagePath = File(cachePath, "image.png")
+        val imageUri = FileProvider.getUriForFile(
+            requireContext(),
+            "com.your.package.name.fileprovider",
+            imagePath
+        )
+
+        try {
+            val stream = FileOutputStream(imagePath)
+            bitmap?.compress(Bitmap.CompressFormat.PNG, 100, stream)
+            stream.close()
+        } catch (e: IOException) {
+            e.printStackTrace()
+        }
+
         val shareIntent = Intent(Intent.ACTION_SEND)
         shareIntent.type = "image/png"
-        startActivity(Intent.createChooser(shareIntent, "Share Image"))
+        shareIntent.putExtra(Intent.EXTRA_STREAM, imageUri)
+
+        startActivity(Intent.createChooser(shareIntent, "Share Image"))*/
     }
 
     private fun showLoading(state: Boolean) {

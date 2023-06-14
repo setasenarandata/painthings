@@ -11,10 +11,4 @@
         android:label="@string/title_home"
         tools:layout="@layout/fragment_home" />
 
-    <fragment
-        android:id="@+id/navigation_draw"
-        android:name="com.project.painthings.ui.main.ui.draw.DrawFragment"
-        android:label="@string/title_draw"
-        tools:layout="@layout/fragment_draw" />
-
 </navigation>
