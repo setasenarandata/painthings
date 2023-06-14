@@ -12,6 +12,23 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
+        <item name="android:windowActivityTransitions">true</item>
+        <item name="android:windowContentTransitions">true</item>
+        <item name="android:windowSharedElementEnterTransition">@transition/shared_transition</item>
+        <item name="android:windowSharedElementExitTransition">@transition/shared_transition</item>
+    </style>
+
+    <style name="mytoast">
+        <item name="stTextBold">true</item>
+        <item name="stTextColor">@color/emotion_bg</item>
+        <item name="stFont">@font/r_flex_medium</item>
+        <item name="stTextSize">14sp</item>
+        <item name="stColorBackground">#fff</item>
+        <item name="stSolidBackground">true</item>
+        <item name="stStrokeWidth">3dp</item>
+        <item name="stStrokeColor">@color/emotion_bg</item>
+        <item name="stLength">LONG</item>
+        <item name="stRadius">24dp</item>
     </style>
 
     <declare-styleable name="PopupBarChart">
@@ -37,4 +54,8 @@
         <attr name="chart_bar_tooltip_subtitle_text_family" format="reference" />
 
     </declare-styleable>
+
+    <style name="textView_style">
+        <item name="android:textColor">@color/black</item>
+    </style>
 </resources>

@@ -99,17 +99,9 @@ class PopupBarChart @JvmOverloads constructor(
     //Graph attributes
     var endColor =
         ContextCompat.getColor(context, com.justin.popupbarchart.R.color.bg_bar_graph_green_end)
-        set(value) {
-            field = value
-//            setProgressBarColor(startColor, field)
-        }
 
     var startColor =
         ContextCompat.getColor(context, com.justin.popupbarchart.R.color.bg_bar_graph_green_start)
-        set(value) {
-            field = value
-//            setProgressBarColor(field, endColor)
-        }
     var roundCorner = true
         set(value) {
             field = value

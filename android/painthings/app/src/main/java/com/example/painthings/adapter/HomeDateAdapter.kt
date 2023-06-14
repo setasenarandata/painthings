@@ -2,7 +2,6 @@ package com.example.painthings.adapter
 
 import android.annotation.SuppressLint
 import android.graphics.Color
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,11 +10,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.painthings.R
 import com.example.painthings.databinding.ItemDateListBinding
 import com.example.painthings.model.HomeDate
-import java.text.SimpleDateFormat
 import java.util.*
 
-class HomeDateAdapter(private val dateList: List<HomeDate>) :
+class HomeDateAdapter(private val dateList: List<HomeDate>, private val dateItemClickListener: DateItemClickListener) :
     RecyclerView.Adapter<HomeDateAdapter.ViewHolder>() {
+
+//    private var dateItemClickListener: DateItemClickListener? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val v = ItemDateListBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -34,11 +34,8 @@ class HomeDateAdapter(private val dateList: List<HomeDate>) :
                 dateList[i].isClicked = false
             }
             dateList[position].isClicked = !dateList[position].isClicked
-            val isoDateFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.getDefault())
-            val isoDate = isoDateFormat.format(dateList[position].cal!!.time)
-
+            dateItemClickListener.onDateItemClicked(dateList[position].cal!!.time)
             // Make api call
-            Log.d("TESTING", isoDate)
             notifyDataSetChanged()
         }
     }
@@ -84,5 +81,9 @@ class HomeDateAdapter(private val dateList: List<HomeDate>) :
                 tvDay.text = dayOfWeekInMonthStr
             }
         }
+    }
+
+    interface DateItemClickListener {
+        fun onDateItemClicked(date: Date)
     }
 }

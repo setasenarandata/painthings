@@ -17,11 +17,21 @@
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="@dimen/_100sdp"
-            android:layout_margin="@dimen/_64sdp"
+            android:layout_marginHorizontal="@dimen/_64sdp"
+            android:layout_marginTop="@dimen/_64sdp"
+            android:layout_marginBottom="@dimen/_12sdp"
             android:src="@drawable/painthings_logo" />
+
+        <ProgressBar
+            android:id="@+id/registerProgressBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"/>
+
 
         <EditText
             android:id="@+id/ed_name"
+            android:layout_marginTop="@dimen/_12sdp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_24sdp"
