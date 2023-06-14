@@ -316,13 +316,13 @@ class HomeFragment : Fragment(), HomeDateAdapter.DateItemClickListener {
             Log.d("IMAGEURL", imageUrl )
             val bitMap = getBitMap(imageUrl)
             withContext(Dispatchers.IO) {
-                val file =  File("${Environment.getExternalStorageDirectory()}/painthings/${tvTitleToday.text}.jpg");
+                val file =  File("${Environment.getExternalStorageDirectory()}/painthings/${tvTitleToday.text}.jpg")
                 val fileOutputStream = FileOutputStream(file)
                 bitMap.compress(Bitmap.CompressFormat.JPEG, 100, fileOutputStream)
                 fileOutputStream.flush()
                 fileOutputStream.close()
 
-                val stringPath = MediaStore.Images.Media.insertImage(requireActivity().getContentResolver(), bitMap, "Share Image", null)
+                val stringPath = MediaStore.Images.Media.insertImage(requireActivity().contentResolver, bitMap, "generated_by_painthings", null)
                 val uri = Uri.parse(stringPath)
 
                 val feedIntent = Intent(Intent.ACTION_SEND)
@@ -335,10 +335,10 @@ class HomeFragment : Fragment(), HomeDateAdapter.DateItemClickListener {
                 storiesIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
                 storiesIntent.setPackage("com.instagram.android")
 
-                val i = Intent(Intent.ACTION_SEND);
-                i.type = "image/*";
-                i.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-                i.putExtra(Intent.EXTRA_STREAM, Uri.parse(stringPath));
+                val i = Intent(Intent.ACTION_SEND)
+                i.type = "image/*"
+                i.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+                i.putExtra(Intent.EXTRA_STREAM, Uri.parse(stringPath))
 
                 requireActivity().grantUriPermission(
                     "com.instagram.android", uri, Intent.FLAG_GRANT_READ_URI_PERMISSION
@@ -347,7 +347,7 @@ class HomeFragment : Fragment(), HomeDateAdapter.DateItemClickListener {
                 val chooserIntent = Intent.createChooser(feedIntent, "Share to...")
                 chooserIntent.putExtra(Intent.EXTRA_INITIAL_INTENTS, arrayOf(storiesIntent, i))
                 startActivity(chooserIntent)
-            };
+            }
 
         }
     }
