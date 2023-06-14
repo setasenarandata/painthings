@@ -7,7 +7,7 @@
     <string name="back_button_text">Back</string>
     <string name="skip_button_text">Skip</string>
 
-<!--    emotion section-->
+    <!--    emotion section-->
     <string name="emotion_heading_1">Love</string>
     <string name="emotion_heading_2">Sad</string>
     <string name="emotion_heading_3">Anger</string>
@@ -28,5 +28,7 @@
 
     <string name="title_home">Home</string>
     <string name="title_draw">Draw</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

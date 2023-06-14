@@ -50,8 +50,24 @@ class HomeFragment : Fragment() {
         shareBtn.setOnClickListener {
             shareImage()
         }
+
+        // Check if Today's about is posted
+        val isTodaysAboutPosted = true // Logic or condition to check if "Today's about" is posted
+
+        val layoutContentPosted = _binding!!.layoutContentPosted
+        val layoutContentNotPosted = _binding!!.layoutContentNotPosted
+
+        if (isTodaysAboutPosted) {
+            layoutContentPosted.visibility = View.VISIBLE
+            layoutContentNotPosted.visibility = View.GONE
+        } else {
+            layoutContentPosted.visibility = View.GONE
+            layoutContentNotPosted.visibility = View.VISIBLE
+        }
+
         return binding.root
     }
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -66,7 +82,7 @@ class HomeFragment : Fragment() {
 
     private fun setListeners() {
         binding.apply {
-            ivToday.setOnClickListener {
+            layoutContentPosted.setOnClickListener {
                 (requireActivity() as HomeActivity).addFragment(
                     DetailFragment(),
                     true,
@@ -176,36 +192,31 @@ class HomeFragment : Fragment() {
     }
 
     private fun shareImage() {
-        // Get the drawable resource ID of the image you want to share
-//        val drawableResId = R.drawable.starry_night
-//
-//        // Retrieve the drawable using its resource ID
-//        val drawable = ContextCompat.getDrawable(requireContext(), drawableResId)
-//
-//        // Convert the drawable to a bitmap
-//        val bitmap = drawable?.toBitmap()
-//
-//        // Create a temporary PNG file to share
-//        val cachePath = File(requireContext().cacheDir, "images")
-//        cachePath.mkdirs()
-//        val imagePath = File(cachePath, "image.png")
-//        val imageUri = FileProvider.getUriForFile(requireContext(), "com.your.package.name.fileprovider", imagePath)
-//
-//        try {
-//            // Save the bitmap to the temporary file
-//            val stream = FileOutputStream(imagePath)
-//            bitmap?.compress(Bitmap.CompressFormat.PNG, 100, stream)
-//            stream.close()
-//        } catch (e: IOException) {
-//            e.printStackTrace()
-//        }
-//
-//        // Create and set the sharing intent
+   /*     val drawableResId = R.drawable.starry_night
+        val drawable = ContextCompat.getDrawable(requireContext(), drawableResId)
+        val bitmap = drawable?.toBitmap()
+
+        val cachePath = File(requireContext().cacheDir, "images")
+        cachePath.mkdirs()
+        val imagePath = File(cachePath, "image.png")
+        val imageUri = FileProvider.getUriForFile(
+            requireContext(),
+            "com.your.package.name.fileprovider",
+            imagePath
+        )
+
+        try {
+            val stream = FileOutputStream(imagePath)
+            bitmap?.compress(Bitmap.CompressFormat.PNG, 100, stream)
+            stream.close()
+        } catch (e: IOException) {
+            e.printStackTrace()
+        }
+
         val shareIntent = Intent(Intent.ACTION_SEND)
         shareIntent.type = "image/png"
-//        shareIntent.putExtra(Intent.EXTRA_STREAM, imageUri)
+        shareIntent.putExtra(Intent.EXTRA_STREAM, imageUri)
 
-        // Start the activity for sharing
-        startActivity(Intent.createChooser(shareIntent, "Share Image"))
+        startActivity(Intent.createChooser(shareIntent, "Share Image"))*/
     }
 }
