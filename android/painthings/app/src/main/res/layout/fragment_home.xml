@@ -59,7 +59,7 @@
                     android:layout_width="@dimen/_50sdp"
                     android:layout_height="@dimen/_50sdp"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/user_dummy"
+                    android:src="@drawable/user_profile"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -115,7 +115,6 @@
 
     <LinearLayout
         android:id="@+id/layout_content_bottom"
-        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:orientation="vertical"
@@ -124,10 +123,11 @@
         app:layout_constraintTop_toBottomOf="@id/layout_top_content">
 
         <TextView
+            android:id="@+id/tvToday"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_20sdp"
-            android:text="About Today"
+            android:text="@string/about_today_placeholder"
             android:textColor="@color/black"
             android:textSize="@dimen/_20ssp"
             android:textStyle="bold" />
@@ -135,6 +135,7 @@
         <LinearLayout
             android:id="@+id/layout_content_today"
             android:layout_width="match_parent"
+            android:visibility="gone"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_16sdp"
             android:orientation="horizontal">

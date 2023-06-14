@@ -4,6 +4,7 @@ import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -23,6 +24,8 @@ import com.example.painthings.adapter.HomeDateAdapter
 import com.example.painthings.emotions.Emotions
 import com.example.painthings.emotions.EmotionsActivity
 import com.example.painthings.model.HomeDate
+import com.example.painthings.network.EmotionResponseItem
+import com.example.painthings.network.WikiArtDetailResponse
 import com.example.painthings.ui.auth.AuthActivity
 import com.example.painthings.view_model.ChartViewModel
 import com.google.android.material.button.MaterialButton
@@ -47,6 +50,7 @@ class HomeFragment : Fragment(), HomeDateAdapter.DateItemClickListener {
     private lateinit var tvArtistToday: TextView
     private lateinit var bottomContent: LinearLayout
     private lateinit var circleImage: CircleImageView
+    private lateinit var todayTitle: TextView
     private var isValid: Boolean = true
     private var artId: String = "empty"
     private val binding get() = _binding!!
@@ -67,6 +71,7 @@ class HomeFragment : Fragment(), HomeDateAdapter.DateItemClickListener {
     ): View {
         val sharedPreferences = requireContext().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
         val name = sharedPreferences.getString("name", "User")!!
+        val noPost = "You haven\'t posted anything today"
 
         myCalendar.timeZone = jakartaTimeZone
 
@@ -89,8 +94,9 @@ class HomeFragment : Fragment(), HomeDateAdapter.DateItemClickListener {
         ivToday = _binding!!.ivToday
         tvTitleToday = _binding!!.tvTodayTitle
         tvArtistToday = _binding!!.tvTodayArtist
-        bottomContent = _binding!!.layoutContentBottom
+        bottomContent = _binding!!.layoutContentToday
         circleImage = _binding!!.circleImageView
+        todayTitle = _binding!!.tvToday
 
         bottomContent.visibility = View.GONE
 
@@ -102,7 +108,9 @@ class HomeFragment : Fragment(), HomeDateAdapter.DateItemClickListener {
         viewModel.getChartStatus().observe(viewLifecycleOwner) {
             showLoading(false)
             if (it.uuid != "" && it.createdAt == selectedDate) {
+                val dateFormat = "About ${it.createdAt}"
                 isValid = false
+                todayTitle.text = dateFormat
                 val emotion = Emotions(
                     it.love,
                     it.sadness,
@@ -116,10 +124,11 @@ class HomeFragment : Fragment(), HomeDateAdapter.DateItemClickListener {
                 CoroutineScope(Dispatchers.Main).launch {
                     setAboutToday(artId)
                 }
-
             } else {
+                Log.d("WHERE", "INSIDE ELSE EMOTIONS 0")
                 setBarGraph(Emotions(0, 0, 0, 0, 0, 0))
                 bottomContent.visibility = View.GONE
+                todayTitle.text = noPost
             }
         }
 
@@ -131,6 +140,7 @@ class HomeFragment : Fragment(), HomeDateAdapter.DateItemClickListener {
                     .load(it.image)
                     .into(ivToday)
                 bottomContent.visibility = View.VISIBLE
+                setListeners(it)
             } else {
                 StyleableToast.makeText(requireContext(), "Error fetching about today", Toast.LENGTH_LONG, R.style.mytoast).show()
             }
@@ -159,14 +169,13 @@ class HomeFragment : Fragment(), HomeDateAdapter.DateItemClickListener {
 
         initLittleCalendar()
         getPostByDate()
-        setListeners()
     }
 
-    private fun setListeners() {
+    private fun setListeners(art: WikiArtDetailResponse) {
         binding.apply {
-            ivToday.setOnClickListener {
+            bottomContent.setOnClickListener {
                 (requireActivity() as HomeActivity).addFragment(
-                    DetailFragment(),
+                    DetailFragment(art),
                     true,
                     DetailFragment::class.java.simpleName
                 )

@@ -4,17 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
     app:startDestination="@+id/navigation_home">
-
     <fragment
         android:id="@+id/navigation_home"
         android:name="com.example.painthings.ui.home.HomeFragment"
         android:label="@string/title_home"
         tools:layout="@layout/fragment_home" />
-
-    <fragment
-        android:id="@+id/navigation_draw"
-        android:name="com.project.painthings.ui.main.ui.draw.DrawFragment"
-        android:label="@string/title_draw"
-        tools:layout="@layout/fragment_draw" />
-
 </navigation>

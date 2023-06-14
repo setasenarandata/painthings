@@ -40,5 +40,7 @@
     <string name="journal_placeholder">Type here</string>
     <string name="journal_button">Post</string>
     <string name="refresh_button">Refresh</string>
+    <string name="about_today_placeholder">About Today</string>
+    <string name="no_post_today">You haven\'t posted anything today</string>
 
 </resources>
