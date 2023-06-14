@@ -59,7 +59,7 @@
                     android:layout_width="@dimen/_50sdp"
                     android:layout_height="@dimen/_50sdp"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/user_profile"
+                    android:src="@drawable/user_dummy"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -75,6 +75,13 @@
                     android:orientation="vertical"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
+
+                    <View
+                        android:id="@+id/notification_color"
+                        android:layout_width="@dimen/_8sdp"
+                        android:layout_height="@dimen/_8sdp"
+                        android:background="@drawable/background_circle"
+                        android:backgroundTint="@color/btnColor" />
 
                 </LinearLayout>
 
@@ -132,38 +139,35 @@
             android:layout_marginTop="@dimen/_16sdp"
             android:orientation="horizontal">
 
-            <LinearLayout
-                android:id="@+id/layout_content_posted"
-                android:layout_width="match_parent"
+            <androidx.cardview.widget.CardView
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:visibility="visible"
-                android:orientation="horizontal">
+                app:cardCornerRadius="@dimen/_10sdp"
+                app:cardElevation="0dp">
 
-                <androidx.cardview.widget.CardView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:cardCornerRadius="@dimen/_10sdp"
-                    app:cardElevation="0dp">
+                <ImageView
+                    android:id="@+id/iv_today"
+                    android:layout_width="@dimen/_130sdp"
+                    android:layout_height="@dimen/_100sdp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/starry_night" />
 
-                    <ImageView
-                        android:id="@+id/iv_today"
-                        android:layout_width="@dimen/_130sdp"
-                        android:layout_height="@dimen/_100sdp"
-                        android:scaleType="centerCrop"
-                        android:src="@drawable/starry_night" />
+            </androidx.cardview.widget.CardView>
 
-                </androidx.cardview.widget.CardView>
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
 
-                <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_marginStart="@dimen/_24sdp"
+                android:layout_weight="1">
+
+                <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_marginStart="@dimen/_24sdp"
-                    android:layout_weight="1">
+                    android:orientation="vertical"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
 
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:orientation="vertical"
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -218,86 +222,19 @@
                         app:cornerRadius="@dimen/_30sdp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent">
+                        app:rippleColor="@color/white" />
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Title"
-                            android:fontFamily="@font/r_flex_light"
-                            android:textSize="12sp"
-                            android:textColor="@color/black" />
+                </LinearLayout>
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Starry Night"
-                            android:fontFamily="@font/r_flex_bold"
-                            android:textSize="16sp"
-                            android:textColor="@color/black"
-                            android:textStyle="bold" />
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/_4sdp"
-                            android:text="Artist"
-                            android:fontFamily="@font/r_flex_light"
-                            android:textSize="12sp"
-                            android:textColor="@color/black" />
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Vincent Van Gogh"
-                            android:textColor="@color/black"
-                            android:fontFamily="@font/r_flex_bold"
-                            android:textSize="16sp" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
-                        <com.google.android.material.button.MaterialButton
-                            android:id="@+id/btn_share"
-                            android:layout_width="wrap_content"
-                            android:layout_height="@dimen/_30sdp"
-                            android:elevation="@dimen/_2sdp"
-                            android:paddingStart="@dimen/_32sdp"
-                            android:paddingEnd="@dimen/_32sdp"
-                            android:text="Share"
-                            android:textAllCaps="false"
-                            android:textSize="@dimen/_8ssp"
-                            android:textStyle="bold"
-                            app:backgroundTint="@color/btnColor"
-                            app:cornerRadius="@dimen/_30sdp"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:rippleColor="@color/white" />
-
-                    </LinearLayout>
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/layout_content_not_posted"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:visibility="gone"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="You Haven't Posted Anything Today"
-                    android:textColor="@color/black"
-                    android:textSize="16sp"
-                    android:textStyle="bold" />
-
-            </LinearLayout>
 
         </LinearLayout>
 
-    </LinearLayout>
 
+    </LinearLayout>
 
     <View
         android:id="@+id/fab_shadow"
