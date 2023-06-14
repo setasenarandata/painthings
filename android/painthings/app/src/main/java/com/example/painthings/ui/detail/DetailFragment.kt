@@ -63,8 +63,8 @@ class DetailFragment(art: WikiArtDetailResponse) : Fragment() {
     }
 
     private fun shareImage() {
-        val shareIntent = Intent(Intent.ACTION_SEND)
-        shareIntent.type = "image/png"
-        startActivity(Intent.createChooser(shareIntent, "Share Image"))
+//        val shareIntent = Intent(Intent.ACTION_SEND)
+//        shareIntent.type = "image/png"
+//        startActivity(Intent.createChooser(shareIntent, "Share Image"))
     }
 }

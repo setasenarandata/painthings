@@ -1,9 +1,13 @@
 package com.example.painthings.ui
 
-import android.content.Intent
+import android.Manifest
+import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
+import android.widget.Toast
+import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
@@ -39,6 +43,4 @@ class HomeActivity : AppCompatActivity() {
         ft.commitAllowingStateLoss()
         binding.detailContainer.visibility = View.VISIBLE
     }
-
-
 }
