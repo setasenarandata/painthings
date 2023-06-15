@@ -1,7 +1,6 @@
 # painthings
-# Project Name
 
-This project is a backend application for managing posts and users. It allows users to create and retrieve posts, as well as manage user accounts with different access levels for administrators and regular users.
+This project is a backend service for painthings app. It allows users to create and retrieve posts, as well as manage user accounts with different access levels for administrators and regular users.
 
 ## Table of Contents
 
@@ -10,8 +9,7 @@ This project is a backend application for managing posts and users. It allows us
   - [Installation](#installation)
 - [Usage](#usage)
 - [API Endpoints](#api-endpoints)
-- [Contributing](#contributing)
-- [License](#license)
+
 
 ## Getting Started
 
@@ -36,7 +34,7 @@ This project is a backend application for managing posts and users. It allows us
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/your/repository.git
+   git clone https://github.com/setasenarandata/painthings.git
    ```
 
 2. Install the dependencies:
@@ -241,3 +239,5 @@ Retrieves artworks based on a cluster.
     "Category": "artwork-category",
     "Artist": "artwork-artist",
     "Title": "artwork-title"
+  }
+]
