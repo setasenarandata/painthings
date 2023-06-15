@@ -114,18 +114,6 @@ Authenticates a user and creates a session.
 }
 ```
 
-**Response Example:**
-
-```json
-{
-  "uuid": "user-uuid",
-  "name": "John Doe",
-  "email": "johndoe@example.com",
-  "role": "user",
-  "finalsession": "session-id"
-}
-```
-
 #### Logout
 
 ```
@@ -133,14 +121,6 @@ DELETE /logout
 ```
 
 Destroys the user session and logs out the user.
-
-**Response Example:**
-
-```json
-{
-  "msg": "Anda telah logout"
-}
-```
 
 #### Get Current User
 
@@ -150,16 +130,6 @@ GET /me
 
 Retrieves the details of the current logged-in user.
 
-**Response Example:**
-
-```json
-{
-  "uuid": "user-uuid",
-  "name": "John Doe",
-  "email": "johndoe@example.com",
-  "role": "user"
-}
-```
 
 
 ### Get All Posts
@@ -228,16 +198,3 @@ Retrieves artworks based on a cluster.
 **Path Parameters:**
 
 - `cluster`: The cluster of the artwork to retrieve.
-
-**Response Example:**
-
-```json
-[
-  {
-    "id": "artwork-id",
-    "Style": "artwork-style",
-    "Category": "artwork-category",
-    "Artist": "artwork-artist",
-    "Title": "artwork-title"
-  }
-]
