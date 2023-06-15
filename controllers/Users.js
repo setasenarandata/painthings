@@ -30,12 +30,22 @@ export const createUser = async(req, res) =>{
     const {name, email, password, birthdate} = req.body;
     const hashPassword = await argon2.hash(password);
     try {
+        const existingUser = await User.findOne({
+            where:{
+                email:email
+            }
+        });
+        if (existingUser) {
+          // If the email is already used, return an error message
+          return res.status(400).json({ msg: "Email sudah digunakan" });
+        }
+
         await User.create({
-            name: name,
-            email: email,
-            password: hashPassword,
-            birthdate: birthdate,
-            role: "user"
+          name: name,
+          email: email,
+          password: hashPassword,
+          birthdate: birthdate,
+          role: "user",
         });
         res.status(201).json({msg: "Register Berhasil"});
     } catch (error) {
