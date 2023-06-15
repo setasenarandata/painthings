@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="barColorBlue">#4E72A7</color>
+    <color name="barColorGold">#D88018</color>
+    <color name="barColorGreen">#4AE16B</color>
+    <color name="barColorPink">#EEB0C1</color>
+    <color name="barColorRed">#C92929</color>
+    <color name="barColorYellow">#FFD41D</color>
+    <color name="bcColor">#2F2157</color>
+    <color name="black">#FF000000</color>
+    <color name="btnColor">#F15223</color>
+    <color name="btnColorOpacity">#40F15223</color>
+    <color name="dateBtnColor">#404040</color>
+    <color name="dimmed_black">#323232</color>
+    <color name="emotion_bg">#1D1D1D</color>
+    <color name="ic_launcher_background">#1D1D1D</color>
+    <color name="inactive">#626262</color>
+    <color name="main_orange">#F15223</color>
+    <color name="menuColor">#BFBFBF</color>
+    <color name="primaryColor">#1D1D1D</color>
+    <color name="purple_200">#F15223</color>
+    <color name="purple_500">#F15223</color>
+    <color name="purple_700">#F15223</color>
+    <color name="subtitleTextColor">#888888</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+    <color name="white">#FFFFFFFF</color>
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <string name="about_today_placeholder">About Today</string>
+    <string name="app_name">painthings</string>
+    <string name="back_button_text">Back</string>
+    <string name="default_emotion_value">0</string>
+    <string name="emotion_heading_1">Love</string>
+    <string name="emotion_heading_2">Sad</string>
+    <string name="emotion_heading_3">Anger</string>
+    <string name="emotion_heading_4">Happiness</string>
+    <string name="emotion_heading_5">Disgust</string>
+    <string name="emotion_heading_6">Optimism</string>
+    <string name="emotion_subtitle_1">On a scale 1–5, rate your current\nemotional connection to love</string>
+    <string name="emotion_subtitle_2">On a scale 1–5, rate your current\nemotional connection to Sad</string>
+    <string name="emotion_subtitle_3">On a scale 1–5, rate your current\nemotional connection to Anger</string>
+    <string name="emotion_subtitle_4">On a scale 1–5, rate your current\nemotional connection to Happiness</string>
+    <string name="emotion_subtitle_5">On a scale 1–5, rate your current\nemotional connection to Disgust</string>
+    <string name="emotion_subtitle_6">On a scale 1–5, rate your current\nemotional connection to Optimism</string>
+    <string name="greet_user">Hi, %s</string>
+    <string name="helper_art_activity">Which paintings would you use to describe your current emotional state?</string>
+    <string name="journal_button">Post</string>
+    <string name="journal_helper">Write anything about today</string>
+    <string name="journal_placeholder">Type here</string>
+    <string name="minus">-</string>
+    <string name="next_button_text">Next</string>
+    <string name="no_post_today">You haven\'t posted anything today</string>
+    <string name="plus">+</string>
+    <string name="refresh_button">Refresh</string>
+    <string name="skip_button_text">Skip</string>
+    <string name="starry_night_artist">Vincent Van Gogh</string>
+    <string name="starry_night_style">1902</string>
+    <string name="starry_night_title">Starry Night</string>
+    <string name="title_draw">Draw</string>
+    <string name="title_home">Home</string>
+    <string name="welcome_1_heading">Hi there! Welcome to <b>Painthings</b></string>
+    <string name="welcome_2_heading">Simply express what do you feel today, and lets us <b>paint.</b></string>
+    <string name="welcome_3_heading">Build a digital diary of your emotional journey with <b>Painthings.</b></string>
+    <style name="Theme.Painthings" parent="Theme.MaterialComponents.Light.NoActionBar">
+        
+        <item name="colorPrimary">@color/purple_500</item>
+        <item name="colorPrimaryVariant">@color/purple_700</item>
+        <item name="colorOnPrimary">@color/white</item>
+        
+        <item name="colorSecondary">@color/teal_200</item>
+        <item name="colorSecondaryVariant">@color/teal_700</item>
+        <item name="colorOnSecondary">@color/black</item>
+        
+        <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
+        
+        <item name="android:windowActivityTransitions">true</item>
+        <item name="android:windowContentTransitions">true</item>
+        <item name="android:windowSharedElementEnterTransition">@transition/shared_transition</item>
+        <item name="android:windowSharedElementExitTransition">@transition/shared_transition</item>
+    </style>
+    <style name="mytoast">
+        <item name="stTextBold">true</item>
+        <item name="stTextColor">@color/emotion_bg</item>
+        <item name="stFont">@font/r_flex_medium</item>
+        <item name="stTextSize">14sp</item>
+        <item name="stColorBackground">#fff</item>
+        <item name="stSolidBackground">true</item>
+        <item name="stStrokeWidth">3dp</item>
+        <item name="stStrokeColor">@color/emotion_bg</item>
+        <item name="stLength">LONG</item>
+        <item name="stRadius">24dp</item>
+    </style>
+    <style name="textView_style">
+        <item name="android:textColor">@color/black</item>
+    </style>
+    <declare-styleable name="PopupBarChart">
+        
+        <attr format="color" name="chart_bar_start_color"/>
+        <attr format="color" name="chart_bar_end_color"/>
+        <attr format="boolean" name="chart_bar_round_corner"/>
+        <attr format="dimension" name="chart_bar_size"/>
+        <attr format="color" name="chart_bar_secondary_color"/>
+
+        
+        <attr format="reference" name="chart_bar_text_color"/>
+        <attr format="dimension" name="chart_bar_text_size"/>
+        <attr format="reference" name="chart_bar_text_family"/>
+
+        
+        <attr format="reference" name="chart_bar_tooltip_bg_color"/>
+        <attr format="reference" name="chart_bar_tooltip_title_text_color"/>
+        <attr format="dimension" name="chart_bar_tooltip_title_text_size"/>
+        <attr format="reference" name="chart_bar_tooltip_title_text_family"/>
+        <attr format="reference" name="chart_bar_tooltip_subtitle_text_color"/>
+        <attr format="dimension" name="chart_bar_tooltip_subtitle_text_size"/>
+        <attr format="reference" name="chart_bar_tooltip_subtitle_text_family"/>
+
+    </declare-styleable>
+</resources>

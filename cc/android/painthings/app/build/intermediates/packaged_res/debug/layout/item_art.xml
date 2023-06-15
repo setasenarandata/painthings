@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/myCardView"
+    android:layout_width="match_parent"
+    android:layout_height="288dp"
+    android:layout_margin="8dp"
+    android:padding="@dimen/_12sdp"
+    android:clickable="true"
+    android:focusable="true"
+    app:cardCornerRadius="20dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/black">
+
+        <ImageView
+            android:id="@+id/ivPainting"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:alpha="0.4"
+            android:transitionName="sharedElementTransPaintings"
+            android:scaleType="centerCrop"
+            android:src="@drawable/starry_night" />
+
+        <TextView
+            android:id="@+id/tvArtTitle"
+            android:layout_width="0dp"
+            android:layout_marginTop="80dp"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/r_flex_black"
+            android:text="@string/starry_night_title"
+            android:textColor="@color/white"
+            android:transitionName="sharedElementTransTitle"
+
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:layout_marginStart="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:maxLines="1"
+            android:ellipsize="end"/>
+
+        <TextView
+            android:id="@+id/tvArtArtist"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:fontFamily="@font/r_flex_mediumitalic"
+            android:text="@string/starry_night_artist"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:textStyle="normal"
+            android:transitionName="sharedElementTransArtist"
+            app:layout_constraintBottom_toTopOf="@+id/tvArtYear"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvArtTitle"
+            android:maxLines="1"
+            android:ellipsize="end"/>
+
+        <TextView
+            android:id="@+id/tvArtYear"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:fontFamily="@font/r_flex_lightitalic"
+            android:text="@string/starry_night_style"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:textStyle="normal"
+            android:transitionName="sharedElementTransYear"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvArtTitle"
+            android:maxLines="1"
+            android:ellipsize="end"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>

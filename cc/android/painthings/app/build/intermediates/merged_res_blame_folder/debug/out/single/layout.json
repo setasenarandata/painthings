@@ -1,0 +1,74 @@
+[
+    {
+        "merged": "/Users/setasena/.gradle/daemon/7.5/com.example.painthings.app-mergeDebugResources-60:/layout/fragment_register.xml",
+        "source": "/Users/setasena/.gradle/daemon/7.5/com.example.painthings.app-main-63:/layout/fragment_register.xml"
+    },
+    {
+        "merged": "/Users/setasena/.gradle/daemon/7.5/com.example.painthings.app-mergeDebugResources-60:/layout/fragment_home.xml",
+        "source": "/Users/setasena/.gradle/daemon/7.5/com.example.painthings.app-main-63:/layout/fragment_home.xml"
+    },
+    {
+        "merged": "/Users/setasena/.gradle/daemon/7.5/com.example.painthings.app-mergeDebugResources-60:/layout/activity_create_new_post.xml",
+        "source": "/Users/setasena/.gradle/daemon/7.5/com.example.painthings.app-main-63:/layout/activity_create_new_post.xml"
+    },
+    {
+        "merged": "com.example.painthings.app-mergeDebugResources-60:/layout/fragment_detail.xml",
+        "source": "com.example.painthings.app-main-63:/layout/fragment_detail.xml"
+    },
+    {
+        "merged": "/Users/setasena/.gradle/daemon/7.5/com.example.painthings.app-mergeDebugResources-60:/layout/item_date_list.xml",
+        "source": "/Users/setasena/.gradle/daemon/7.5/com.example.painthings.app-main-63:/layout/item_date_list.xml"
+    },
+    {
+        "merged": "/Users/setasena/.gradle/daemon/7.5/com.example.painthings.app-mergeDebugResources-60:/layout/activity_art.xml",
+        "source": "/Users/setasena/.gradle/daemon/7.5/com.example.painthings.app-main-63:/layout/activity_art.xml"
+    },
+    {
+        "merged": "/Users/setasena/.gradle/daemon/7.5/com.example.painthings.app-mergeDebugResources-60:/layout/fragment_detail.xml",
+        "source": "/Users/setasena/.gradle/daemon/7.5/com.example.painthings.app-main-63:/layout/fragment_detail.xml"
+    },
+    {
+        "merged": "/Users/setasena/.gradle/daemon/7.5/com.example.painthings.app-mergeDebugResources-60:/layout/fragment_draw.xml",
+        "source": "/Users/setasena/.gradle/daemon/7.5/com.example.painthings.app-main-63:/layout/fragment_draw.xml"
+    },
+    {
+        "merged": "/Users/setasena/.gradle/daemon/7.5/com.example.painthings.app-mergeDebugResources-60:/layout/activity_emotions.xml",
+        "source": "/Users/setasena/.gradle/daemon/7.5/com.example.painthings.app-main-63:/layout/activity_emotions.xml"
+    },
+    {
+        "merged": "/Users/setasena/.gradle/daemon/7.5/com.example.painthings.app-mergeDebugResources-60:/layout/activity_home.xml",
+        "source": "/Users/setasena/.gradle/daemon/7.5/com.example.painthings.app-main-63:/layout/activity_home.xml"
+    },
+    {
+        "merged": "/Users/setasena/.gradle/daemon/7.5/com.example.painthings.app-mergeDebugResources-60:/layout/fragment_login.xml",
+        "source": "/Users/setasena/.gradle/daemon/7.5/com.example.painthings.app-main-63:/layout/fragment_login.xml"
+    },
+    {
+        "merged": "/Users/setasena/.gradle/daemon/7.5/com.example.painthings.app-mergeDebugResources-60:/layout/activity_auth.xml",
+        "source": "/Users/setasena/.gradle/daemon/7.5/com.example.painthings.app-main-63:/layout/activity_auth.xml"
+    },
+    {
+        "merged": "/Users/setasena/.gradle/daemon/7.5/com.example.painthings.app-mergeDebugResources-60:/layout/onboarding_layout.xml",
+        "source": "/Users/setasena/.gradle/daemon/7.5/com.example.painthings.app-main-63:/layout/onboarding_layout.xml"
+    },
+    {
+        "merged": "/Users/setasena/.gradle/daemon/7.5/com.example.painthings.app-mergeDebugResources-60:/layout/item_art.xml",
+        "source": "/Users/setasena/.gradle/daemon/7.5/com.example.painthings.app-main-63:/layout/item_art.xml"
+    },
+    {
+        "merged": "/Users/setasena/.gradle/daemon/7.5/com.example.painthings.app-mergeDebugResources-60:/layout/activity_splash.xml",
+        "source": "/Users/setasena/.gradle/daemon/7.5/com.example.painthings.app-main-63:/layout/activity_splash.xml"
+    },
+    {
+        "merged": "/Users/setasena/.gradle/daemon/7.5/com.example.painthings.app-mergeDebugResources-60:/layout/activity_onboarding.xml",
+        "source": "/Users/setasena/.gradle/daemon/7.5/com.example.painthings.app-main-63:/layout/activity_onboarding.xml"
+    },
+    {
+        "merged": "/Users/setasena/.gradle/daemon/7.5/com.example.painthings.app-mergeDebugResources-60:/layout/activity_main.xml",
+        "source": "/Users/setasena/.gradle/daemon/7.5/com.example.painthings.app-main-63:/layout/activity_main.xml"
+    },
+    {
+        "merged": "/Users/setasena/.gradle/daemon/7.5/com.example.painthings.app-mergeDebugResources-60:/layout/emotions_layout.xml",
+        "source": "/Users/setasena/.gradle/daemon/7.5/com.example.painthings.app-main-63:/layout/emotions_layout.xml"
+    }
+]

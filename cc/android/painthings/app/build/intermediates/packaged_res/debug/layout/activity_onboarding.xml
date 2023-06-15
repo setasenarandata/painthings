@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/emotion_bg"
+    android:orientation="vertical"
+    app:flow_horizontalAlign="center">
+
+    <ImageView
+        android:id="@+id/headingImageOnboarding"
+        android:layout_width="match_parent"
+        android:layout_height="240dp"
+        android:layout_marginTop="60dp"
+        android:src="@drawable/image_welcome_1" />
+
+    <TextView
+        android:id="@+id/headingOnboarding"
+        android:layout_width="match_parent"
+        android:layout_marginHorizontal="24dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:fontFamily="@font/r_flex_regular"
+        android:text="@string/welcome_1_heading"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="24sp" />
+</LinearLayout>

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Theme.Painthings" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        
+        <item name="colorPrimary">@color/purple_200</item>
+        <item name="colorPrimaryVariant">@color/purple_700</item>
+        <item name="colorOnPrimary">@color/black</item>
+        <item name="hintTextColor">@color/white</item>
+        
+        <item name="colorSecondary">@color/teal_200</item>
+        <item name="colorSecondaryVariant">@color/teal_200</item>
+        <item name="colorOnSecondary">@color/black</item>
+        
+        <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
+        
+        <item name="android:windowActivityTransitions">true</item>
+        <item name="android:windowContentTransitions">true</item>
+        <item name="android:windowSharedElementEnterTransition">@transition/shared_transition</item>
+        <item name="android:windowSharedElementExitTransition">@transition/shared_transition</item>
+    </style>
+    <style name="mytoast">
+        <item name="stTextBold">true</item>
+        <item name="stTextColor">@color/emotion_bg</item>
+        <item name="stFont">@font/r_flex_medium</item>
+        <item name="stTextSize">14sp</item>
+        <item name="stColorBackground">#fff</item>
+        <item name="stSolidBackground">true</item>
+        <item name="stStrokeWidth">3dp</item>
+        <item name="stStrokeColor">@color/emotion_bg</item>
+        <item name="stLength">LONG</item>
+        <item name="stRadius">24dp</item>
+    </style>
+    <style name="textView_style">
+        <item name="android:textColor">@color/white</item>
+    </style>
+    <declare-styleable name="PopupBarChart">
+        
+        <attr format="color" name="chart_bar_start_color"/>
+        <attr format="color" name="chart_bar_end_color"/>
+        <attr format="boolean" name="chart_bar_round_corner"/>
+        <attr format="dimension" name="chart_bar_size"/>
+        <attr format="color" name="chart_bar_secondary_color"/>
+
+        
+        <attr format="reference" name="chart_bar_text_color"/>
+        <attr format="dimension" name="chart_bar_text_size"/>
+        <attr format="reference" name="chart_bar_text_family"/>
+
+        
+        <attr format="reference" name="chart_bar_tooltip_bg_color"/>
+        <attr format="reference" name="chart_bar_tooltip_title_text_color"/>
+        <attr format="dimension" name="chart_bar_tooltip_title_text_size"/>
+        <attr format="reference" name="chart_bar_tooltip_title_text_family"/>
+        <attr format="reference" name="chart_bar_tooltip_subtitle_text_color"/>
+        <attr format="dimension" name="chart_bar_tooltip_subtitle_text_size"/>
+        <attr format="reference" name="chart_bar_tooltip_subtitle_text_family"/>
+
+    </declare-styleable>
+</resources>

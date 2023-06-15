@@ -1,0 +1,46 @@
+<resources>
+    <string name="app_name">painthings</string>
+    <string name="welcome_1_heading">Hi there! Welcome to <b>Painthings</b></string>
+    <string name="welcome_2_heading">Simply express what do you feel today, and lets us <b>paint.</b></string>
+    <string name="welcome_3_heading">Build a digital diary of your emotional journey with <b>Painthings.</b></string>
+    <string name="next_button_text">Next</string>
+    <string name="back_button_text">Back</string>
+    <string name="skip_button_text">Skip</string>
+
+    <!--    emotion section-->
+    <string name="emotion_heading_1">Love</string>
+    <string name="emotion_heading_2">Sad</string>
+    <string name="emotion_heading_3">Anger</string>
+    <string name="emotion_heading_4">Happiness</string>
+    <string name="emotion_heading_5">Disgust</string>
+    <string name="emotion_heading_6">Optimism</string>
+
+    <string name="emotion_subtitle_1">On a scale 1–5, rate your current\nemotional connection to love</string>
+    <string name="emotion_subtitle_2">On a scale 1–5, rate your current\nemotional connection to Sad</string>
+    <string name="emotion_subtitle_3">On a scale 1–5, rate your current\nemotional connection to Anger</string>
+    <string name="emotion_subtitle_4">On a scale 1–5, rate your current\nemotional connection to Happiness</string>
+    <string name="emotion_subtitle_5">On a scale 1–5, rate your current\nemotional connection to Disgust</string>
+    <string name="emotion_subtitle_6">On a scale 1–5, rate your current\nemotional connection to Optimism</string>
+
+    <string name="plus">+</string>
+    <string name="minus">-</string>
+    <string name="default_emotion_value">0</string>
+
+    <string name="title_home">Home</string>
+    <string name="title_draw">Draw</string>
+
+    <string name="greet_user">Hi, %s</string>
+
+    <string name="starry_night_title">Starry Night</string>
+    <string name="starry_night_artist">Vincent Van Gogh</string>
+    <string name="starry_night_style">1902</string>
+    <string name="helper_art_activity">Which paintings would you use to describe your current emotional state?</string>
+
+    <string name="journal_helper">Write anything about today</string>
+    <string name="journal_placeholder">Type here</string>
+    <string name="journal_button">Post</string>
+    <string name="refresh_button">Refresh</string>
+    <string name="about_today_placeholder">About Today</string>
+    <string name="no_post_today">You haven\'t posted anything today</string>
+
+</resources>
