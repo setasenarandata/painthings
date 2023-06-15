@@ -97,7 +97,7 @@ class DetailFragment(art: WikiArtDetailResponse, journal: String) : Fragment() {
         lifecycleScope.launch {
             val bitMap = getBitMap(image.toString())
             withContext(Dispatchers.IO) {
-                val file =  File("${Environment.getExternalStorageDirectory()}/painthings/${title}.jpg")
+                val file =  File("${Environment.getExternalStorageDirectory()}/${title}.jpg")
                 val fileOutputStream = FileOutputStream(file)
                 bitMap.compress(Bitmap.CompressFormat.JPEG, 100, fileOutputStream)
                 fileOutputStream.flush()

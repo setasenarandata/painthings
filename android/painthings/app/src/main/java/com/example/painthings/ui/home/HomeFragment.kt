@@ -76,6 +76,7 @@ class HomeFragment : Fragment(), HomeDateAdapter.DateItemClickListener {
     private var myJournal = ""
     private val binding get() = _binding!!
     private val storagePermissionCode = 100
+    private val todayDate = getTodayDate()
     private var selectedDate: String = SimpleDateFormat(
         "dd-MM-yyyy",
         Locale.getDefault()
@@ -126,7 +127,9 @@ class HomeFragment : Fragment(), HomeDateAdapter.DateItemClickListener {
             showLoading(false)
             if (it.uuid != "" && it.createdAt == selectedDate) {
                 val dateFormat = "About ${it.createdAt}"
-                isValid = false
+                if (it.createdAt == todayDate) {
+                    isValid = false
+                }
                 todayTitle.text = dateFormat
                 myJournal = it.journal!!
                 val emotion = Emotions(
@@ -481,5 +484,11 @@ class HomeFragment : Fragment(), HomeDateAdapter.DateItemClickListener {
 
         val result = (loading.execute(request) as SuccessResult).drawable
         return (result as BitmapDrawable).bitmap
+    }
+
+    fun getTodayDate(): String {
+        val calendar = Calendar.getInstance()
+        val dateFormat = SimpleDateFormat("dd-MM-yyyy", Locale.getDefault())
+        return dateFormat.format(calendar.time)
     }
 }
