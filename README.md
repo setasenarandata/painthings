@@ -52,7 +52,7 @@ git clone https://github.com/setasenarandata/painthings.git
 ```
 
 2. Open your IDE and navigate to File > Open.
-3. Select the "painthings/ml" directory from the cloned repository.
+3. Select "painthings/ml" directory from the cloned repository.
 4. Install all the requirements by run "pip install -r requirements.txt" on your terminal.
 5. Click on the "Run" button in yout IDE to deploy the model on your device.
 6. Wait for the link to appear in your terminal and add '/predict' at the end of the link to use the machine learning model endpoint
@@ -77,7 +77,7 @@ git clone https://github.com/setasenarandata/painthings.git
 ```
 
 2. Open Android Studio and navigate to File > Open.
-3. Select the "painthings/android" directory from the cloned repository.
+3. Select "painthings/md/android" directory from the cloned repository.
 4. Wait for Android Studio to finish importing and building the app.
 5. Connect your Android device or launch an emulator with Pixel 4 Android 13.0, API Level 33.
 6. Click on the "Run" button in Android Studio to deploy the app on your device or emulator.
