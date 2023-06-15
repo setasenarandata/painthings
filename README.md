@@ -138,7 +138,7 @@ Destroys the user session and logs out the user.
 
 ```json
 {
-  "msg": "You have been logged out"
+  "msg": "Anda telah logout"
 }
 ```
 
