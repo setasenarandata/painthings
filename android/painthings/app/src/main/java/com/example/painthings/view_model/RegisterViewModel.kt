@@ -21,7 +21,7 @@ class RegisterViewModel : ViewModel() {
                 if (response.isSuccessful) {
                     registerRes.postValue(response.body())
                 } else {
-                    Log.d("REGISTERRES", "ERROR WAS FOUND")
+                    Log.d("TAG", "ERROR WAS FOUND")
                 }
             }
 

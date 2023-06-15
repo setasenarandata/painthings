@@ -43,7 +43,7 @@ class DetailFragment(art: WikiArtDetailResponse, journal: String) : Fragment() {
     private val description = art.description
     private val image = art.image
     private val myJournal = journal
-    private val STORAGE_PERMISSION_CODE = 100
+    private val storagePermissionCode = 100
 
 
     override fun onCreateView(
@@ -95,7 +95,6 @@ class DetailFragment(art: WikiArtDetailResponse, journal: String) : Fragment() {
 
     private fun saveAndShareImage() {
         lifecycleScope.launch {
-            Log.d("IMAGEURL", image.toString() )
             val bitMap = getBitMap(image.toString())
             withContext(Dispatchers.IO) {
                 val file =  File("${Environment.getExternalStorageDirectory()}/painthings/${title}.jpg")
@@ -152,25 +151,23 @@ class DetailFragment(art: WikiArtDetailResponse, journal: String) : Fragment() {
         } else {
             ActivityCompat.requestPermissions(requireActivity(),
                 arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE),
-                STORAGE_PERMISSION_CODE
+                storagePermissionCode
             )
         }
     }
 
     private val storageActivityResultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
-        Log.d("RESULTLAUNCHER", "INITIATED")
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
             if (Environment.isExternalStorageManager()) {
-                Log.d("RESULTLAUNCHER", "INITIATED 2")
                 saveAndShareImage()
 
             } else {
-                Log.d("RESULTLAUNCHER", "DENIED")
+                Log.d("TAG", "DENIED")
             }
         }  else {
             ActivityCompat.requestPermissions(requireActivity(),
                 arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE),
-                STORAGE_PERMISSION_CODE
+                storagePermissionCode
             )
         }
     }
@@ -192,16 +189,15 @@ class DetailFragment(art: WikiArtDetailResponse, journal: String) : Fragment() {
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
 
-        if (requestCode == STORAGE_PERMISSION_CODE) {
+        if (requestCode == storagePermissionCode) {
             if (grantResults.isNotEmpty()) {
                 val write = grantResults[0] == PackageManager.PERMISSION_GRANTED
                 val read = grantResults[1] == PackageManager.PERMISSION_GRANTED
 
                 if (write && read){
-                    Log.d("ONREQUEST", "INITIATED 2")
                     saveAndShareImage()
                 } else {
-                    Log.d("ONREQUEST", "DENIED")
+                    Log.d("TAG", "DENIED")
                 }
 
             }

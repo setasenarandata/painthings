@@ -1,11 +1,9 @@
 package com.example.painthings.emotions
 
-import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Html
-import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.LinearLayout
@@ -20,18 +18,18 @@ class EmotionsActivity : AppCompatActivity() {
     private lateinit var mDotLayout: LinearLayout
     private lateinit var dots: Array<TextView?>
     private lateinit var viewPagerAdapter: EmotionsViewPagerAdapter
-    private lateinit var nextbtn: Button
-    private lateinit var backBtn: Button
+    private lateinit var nextButton: Button
+    private lateinit var backButton: Button
 
     private val counterValues = mutableListOf(0, 0, 0, 0, 0, 0)
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.emotions_layout)
-        nextbtn = findViewById(R.id.nextButton)
-        backBtn = findViewById(R.id.backButton)
+        nextButton = findViewById(R.id.nextButton)
+        backButton = findViewById(R.id.backButton)
 
-        nextbtn.setOnClickListener {
+        nextButton.setOnClickListener {
             val currentEmotion = getItem(0)
 
             // Save the previous counter value for the current emotion
@@ -46,7 +44,6 @@ class EmotionsActivity : AppCompatActivity() {
                 val i = Intent(this@EmotionsActivity, ArtActivity::class.java)
 
                 i.putExtra("EMOTION_ARRAY", counterValues.toIntArray())
-                Log.d("FINALEMOTION", counterValues.toString())
                 startActivity(i)
                 finish()
             }
@@ -54,7 +51,7 @@ class EmotionsActivity : AppCompatActivity() {
             viewPagerAdapter.notifyDataSetChanged()
         }
 
-        backBtn.setOnClickListener {
+        backButton.setOnClickListener {
             val currentEmotion = getItem(0)
 
             // Save the previous counter value for the current emotion
@@ -78,11 +75,11 @@ class EmotionsActivity : AppCompatActivity() {
         mDotLayout = findViewById<View>(R.id.pageIndicator) as LinearLayout
         viewPagerAdapter = EmotionsViewPagerAdapter(this)
         mSLideViewPager.adapter = viewPagerAdapter
-        setUpindicator(0)
+        setupIndicator(0)
         mSLideViewPager.addOnPageChangeListener(viewListener)
     }
 
-    fun setUpindicator(position: Int) {
+    fun setupIndicator(position: Int) {
         dots = arrayOfNulls(6)
         mDotLayout.removeAllViews()
         for (i in dots.indices) {
@@ -103,7 +100,7 @@ class EmotionsActivity : AppCompatActivity() {
         }
 
         override fun onPageSelected(position: Int) {
-            setUpindicator(position)
+            setupIndicator(position)
         }
 
         override fun onPageScrollStateChanged(state: Int) {}

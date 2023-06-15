@@ -33,13 +33,13 @@ class EmotionViewModel : ViewModel() {
             }
 
             override fun onFailure(call: Call<PredictResponse>, t: Throwable) {
-                Log.d("error", t.message.toString())
+                Log.d("TAG", t.message.toString())
             }
         })
     }
 
-    fun fetchCluster(cluter: Int) {
-        ApiConfig.getApiService().fetchCluster(cluter).enqueue(object : Callback<List<ArtResponse>> {
+    fun fetchCluster(cluster: Int) {
+        ApiConfig.getApiService().fetchCluster(cluster).enqueue(object : Callback<List<ArtResponse>> {
             override fun onResponse(call: Call<List<ArtResponse>>, response: Response<List<ArtResponse>>) {
                 if (response.isSuccessful && response.body() != null) {
                     clusterContainer.postValue(response.body())
@@ -66,10 +66,10 @@ class EmotionViewModel : ViewModel() {
                     if (response.id == artResponse.id) {
                         list.add(response)
                     } else {
-                        Log.e("WIKIERROR", "ERROR FOUND")
+                        Log.e("TAG", "ERROR FOUND")
                     }
                 } catch (e: Exception) {
-                    Log.e("WIKIERROR", "Error occurred during API requests CATCH 1: ${e.message}")
+                    Log.e("TAG", "Error occurred during API requests CATCH 1: ${e.message}")
                 }
             }
 
@@ -82,10 +82,8 @@ class EmotionViewModel : ViewModel() {
                 deferredList.awaitAll()
             }
         } catch (e: Exception) {
-            Log.e("WIKIERROR", "Error occurred during API requests CATCH 2: ${e.message}")
+            Log.e("TAG", "Error occurred during API requests CATCH 2: ${e.message}")
         }
-
-        Log.d("ITERATION", "DONE. POSTING TO LIVE DATA")
         finalArt.postValue(list)
     }
 

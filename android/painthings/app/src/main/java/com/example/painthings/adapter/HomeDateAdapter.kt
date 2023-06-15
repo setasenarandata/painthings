@@ -15,8 +15,6 @@ import java.util.*
 class HomeDateAdapter(private val dateList: List<HomeDate>, private val dateItemClickListener: DateItemClickListener) :
     RecyclerView.Adapter<HomeDateAdapter.ViewHolder>() {
 
-//    private var dateItemClickListener: DateItemClickListener? = null
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val v = ItemDateListBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ViewHolder(v)
@@ -35,7 +33,6 @@ class HomeDateAdapter(private val dateList: List<HomeDate>, private val dateItem
             }
             dateList[position].isClicked = !dateList[position].isClicked
             dateItemClickListener.onDateItemClicked(dateList[position].cal!!.time)
-            // Make api call
             notifyDataSetChanged()
         }
     }

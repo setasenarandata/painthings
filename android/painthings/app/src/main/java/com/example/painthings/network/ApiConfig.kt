@@ -13,8 +13,6 @@ import java.util.concurrent.TimeUnit
 
 class ApiConfig {
     companion object{
-//        private lateinit var sharedPreferences: SharedPreferences
-
         private var TIMEOUT_MILLIS = 20000
 
         fun getApiService(): ApiService {
