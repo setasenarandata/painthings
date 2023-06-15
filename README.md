@@ -42,6 +42,28 @@ In the Cloud Computing learning path, we created APIs for user authentication, p
 ## Installation
 
 ### Cloud Computing
+1. Clone the repository:
+    ```shell
+    git clone https://github.com/setasenarandata/painthings.git
+    ```
+    
+2. Install the dependencies:
+    
+    ```shell
+    cd project-folder
+    npm install
+    ```
+    
+3. Set up the database:
+    
+    - Create a MySQL database.
+    - Update the database configuration in the `.env` file.
+4. Start the application:
+    
+    ```shell
+    npm start
+    ```
+    
 ### Machine Learning
 
 To install and run our machine learning model, please follow the steps below:
@@ -56,8 +78,6 @@ git clone https://github.com/setasenarandata/painthings.git
 4. Install all the requirements by run "pip install -r requirements.txt" on your terminal.
 5. Click on the "Run" button in yout IDE to deploy the model on your device.
 6. Wait for the link to appear in your terminal and add '/predict' at the end of the link to use the machine learning model endpoint
-
-#### Installation Steps:
 
 ### Mobile Development
 
@@ -96,8 +116,146 @@ Our final deliverables is a native Android application. After you've managed to 
 
 
 ## API Reference
+To use the application, you need to send HTTP requests to the provided API endpoints. You can use tools like curl or Postman to interact with the API.
 
--
+### [](https://github.com/setasenarandata/painthings/tree/Backend-Painthings#get-all-users)Get All Users
+
+```
+GET /users
+```
+
+Retrieves all users. Requires authentication and admin access.
+
+### [](https://github.com/setasenarandata/painthings/tree/Backend-Painthings#get-user-by-id)Get User by ID
+
+```
+GET /users/:id
+```
+
+Retrieves a user by their ID. Requires authentication and admin access.
+
+### [](https://github.com/setasenarandata/painthings/tree/Backend-Painthings#create-a-user)Create a User
+
+```
+POST /users
+```
+
+Creates a new user.
+
+**Request Body Example:**
+
+```json
+{
+  "name": "John Doe",
+  "email": "johndoe@example.com",
+  "password": "password123",
+  "birthdate": "01-01-1990"
+}
+```
+
+### [](https://github.com/setasenarandata/painthings/tree/Backend-Painthings#user-authentication)User Authentication
+
+#### [](https://github.com/setasenarandata/painthings/tree/Backend-Painthings#login)Login
+
+```
+POST /login
+```
+
+Authenticates a user and creates a session.
+
+**Request Body Example:**
+
+```json
+{
+  "email": "johndoe@example.com",
+  "password": "password123"
+}
+```
+
+#### [](https://github.com/setasenarandata/painthings/tree/Backend-Painthings#logout)Logout
+
+```
+DELETE /logout
+```
+
+Destroys the user session and logs out the user.
+
+#### [](https://github.com/setasenarandata/painthings/tree/Backend-Painthings#get-current-user)Get Current User
+
+```
+GET /me
+```
+
+Retrieves the details of the current logged-in user.
+
+### [](https://github.com/setasenarandata/painthings/tree/Backend-Painthings#get-all-posts)Get All Posts
+
+```bash
+GET /posts
+```
+
+Retrieves all posts. Requires authentication.
+
+### [](https://github.com/setasenarandata/painthings/tree/Backend-Painthings#get-post-by-id)Get Post by ID
+
+```
+GET /posts/:id
+```
+
+Retrieves a post by its ID. Requires authentication.
+
+**Path Parameters:**
+
+- `id`: The id of the users post.
+
+### [](https://github.com/setasenarandata/painthings/tree/Backend-Painthings#create-a-post)Create a Post
+
+```
+POST /posts
+```
+
+Creates a new post. Requires authentication.
+
+**Request Body Example:**
+
+```json
+{
+  "love": 5,
+  "sadness": 2,
+  "anger": 3,
+  "happiness": 2,
+  "disgust": 1,
+  "optimism": 3,
+  "art_id": "577273feedc2cb3880ca5e94",
+  "journal": "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+}
+```
+
+### [](https://github.com/setasenarandata/painthings/tree/Backend-Painthings#get-post-by-date)Get Post by Date
+
+```
+GET /posts/date/:createdAt
+```
+
+Retrieves a post by its creation date. Requires authentication.
+
+**Path Parameters:**
+
+- `createdAT`: The date of the users post.
+
+### [](https://github.com/setasenarandata/painthings/tree/Backend-Painthings#artwork-management)Artwork Management
+
+#### [](https://github.com/setasenarandata/painthings/tree/Backend-Painthings#get-artwork-by-cluster)Get Artwork by Cluster
+
+```
+GET /art/:cluster
+```
+
+Retrieves artworks based on a cluster.
+
+**Path Parameters:**
+
+- `cluster`: The cluster of the artwork to retrieve.
 
 
 ## Acknowledgements
