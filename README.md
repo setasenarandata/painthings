@@ -97,6 +97,73 @@ Creates a new user.
 }
 ```
 
+### User Authentication
+
+#### Login
+
+```
+POST /login
+```
+
+Authenticates a user and creates a session.
+
+**Request Body Example:**
+
+```json
+{
+  "email": "johndoe@example.com",
+  "password": "password123"
+}
+```
+
+**Response Example:**
+
+```json
+{
+  "uuid": "user-uuid",
+  "name": "John Doe",
+  "email": "johndoe@example.com",
+  "role": "user",
+  "finalsession": "session-id"
+}
+```
+
+#### Logout
+
+```
+DELETE /logout
+```
+
+Destroys the user session and logs out the user.
+
+**Response Example:**
+
+```json
+{
+  "msg": "You have been logged out"
+}
+```
+
+#### Get Current User
+
+```
+GET /me
+```
+
+Retrieves the details of the current logged-in user.
+
+**Response Example:**
+
+```json
+{
+  "uuid": "user-uuid",
+  "name": "John Doe",
+  "email": "johndoe@example.com",
+  "role": "user"
+}
+```
+
+
 ### Get All Posts
 
 ```
@@ -112,6 +179,9 @@ GET /posts/:id
 ```
 
 Retrieves a post by its ID. Requires authentication.
+
+**Path Parameters:**
+- `id`: The id of the users post.
 
 ### Create a Post
 
@@ -144,5 +214,30 @@ GET /posts/date/:createdAt
 
 Retrieves a post by its creation date. Requires authentication.
 
+**Path Parameters:**
+- `createdAT`: The date of the users post.
 
+### Artwork Management
 
+#### Get Artwork by Cluster
+
+```
+GET /art/:cluster
+```
+
+Retrieves artworks based on a cluster.
+
+**Path Parameters:**
+
+- `cluster`: The cluster of the artwork to retrieve.
+
+**Response Example:**
+
+```json
+[
+  {
+    "id": "artwork-id",
+    "Style": "artwork-style",
+    "Category": "artwork-category",
+    "Artist": "artwork-artist",
+    "Title": "artwork-title"
