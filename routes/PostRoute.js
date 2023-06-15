@@ -4,8 +4,6 @@ import {
     getPostById,
     getPostByDate,
     createPost
-    // updatePost,
-    // deletePost
 } from "../controllers/Posts.js";
 import { verifyUser } from "../middleware/AuthUser.js";
 
