@@ -39,10 +39,10 @@ class ChartViewModel : ViewModel() {
             if (response.id == artId) {
                 wikiArt.postValue(response)
             } else {
-                Log.e("WIKIERROR", "ERROR FOUND")
+                Log.e("TAG", "ERROR FOUND")
             }
         } catch (e: Exception) {
-            Log.e("WIKIERROR", "Error occurred during API requests CATCH 1: ${e.message}")
+            Log.e("TAG", "Error occurred during API requests CATCH 1: ${e.message}")
         }
     }
 

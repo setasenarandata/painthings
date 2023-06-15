@@ -46,14 +46,6 @@ class ArtActivity : AppCompatActivity() {
         val emotionArray = intent.getIntArrayExtra("EMOTION_ARRAY")
         val emotions = Emotions(emotionArray!![0], emotionArray[1], emotionArray[2], emotionArray[3], emotionArray[4], emotionArray[5])
 
-        Log.d("LOVE", emotions.love.toString())
-        Log.d("SADNESS", emotions.sadness.toString())
-        Log.d("ANGER", emotions.anger.toString())
-        Log.d("HAPPINESS", emotions.happiness.toString())
-        Log.d("DISGUST", emotions.disgust.toString())
-        Log.d("OPTIMISM", emotions.optimism.toString())
-
-
         adapter.setOnItemClickCallback(object : ArtAdapter.OnItemClickCallback {
             override fun onItemClick(
                 data: WikiArtDetailResponse,

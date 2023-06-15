@@ -1,9 +1,19 @@
 package com.example.painthings.ui.home
 
+import android.Manifest
 import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
+import android.graphics.Bitmap
+import android.graphics.drawable.BitmapDrawable
+import android.net.Uri
+import android.os.Build
 import android.os.Bundle
+import android.os.Environment
+import android.provider.MediaStore
+import android.provider.Settings
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,19 +21,27 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
+import coil.ImageLoader
+import coil.request.ImageRequest
+import coil.request.SuccessResult
 import com.bumptech.glide.Glide
 import com.example.painthings.R
-import com.example.painthings.databinding.FragmentHomeBinding
-import com.example.painthings.ui.HomeActivity
-import com.example.painthings.ui.detail.DetailFragment
 import com.example.painthings.adapter.HomeDateAdapter
+import com.example.painthings.databinding.FragmentHomeBinding
 import com.example.painthings.emotions.Emotions
 import com.example.painthings.emotions.EmotionsActivity
 import com.example.painthings.model.HomeDate
+import com.example.painthings.network.WikiArtDetailResponse
+import com.example.painthings.ui.HomeActivity
 import com.example.painthings.ui.auth.AuthActivity
+import com.example.painthings.ui.detail.DetailFragment
 import com.example.painthings.view_model.ChartViewModel
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -33,8 +51,12 @@ import io.github.muddz.styleabletoast.StyleableToast
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import java.io.File
+import java.io.FileOutputStream
 import java.text.SimpleDateFormat
 import java.util.*
+
 
 class HomeFragment : Fragment(), HomeDateAdapter.DateItemClickListener {
 
@@ -47,9 +69,13 @@ class HomeFragment : Fragment(), HomeDateAdapter.DateItemClickListener {
     private lateinit var tvArtistToday: TextView
     private lateinit var bottomContent: LinearLayout
     private lateinit var circleImage: CircleImageView
+    private lateinit var todayTitle: TextView
     private var isValid: Boolean = true
     private var artId: String = "empty"
+    private var imageUrl = ""
+    private var myJournal = ""
     private val binding get() = _binding!!
+    private val storagePermissionCode = 100
     private var selectedDate: String = SimpleDateFormat(
         "dd-MM-yyyy",
         Locale.getDefault()
@@ -67,6 +93,7 @@ class HomeFragment : Fragment(), HomeDateAdapter.DateItemClickListener {
     ): View {
         val sharedPreferences = requireContext().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
         val name = sharedPreferences.getString("name", "User")!!
+        val noPost = "You haven\'t posted anything today"
 
         myCalendar.timeZone = jakartaTimeZone
 
@@ -81,16 +108,12 @@ class HomeFragment : Fragment(), HomeDateAdapter.DateItemClickListener {
             addNewEmotions()
         }
 
-        shareBtn = _binding!!.btnShare
-        shareBtn.setOnClickListener {
-            shareImage()
-        }
-
         ivToday = _binding!!.ivToday
         tvTitleToday = _binding!!.tvTodayTitle
         tvArtistToday = _binding!!.tvTodayArtist
-        bottomContent = _binding!!.layoutContentBottom
+        bottomContent = _binding!!.layoutContentToday
         circleImage = _binding!!.circleImageView
+        todayTitle = _binding!!.tvToday
 
         bottomContent.visibility = View.GONE
 
@@ -102,7 +125,10 @@ class HomeFragment : Fragment(), HomeDateAdapter.DateItemClickListener {
         viewModel.getChartStatus().observe(viewLifecycleOwner) {
             showLoading(false)
             if (it.uuid != "" && it.createdAt == selectedDate) {
+                val dateFormat = "About ${it.createdAt}"
                 isValid = false
+                todayTitle.text = dateFormat
+                myJournal = it.journal!!
                 val emotion = Emotions(
                     it.love,
                     it.sadness,
@@ -116,10 +142,11 @@ class HomeFragment : Fragment(), HomeDateAdapter.DateItemClickListener {
                 CoroutineScope(Dispatchers.Main).launch {
                     setAboutToday(artId)
                 }
-
             } else {
+                Log.d("WHERE", "INSIDE ELSE EMOTIONS 0")
                 setBarGraph(Emotions(0, 0, 0, 0, 0, 0))
                 bottomContent.visibility = View.GONE
+                todayTitle.text = noPost
             }
         }
 
@@ -127,10 +154,12 @@ class HomeFragment : Fragment(), HomeDateAdapter.DateItemClickListener {
             if (it.id == artId) {
                 tvArtistToday.text = it.artistName
                 tvTitleToday.text = it.title
+                imageUrl = it.image.toString()
                 Glide.with(this)
                     .load(it.image)
                     .into(ivToday)
                 bottomContent.visibility = View.VISIBLE
+                setListeners(it)
             } else {
                 StyleableToast.makeText(requireContext(), "Error fetching about today", Toast.LENGTH_LONG, R.style.mytoast).show()
             }
@@ -151,6 +180,7 @@ class HomeFragment : Fragment(), HomeDateAdapter.DateItemClickListener {
             val dialog = builder.create()
             dialog.show()
         }
+
         return binding.root
     }
 
@@ -159,17 +189,27 @@ class HomeFragment : Fragment(), HomeDateAdapter.DateItemClickListener {
 
         initLittleCalendar()
         getPostByDate()
-        setListeners()
     }
 
-    private fun setListeners() {
+    private fun setListeners(art: WikiArtDetailResponse) {
         binding.apply {
-            ivToday.setOnClickListener {
+            bottomContent.setOnClickListener {
                 (requireActivity() as HomeActivity).addFragment(
-                    DetailFragment(),
+                    DetailFragment(art, myJournal),
                     true,
                     DetailFragment::class.java.simpleName
                 )
+            }
+
+            shareBtn = _binding!!.btnShare
+            shareBtn.setOnClickListener {
+                if (checkPermission()) {
+                    Log.d("CLICKED", "INITIATED")
+                    saveAndShareImage()
+                } else {
+                    Log.d("CLICKED", "DENIED")
+                    requestPermission()
+                }
             }
         }
     }
@@ -272,10 +312,116 @@ class HomeFragment : Fragment(), HomeDateAdapter.DateItemClickListener {
         _binding = null
     }
 
-    private fun shareImage() {
-        val shareIntent = Intent(Intent.ACTION_SEND)
-        shareIntent.type = "image/png"
-        startActivity(Intent.createChooser(shareIntent, "Share Image"))
+    private fun saveAndShareImage() {
+        lifecycleScope.launch {
+            val bitMap = getBitMap(imageUrl)
+            withContext(Dispatchers.IO) {
+                val file =  File("${Environment.getExternalStorageDirectory()}/${tvTitleToday.text}.jpg")
+                val fileOutputStream = FileOutputStream(file)
+                bitMap.compress(Bitmap.CompressFormat.JPEG, 100, fileOutputStream)
+                fileOutputStream.flush()
+                fileOutputStream.close()
+
+                val stringPath = MediaStore.Images.Media.insertImage(requireActivity().contentResolver, bitMap, "generated_by_painthings", null)
+                val uri = Uri.parse(stringPath)
+
+                val feedIntent = Intent(Intent.ACTION_SEND)
+                feedIntent.type = "image/*"
+                feedIntent.putExtra(Intent.EXTRA_STREAM, uri)
+                feedIntent.setPackage("com.instagram.android")
+
+                val storiesIntent = Intent("com.instagram.share.ADD_TO_STORY")
+                storiesIntent.setDataAndType(uri, "jpg")
+                storiesIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+                storiesIntent.setPackage("com.instagram.android")
+
+                val i = Intent(Intent.ACTION_SEND)
+                i.type = "image/*"
+                i.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+                i.putExtra(Intent.EXTRA_STREAM, Uri.parse(stringPath))
+
+                requireActivity().grantUriPermission(
+                    "com.instagram.android", uri, Intent.FLAG_GRANT_READ_URI_PERMISSION
+                )
+
+                val chooserIntent = Intent.createChooser(feedIntent, "Share to...")
+                chooserIntent.putExtra(Intent.EXTRA_INITIAL_INTENTS, arrayOf(storiesIntent, i))
+                startActivity(chooserIntent)
+            }
+
+        }
+    }
+
+    private fun requestPermission() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            try {
+                Log.d("PERMISSION", "TRY INITIATED")
+                val intent = Intent()
+                intent.action = Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION
+                val uri = Uri.fromParts("package", requireActivity().packageName, null)
+                intent.data = uri
+                storageActivityResultLauncher.launch(intent)
+
+            } catch (e: java.lang.Exception) {
+                val intent = Intent()
+                intent.action = Settings.ACTION_MANAGE_ALL_FILES_ACCESS_PERMISSION
+                storageActivityResultLauncher.launch(intent)
+            }
+        } else {
+            ActivityCompat.requestPermissions(requireActivity(),
+            arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE),
+                storagePermissionCode
+            )
+        }
+    }
+
+    private val storageActivityResultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            if (Environment.isExternalStorageManager()) {
+                saveAndShareImage()
+
+            } else {
+                Log.d("TAG", "DENIED")
+            }
+        }  else {
+            ActivityCompat.requestPermissions(requireActivity(),
+                arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE),
+                storagePermissionCode
+            )
+        }
+    }
+
+    private fun checkPermission(): Boolean {
+        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            Environment.isExternalStorageManager()
+        }  else {
+            val write = ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.WRITE_EXTERNAL_STORAGE)
+            val read = ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.READ_EXTERNAL_STORAGE)
+            write == PackageManager.PERMISSION_GRANTED && read == PackageManager.PERMISSION_GRANTED
+        }
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+
+        if (requestCode == storagePermissionCode) {
+            if (grantResults.isNotEmpty()) {
+                val write = grantResults[0] == PackageManager.PERMISSION_GRANTED
+                val read = grantResults[1] == PackageManager.PERMISSION_GRANTED
+
+                if (write && read){
+                    Log.d("TAG", "INITIATED 2")
+                    saveAndShareImage()
+                } else {
+                    Log.d("TAG", "DENIED")
+                }
+
+            }
+        }
     }
 
     private fun showLoading(state: Boolean) {
@@ -325,5 +471,15 @@ class HomeFragment : Fragment(), HomeDateAdapter.DateItemClickListener {
         binding.apply {
             viewModel.getArtDetails(artId)
         }
+    }
+
+    private suspend fun getBitMap(url: String): Bitmap {
+        val loading = ImageLoader(requireContext())
+        val request = ImageRequest.Builder(requireContext())
+            .data(url)
+            .build()
+
+        val result = (loading.execute(request) as SuccessResult).drawable
+        return (result as BitmapDrawable).bitmap
     }
 }
