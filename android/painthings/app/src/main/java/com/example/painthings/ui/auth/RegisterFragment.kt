@@ -44,6 +44,8 @@ class RegisterFragment : Fragment() {
                     )
                         .commit()
                 }
+            } else if (it.msg == "This email is taken") {
+                StyleableToast.makeText(requireContext(), it.msg, Toast.LENGTH_LONG, R.style.mytoast).show()
             } else {
                 StyleableToast.makeText(requireContext(), "Register unsuccessful", Toast.LENGTH_LONG, R.style.mytoast).show()
             }
