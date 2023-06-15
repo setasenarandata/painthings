@@ -1,5 +1,7 @@
 # Painthings
 
+![Image](https://res.cloudinary.com/do4hrajag/image/upload/v1686849830/BANGKIT/GithubImagePreviewPainthings_jvynlx.png)
+
 Painthings is a mobile application designed to support individuals in exploring and processing their emotions through a **combination** of **art** and **journaling**. The app offers a unique and meaningful experience by allowing users to search for paintings or artworks based on specific emotions they are feeling. These selected artworks serve as prompts for journaling, helping users delve deeper into their *emotions* and *express* themselves through **writing**.
 
 With Painthings, users can create a **digital diary** where they can save their journal entries, creating a personal record of their emotional journey. The app aims to provide accessible emotional **well-being** resources by harnessing the therapeutic benefits of art therapy and expressive writing.
