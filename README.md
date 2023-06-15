@@ -4,7 +4,7 @@ Painthings is a mobile application designed to support individuals in exploring 
 
 With Painthings, users can create a **digital diary** where they can save their journal entries, creating a personal record of their emotional journey. The app aims to provide accessible emotional **well-being** resources by harnessing the therapeutic benefits of art therapy and expressive writing.
 
----
+
 ## Description
 
 Painthings is a [BANGKIT 2023 by Google, GoTo and Traveloka](https://grow.google/intl/id_id/bangkit/) Capstone Project. We're from team **C23-PS465** consisting of six members:
@@ -37,7 +37,8 @@ For the Mobile Development learning path, we successfully implemented all planne
 
 In the Cloud Computing learning path, we created APIs for user authentication, posts, and choosing paintings. We deployed the backend service and machine learning models to the Google Cloud Platform using App Engine with the help of Flask.
 
----
+
+
 ## Installation
 
 ### Cloud Computing
@@ -72,18 +73,22 @@ Please note that you may need to enable "Unknown sources" in your device's setti
 
 Now you're ready to explore Painthings and enjoy its features!
 
+
 ## Usage
 
 Our final deliverables is a native Android application. After you've managed to install or run the app in your device or emulator, you can register and login to Painthings. Simple right?
+
 
 ## API Reference
 
 -
 
+
 ## Acknowledgements
 We would like to express our sincere gratitude to [BANGKIT 2023 by Google, GoTo, and Traveloka](https://grow.google/intl/id_id/bangkit/) for providing us with an incredible opportunity to enhance our skills and knowledge. We are immensely grateful for the support and guidance we received throughout this capstone project.
 
 We extend our heartfelt thanks to our mentors, [Rezki Trianto](https://www.linkedin.com/in/rezkitrianto) and [Eldho Rizcky Al Risyad](https://www.linkedin.com/in/eldhorizcky), for their invaluable expertise and continuous assistance. Their mentorship played a pivotal role in the successful completion of this project.
+
 
 ## Resources
 ### Cloud Computing
@@ -117,6 +122,11 @@ We extend our heartfelt thanks to our mentors, [Rezki Trianto](https://www.linke
 - [StyleableToast](https://github.com/Muddz/StyleableToast) to create styleable toast
 - [coil-kt](https://coil-kt.github.io/coil/) as our coroutines image loader
 
+
 ## Roadmap
 
--
+Outline your future plans for the project, including upcoming features and enhancements.
+
+Feel free to modify this template to suit your project's specific needs. Add additional sections or rearrange them as necessary.
+
+Remember to keep the README file up to date as your project evolves.
