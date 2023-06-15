@@ -43,6 +43,22 @@ In the Cloud Computing learning path, we created APIs for user authentication, p
 
 ### Cloud Computing
 ### Machine Learning
+
+To install and run our machine learning model, please follow the steps below:
+1. Clone the Painthings repository by running the following command in your terminal:
+
+```bash
+git clone https://github.com/setasenarandata/painthings.git
+```
+
+2. Open your IDE and navigate to File > Open.
+3. Select the "painthings/ml" directory from the cloned repository.
+4. Install all the requirements by run "pip install -r requirements.txt" on your terminal.
+5. Click on the "Run" button in yout IDE to deploy the model on your device.
+6. Wait for the link to appear in your terminal and add '/predict' at the end of the link to use the machine learning model endpoint
+
+#### Installation Steps:
+
 ### Mobile Development
 
 To install and run our Android app, please follow the steps below:
