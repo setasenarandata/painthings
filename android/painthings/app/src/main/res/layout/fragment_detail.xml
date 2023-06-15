@@ -62,7 +62,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/starry_night_artist"
                 android:textColor="@color/black"
-                android:textSize="@dimen/_18ssp"
+                android:textSize="@dimen/_16ssp"
                 android:fontFamily="@font/r_flex_mediumitalic" />
 
             <TextView
