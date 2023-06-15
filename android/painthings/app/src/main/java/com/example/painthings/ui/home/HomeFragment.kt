@@ -6,7 +6,6 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
-import android.graphics.Canvas
 import android.graphics.drawable.BitmapDrawable
 import android.net.Uri
 import android.os.Build
@@ -74,8 +73,9 @@ class HomeFragment : Fragment(), HomeDateAdapter.DateItemClickListener {
     private var isValid: Boolean = true
     private var artId: String = "empty"
     private var imageUrl = ""
+    private var myJournal = ""
     private val binding get() = _binding!!
-    private val STORAGE_PERMISSION_CODE = 100
+    private val storagePermissionCode = 100
     private var selectedDate: String = SimpleDateFormat(
         "dd-MM-yyyy",
         Locale.getDefault()
@@ -128,6 +128,7 @@ class HomeFragment : Fragment(), HomeDateAdapter.DateItemClickListener {
                 val dateFormat = "About ${it.createdAt}"
                 isValid = false
                 todayTitle.text = dateFormat
+                myJournal = it.journal!!
                 val emotion = Emotions(
                     it.love,
                     it.sadness,
@@ -194,7 +195,7 @@ class HomeFragment : Fragment(), HomeDateAdapter.DateItemClickListener {
         binding.apply {
             bottomContent.setOnClickListener {
                 (requireActivity() as HomeActivity).addFragment(
-                    DetailFragment(art),
+                    DetailFragment(art, myJournal),
                     true,
                     DetailFragment::class.java.simpleName
                 )
@@ -313,10 +314,9 @@ class HomeFragment : Fragment(), HomeDateAdapter.DateItemClickListener {
 
     private fun saveAndShareImage() {
         lifecycleScope.launch {
-            Log.d("IMAGEURL", imageUrl )
             val bitMap = getBitMap(imageUrl)
             withContext(Dispatchers.IO) {
-                val file =  File("${Environment.getExternalStorageDirectory()}/painthings/${tvTitleToday.text}.jpg")
+                val file =  File("${Environment.getExternalStorageDirectory()}/${tvTitleToday.text}.jpg")
                 val fileOutputStream = FileOutputStream(file)
                 bitMap.compress(Bitmap.CompressFormat.JPEG, 100, fileOutputStream)
                 fileOutputStream.flush()
@@ -370,25 +370,23 @@ class HomeFragment : Fragment(), HomeDateAdapter.DateItemClickListener {
         } else {
             ActivityCompat.requestPermissions(requireActivity(),
             arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE),
-                STORAGE_PERMISSION_CODE
+                storagePermissionCode
             )
         }
     }
 
     private val storageActivityResultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
-        Log.d("RESULTLAUNCHER", "INITIATED")
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
             if (Environment.isExternalStorageManager()) {
-                Log.d("RESULTLAUNCHER", "INITIATED 2")
                 saveAndShareImage()
 
             } else {
-                Log.d("RESULTLAUNCHER", "DENIED")
+                Log.d("TAG", "DENIED")
             }
         }  else {
             ActivityCompat.requestPermissions(requireActivity(),
                 arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE),
-                STORAGE_PERMISSION_CODE
+                storagePermissionCode
             )
         }
     }
@@ -410,16 +408,16 @@ class HomeFragment : Fragment(), HomeDateAdapter.DateItemClickListener {
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
 
-        if (requestCode == STORAGE_PERMISSION_CODE) {
+        if (requestCode == storagePermissionCode) {
             if (grantResults.isNotEmpty()) {
                 val write = grantResults[0] == PackageManager.PERMISSION_GRANTED
                 val read = grantResults[1] == PackageManager.PERMISSION_GRANTED
 
                 if (write && read){
-                    Log.d("ONREQUEST", "INITIATED 2")
+                    Log.d("TAG", "INITIATED 2")
                     saveAndShareImage()
                 } else {
-                    Log.d("ONREQUEST", "DENIED")
+                    Log.d("TAG", "DENIED")
                 }
 
             }

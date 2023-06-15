@@ -48,39 +48,53 @@
 
             <TextView
                 android:id="@+id/tv_detail"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Starry Night"
+                android:text="@string/starry_night_title"
                 android:textColor="@color/black"
                 android:textSize="@dimen/_18ssp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:fontFamily="@font/r_flex_mediumitalic"/>
 
             <TextView
                 android:id="@+id/tv_artist"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Vincent Van Gogh"
+                android:text="@string/starry_night_artist"
                 android:textColor="@color/black"
-                android:textSize="@dimen/_18ssp" />
-
-        </LinearLayout>
-
-        <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_marginTop="@dimen/_16sdp"
-            android:layout_marginBottom="@dimen/_16sdp"
-            app:layout_constraintBottom_toTopOf="@id/btn_share"
-            app:layout_constraintTop_toBottomOf="@id/layout_title">
+                android:textSize="@dimen/_18ssp"
+                android:fontFamily="@font/r_flex_mediumitalic" />
 
             <TextView
                 android:id="@+id/tv_description"
+                android:layout_marginTop="12dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Through his drip action technique, Pollock would create layers upon layers of paint, created in a chaotic assemblage of drips and splashes. Physicists have studied Pollock’s canvases, such as Lavender Mist, for fractals, which naturally occur out of chaos. Chaos is defined as an irregularity of motion or shape that naturally arises from deterministic forces (such as painting). Some art scientists, such as Richard Taylor, have determined that the more chaotic Pollock’s drippings became, the closer they resembled naturally occurring fractals, and that his chronologically later paintings displayed these characteristics more so than his earlier works, which were less chaotic."
-                android:textColor="@color/black" />
+                android:textColor="@color/black"
+                android:fontFamily="@font/r_flex_lightitalic"
+                android:maxLines="4"/>
 
-        </ScrollView>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="My Journal"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_18ssp"
+                android:fontFamily="@font/r_flex_medium" />
+
+            <TextView
+                android:id="@+id/tvMyJournal"
+                android:layout_marginTop="12dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="What's interesting for me is designing is always an enjoyable proccess for me. I love to get stuck on Figma for hours because designing never gets old."
+                android:textColor="@color/black"
+                android:fontFamily="@font/r_flex_regular"
+                android:maxLines="4"/>
+
+        </LinearLayout>
 
 
         <com.google.android.material.button.MaterialButton

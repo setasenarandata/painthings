@@ -34,7 +34,7 @@ import kotlinx.coroutines.withContext
 import java.io.File
 import java.io.FileOutputStream
 
-class DetailFragment(art: WikiArtDetailResponse) : Fragment() {
+class DetailFragment(art: WikiArtDetailResponse, journal: String) : Fragment() {
     private var _binding: FragmentDetailBinding? = null
     private val binding get() = _binding!!
     private lateinit var shareBtn: MaterialButton
@@ -42,6 +42,7 @@ class DetailFragment(art: WikiArtDetailResponse) : Fragment() {
     private val artist = art.artistName
     private val description = art.description
     private val image = art.image
+    private val myJournal = journal
     private val STORAGE_PERMISSION_CODE = 100
 
 
@@ -54,6 +55,7 @@ class DetailFragment(art: WikiArtDetailResponse) : Fragment() {
 
         _binding!!.tvDetail.text = title
         _binding!!.tvArtist.text = artist
+        _binding!!.tvMyJournal.text = myJournal
 
         if (description == "") {
             val noDesc = "No description provided by WikiArt"
