@@ -105,7 +105,8 @@ git clone https://github.com/setasenarandata/painthings.git
 6. Click on the "Run" button in Android Studio to deploy the app on your device or emulator.
 7. Wait for the app to install and launch.
 
-Alternatively, if you prefer not to build the app from the source code, we also provide an APK file for easy installation. Simply download the APK file and install it on your Android device.
+Alternatively, if you prefer not to build the app from the source code, we also provide an [APK](https://drive.google.com/drive/folders/1Vz5H8Xs4-0pswyYXn9DjILy9ugeFb3y_?usp=sharing) file for easy installation. Simply download the APK file and install it on your Android device.
+APK File: [Link](https://drive.google.com/drive/folders/1Vz5H8Xs4-0pswyYXn9DjILy9ugeFb3y_?usp=sharing)
 
 Please note that you may need to enable "Unknown sources" in your device's settings to install the APK file.
 
