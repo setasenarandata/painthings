@@ -117,6 +117,7 @@ Now you're ready to explore Painthings and enjoy its features!
 
 Our final deliverables is a native Android application. After you've managed to install or run the app in your device or emulator, you can register and login to Painthings. Simple right?
 
+[![IMAGE ALT TEXT HERE](https://res.cloudinary.com/do4hrajag/image/upload/v1686928391/BANGKIT/painthings_demo_zvxhxf.png)](https://www.youtube.com/watch?v=54QI1sydAvQ)
 
 ## API Reference
 To use the application, you need to send HTTP requests to the provided API endpoints. You can use tools like curl or Postman to interact with the API.
@@ -301,9 +302,11 @@ We extend our heartfelt thanks to our mentors, [Rezki Trianto](https://www.linke
 
 
 ## Roadmap
-
-Outline your future plans for the project, including upcoming features and enhancements.
-
-Feel free to modify this template to suit your project's specific needs. Add additional sections or rearrange them as necessary.
-
-Remember to keep the README file up to date as your project evolves.
+| Date            | Event                           |
+|-----------------|---------------------------------|
+| July, 2023      | Launch Beta Version             |
+| August, 2023    | Add Streak and Widget features  |
+| September, 2023 | Firebase Analytics              |
+| October, 2023   | Collaborate with partners       |
+| November, 2023  | UAT with partners               |
+| December, 2023  | Launch Main Version and Promote |
